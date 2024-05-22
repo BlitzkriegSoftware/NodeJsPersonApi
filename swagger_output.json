@@ -11,7 +11,7 @@
     "http"
   ],
   "paths": {
-    "/": {
+    "/person/": {
       "get": {
         "description": "",
         "responses": {
@@ -52,21 +52,27 @@
             "description": "OK"
           }
         }
-      },
-      "delete": {
+      }
+    },
+    "/person/samples": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/person/{id}": {
+      "get": {
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -74,20 +80,8 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/samples": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/{id}": {
-      "get": {
+      },
+      "delete": {
         "description": "",
         "parameters": [
           {

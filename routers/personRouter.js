@@ -11,6 +11,17 @@ router.get("/", (req, res) => {
   res.json(Data);
 });
 
+router.get("/samples", (req, res) => {
+  const sampleCount = 5;
+
+  for (let i = 0; i < sampleCount; i++) {
+    var p = Person.makeperson();
+    Data.push(p);
+  }
+
+  res.json(Data);
+});
+
 router.get("/:id", (req, res) => {
   const results = Data.filter((person) => person.id == req.params.id);
   res.json(results);

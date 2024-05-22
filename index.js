@@ -8,7 +8,7 @@ const app = express();
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger_output.json");
 
-const router = require("./routers/personRouter");
+const personRouter = require("./routers/personRouter");
 
 app.use(express.json());
 
@@ -17,7 +17,7 @@ app.use((err, req, res, next) => {
   res.status(500).send(JSON.stringify(j));
 });
 
-app.use("/person", router.personRouter);
+app.use("/person", personRouter);
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.get("/", (req, res) => {

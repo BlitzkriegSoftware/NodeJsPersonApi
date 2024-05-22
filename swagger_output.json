@@ -76,6 +76,16 @@
         }
       }
     },
+    "/samples": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/{id}": {
       "get": {
         "description": "",

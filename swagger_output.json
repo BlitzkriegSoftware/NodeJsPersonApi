@@ -5,11 +5,8 @@
     "title": "REST API",
     "description": ""
   },
-  "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/person/": {
       "get": {

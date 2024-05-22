@@ -31,7 +31,7 @@ const options = {
 
 const swaggerFile = require("./swagger_output.json");
 
-app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h
 const cors = require("cors");

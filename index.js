@@ -11,6 +11,12 @@ const swaggerFile = require("./swagger_output.json");
 const router = require("./routers/personRouter");
 
 app.use(express.json());
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send(JSON.stringify(j));
+});
+
 app.use("/person", router.personRouter);
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 

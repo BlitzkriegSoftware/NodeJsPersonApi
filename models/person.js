@@ -24,16 +24,40 @@ module.exports = class Person {
 
   static makeperson() {
     var _id = String(Math.round(Math.random() * 100000));
-    var _firstname = faker.person.firstName;
-    var _lastname = faker.person.lastName;
+    var _firstname = faker.person.firstName();
+    var _lastname = faker.person.lastName();
     var _cellphone = faker.phone.number();
-    var _company = faker.company.name;
+    var _company = faker.company.name();
     var _email = _firstname + "." + _lastname + "@" + _company + ".com";
 
     return new Person(_id, _firstname, _lastname, _cellphone, _email, _company);
   }
 
-  isvalid() {
+  static tostring(person) {
+    var s = `${person.id};${person.firstname};${person.lastname};${person.cellphone};${person.email};${person.company}`;
+    return s;
+  }
+
+  tostring() {
+    return Person.tostring(this);
+  }
+
+  static fromjson(json) {
+    var o = JSON.parse(json);
+    console.log(Object.getOwnPropertyNames(o));
+    var p = new Person(
+      o.id,
+      o.firstname,
+      o.lastname,
+      o.cellphone,
+      o.email,
+      o.company
+    );
+
+    return p;
+  }
+
+  isValid() {
     return (
       !this.isBlank(this.firstname) &&
       !this.isBlank(this.lastname) &&

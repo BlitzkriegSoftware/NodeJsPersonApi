@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "REST API",
-    "description": ""
+    "description": "Person API"
   },
   "servers": [
     {
@@ -11,28 +11,10 @@
     }
   ],
   "paths": {
-    "/person/": {
+    "/person/list": {
       "get": {
         "summary": "Gets all people",
         "description": "Returns a JSON array of PERSON",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "post": {
-        "summary": "Add a new PERSON",
-        "description": "Returns status message",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      },
-      "put": {
-        "summary": "Updates an existing PERSON",
-        "description": "Returns status message",
         "responses": {
           "200": {
             "description": "OK"
@@ -43,10 +25,17 @@
     "/person/samples": {
       "get": {
         "summary": "Makes 5 sample people and adds them to DATA",
-        "description": "Returns a JSON array of PERSON",
+        "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Returns a JSON array of PERSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/People"
+                }
+              }
+            }
           }
         }
       }
@@ -54,7 +43,7 @@
     "/person/{id}": {
       "get": {
         "summary": "Gets person by ID",
-        "description": "Returns PERSON or error",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -67,7 +56,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Returns PERSON or error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
           }
         }
       },
@@ -88,6 +84,64 @@
           "200": {
             "description": "OK"
           }
+        }
+      }
+    },
+    "/person/": {
+      "post": {
+        "summary": "Add a new PERSON",
+        "description": "Returns status message",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates an existing PERSON",
+        "description": "Returns status message",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Person": {
+        "$id": "unique identity",
+        "$firstname": "first name",
+        "$lastname": "last name",
+        "cellphone": "cell phone",
+        "company": "company",
+        "email": "email"
+      },
+      "People": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Person"
         }
       }
     }

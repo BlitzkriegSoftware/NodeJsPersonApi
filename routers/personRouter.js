@@ -11,7 +11,7 @@ router.use(express.json());
 
 // #swagger.description = 'People API'
 
-router.get("/person/", (req, res) => {
+router.get("/person/list", (req, res) => {
   // #swagger.summary = 'Gets all people'
   // #swagger.description = 'Returns a JSON array of PERSON'
   res.json(Data);
@@ -19,8 +19,18 @@ router.get("/person/", (req, res) => {
 
 router.get("/person/samples", (req, res) => {
   // #swagger.summary = 'Makes 5 sample people and adds them to DATA'
-  // #swagger.description = 'Returns a JSON array of PERSON'
 
+  /* #swagger.responses[200] = {
+            description: "Returns a JSON array of PERSON",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/People"
+                    }
+                }           
+            }
+        }   
+  */
   const sampleCount = 5;
 
   for (let i = 0; i < sampleCount; i++) {
@@ -33,7 +43,19 @@ router.get("/person/samples", (req, res) => {
 
 router.get("/person/:id", (req, res) => {
   // #swagger.summary = 'Gets person by ID'
-  // #swagger.description = 'Returns PERSON or error'
+
+  /* #swagger.responses[200] = {
+            description: "Returns PERSON or error",
+            content: {
+                "application/json": {
+                    schema:{
+                        $ref: "#/components/schemas/Person"
+                    }
+                }           
+            }
+        }   
+  */
+
   const results = Data.filter((person) => person.id == req.params.id);
   res.json(results);
 });
@@ -41,6 +63,19 @@ router.get("/person/:id", (req, res) => {
 router.post("/person/", (req, res) => {
   // #swagger.summary = 'Add a new PERSON'
   // #swagger.description = 'Returns status message'
+
+  /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/Person"
+                    }  
+                }
+            }
+        } 
+    */
+
   var person = Person.fromjson(req.body);
   Data.push(person);
   res.json({ success: true, message: "added successfully" });
@@ -49,6 +84,18 @@ router.post("/person/", (req, res) => {
 router.put("/person/", (req, res) => {
   // #swagger.summary = 'Updates an existing PERSON'
   // #swagger.description = 'Returns status message'
+
+  /*  #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/Person"
+                    }  
+                }
+            }
+        } 
+  */
   const json = req.body;
   var p = Person.fromjson(json);
   var id = p.id;

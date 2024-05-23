@@ -17,7 +17,30 @@ swaggerAutogen(outputFile, endpointsFiles).then((data) => {
   console.log("Updating " + outputFile);
 
   let openapi3 = require(outputFile);
+
+  // Manual overrides
+  openapi3.info.description = "Person API";
   openapi3.servers[0].url = "http://localhost:" + Port;
+  openapi3.components = {
+    schemas: {
+      Person: {
+        $id: "unique identity",
+        $firstname: "first name",
+        $lastname: "last name",
+        cellphone: "cell phone",
+        company: "company",
+        email: "email",
+      },
+      People: {
+        type: "array",
+        items: {
+          $ref: "#/components/schemas/Person",
+        },
+      },
+    },
+  };
+
+  // write updates
   var json = JSON.stringify(openapi3, null, 2);
   fs.writeFile(outputFile, json, (err) => {
     if (err) console.log(JSON.stringify(err));

@@ -1,17 +1,20 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
     "title": "REST API",
     "description": ""
   },
-  "host": "localhost:30083",
-  "basePath": "/",
-  "schemes": ["http"],
+  "servers": [
+    {
+      "url": "http://localhost:30083"
+    }
+  ],
   "paths": {
     "/person/": {
       "get": {
-        "description": "",
+        "summary": "Gets all people",
+        "description": "Returns a JSON array of PERSON",
         "responses": {
           "200": {
             "description": "OK"
@@ -19,7 +22,8 @@
         }
       },
       "post": {
-        "description": "",
+        "summary": "Add a new PERSON",
+        "description": "Returns status message",
         "responses": {
           "200": {
             "description": "OK"
@@ -27,24 +31,8 @@
         }
       },
       "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                },
-                "new_name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "summary": "Updates an existing PERSON",
+        "description": "Returns status message",
         "responses": {
           "200": {
             "description": "OK"
@@ -54,7 +42,8 @@
     },
     "/person/samples": {
       "get": {
-        "description": "",
+        "summary": "Makes 5 sample people and adds them to DATA",
+        "description": "Returns a JSON array of PERSON",
         "responses": {
           "200": {
             "description": "OK"
@@ -64,13 +53,16 @@
     },
     "/person/{id}": {
       "get": {
-        "description": "",
+        "summary": "Gets person by ID",
+        "description": "Returns PERSON or error",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -80,13 +72,16 @@
         }
       },
       "delete": {
-        "description": "",
+        "summary": "Deletes an existing PERSON by ID",
+        "description": "Returns status message",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {

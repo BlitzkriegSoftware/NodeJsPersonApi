@@ -1,7 +1,6 @@
 "use strict";
 
-// Environment Variables
-const port = process.env.API_PORT ?? 30090;
+const { Port } = require("./Settings/envvars");
 
 // Express setup
 const express = require("express");
@@ -29,7 +28,7 @@ const options = {
   },
 };
 
-const swaggerFile = require("./swagger_output.json");
+const swaggerFile = require("./swagger.json");
 
 app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
@@ -42,6 +41,30 @@ let corsOptions = {
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+
+// https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+app.use(function (req, res, next) {
+  // Content security policy
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; frame-src 'self'"
+  );
+
+  // HSTS
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=63072000; includeSubDomains; preload"
+  );
+
+  // misc. InfoSec headers
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "DENY");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+
+  // Remove headers
+  res.removeHeader("x-powered-by");
+  next();
+});
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -63,5 +86,5 @@ app.get("/", (req, res) => {
 
 // Start
 app.listen(port, () => {
-  console.log(`Person API listening on port ${port}`);
+  console.log(`Person API listening on port ${Port}`);
 });

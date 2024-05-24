@@ -57,7 +57,7 @@ router.get("/person/samples/:count?", (req, res) => {
   }   
 */
 
-  const sampleCount = req.params.count ?? 5;
+  const sampleCount = req.params.count || 5;
 
   for (let i = 0; i < sampleCount; i++) {
     var p = Person.makePerson();

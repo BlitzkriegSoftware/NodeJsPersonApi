@@ -17,7 +17,7 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Returns PEOPLE or error",
+            "description": "Returns People",
             "content": {
               "application/json": {
                 "schema": {
@@ -29,27 +29,9 @@
         }
       }
     },
-    "/person/samples": {
+    "/person/samples/{id}": {
       "get": {
-        "summary": "Makes 5 sample people and adds them to DATA",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Returns PERSON or error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/People"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/person/{id}": {
-      "get": {
-        "summary": "Gets person by ID",
+        "summary": "Makes N sample people and adds them to DATA (default: 5)",
         "description": "",
         "parameters": [
           {
@@ -67,7 +49,45 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$ref": "#/components/schemas/People"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/person/{id}": {
+      "get": {
+        "summary": "Gets person by ID or 404 w. Status",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns PERSON",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
                 }
               }
             }
@@ -97,10 +117,27 @@
     "/person/": {
       "post": {
         "summary": "Add a new PERSON",
-        "description": "Returns status message",
+        "description": "Returns Status message",
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created w. Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Person w. Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -119,7 +156,24 @@
         "description": "Returns status message",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Updated w. Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Person w. Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -182,6 +236,22 @@
             "$ref": "#/components/schemas/Person"
           }
         }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "status message"
+          },
+          "data": {
+            "type": "string",
+            "example": "any data"
+          }
+        },
+        "required": [
+          "message"
+        ]
       }
     }
   }

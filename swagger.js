@@ -27,6 +27,10 @@ var comps = {
           $ref: "#/components/schemas/Person",
         },
       },
+      Status: {
+        $message: "status message",
+        data: "any data",
+      },
     },
   },
 };

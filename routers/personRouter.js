@@ -157,8 +157,29 @@ router.post("/person/", (req, res) => {
   }   
   */
 
+  /* 
+  #swagger.responses[409] = {
+    description: "Duplicate Person",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/Status"
+        }
+      }           
+    }
+  }   
+  */
+
   var person = Person.fromObject(req.body);
   if (person.isValid()) {
+    const results = Data.filter((p) => p.id == person.id);
+
+    if (results.length > 0) {
+      var status = new Status("Duplicate");
+      res.status(409).json(status);
+      return;
+    }
+
     var status = new Status("Created");
     Data.push(person);
     res.status(201).json(status);
@@ -221,10 +242,9 @@ router.put("/person/", (req, res) => {
 
   if (p.isValid()) {
     // remove old record
-    var id = p.id;
     Data = Data.filter((value, index, arr) => {
-      if (id != value.id) return false;
-      else return true;
+      if (p.id != value.id) return true;
+      else return false;
     });
 
     // add resplacement

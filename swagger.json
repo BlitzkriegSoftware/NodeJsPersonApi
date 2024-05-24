@@ -155,6 +155,16 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Duplicate Person",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
           }
         },
         "requestBody": {

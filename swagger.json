@@ -29,13 +29,13 @@
         }
       }
     },
-    "/person/samples/{id}": {
+    "/person/samples/{count?}": {
       "get": {
         "summary": "Makes N sample people and adds them to DATA (default: 5)",
         "description": "",
         "parameters": [
           {
-            "name": "id",
+            "name": "count?",
             "in": "path",
             "required": true,
             "schema": {
@@ -45,7 +45,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns PERSON or error",
+            "description": "Creates {count} people",
             "content": {
               "application/json": {
                 "schema": {
@@ -109,7 +109,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Deleted status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
           }
         }
       }

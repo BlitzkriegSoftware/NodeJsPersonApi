@@ -12,6 +12,11 @@ router.use(express.json());
 
 // #swagger.description = 'People API'
 
+/*
+  ------------------
+  LIST
+  ------------------
+*/
 router.get("/person/list", (req, res) => {
   // #swagger.summary = 'Gets all people'
 
@@ -31,12 +36,17 @@ router.get("/person/list", (req, res) => {
   res.json(Data);
 });
 
-router.get("/person/samples/:id", (req, res) => {
+/*
+  ------------------
+  MAKE SAMPLES
+  ------------------
+*/
+router.get("/person/samples/:count?", (req, res) => {
   // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
 
   /* 
   #swagger.responses[200] = {
-    description: "Returns PERSON or error",
+    description: "Creates {count} people",
     content: {
       "application/json": {
         schema:{
@@ -47,7 +57,7 @@ router.get("/person/samples/:id", (req, res) => {
   }   
 */
 
-  const sampleCount = req.params.id ?? 5;
+  const sampleCount = req.params.count ?? 5;
 
   for (let i = 0; i < sampleCount; i++) {
     var p = Person.makePerson();
@@ -57,6 +67,11 @@ router.get("/person/samples/:id", (req, res) => {
   res.json(Data);
 });
 
+/*
+  ------------------
+  GET BY ID
+  ------------------
+*/
 router.get("/person/:id", (req, res) => {
   // #swagger.summary = 'Gets person by ID or 404 w. Status'
 
@@ -95,6 +110,11 @@ router.get("/person/:id", (req, res) => {
   }
 });
 
+/*
+  ------------------
+  ADD PERSON
+  ------------------
+*/
 router.post("/person/", (req, res) => {
   // #swagger.summary = 'Add a new PERSON'
   // #swagger.description = 'Returns Status message'
@@ -150,6 +170,11 @@ router.post("/person/", (req, res) => {
   }
 });
 
+/*
+  ------------------
+  UPDATE PERSON
+  ------------------
+*/
 router.put("/person/", (req, res) => {
   // #swagger.summary = 'Updates an existing PERSON'
   // #swagger.description = 'Returns status message'
@@ -214,16 +239,63 @@ router.put("/person/", (req, res) => {
   }
 });
 
+/*
+  ------------------
+  DELETE
+  ------------------
+*/
 router.delete("/person/:id", (req, res) => {
   // #swagger.summary = 'Deletes an existing PERSON by ID'
   // #swagger.description = 'Returns status message'
+
+  /* 
+  #swagger.responses[200] = {
+    description: "Deleted status",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/Status"
+        }
+      }           
+    }
+  }   
+  */
+
+  /* 
+  #swagger.responses[404] = {
+    description: "Not Found",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/Status"
+        }
+      }           
+    }
+  }   
+  */
+
+  var deleted = false;
   const id = req.params.id;
   Data = Data.filter((value, index, arr) => {
-    if (id != value.id) return false;
-    else return true;
+    if (id == value.id) {
+      deleted = true;
+      return false;
+    } else return true;
   });
-  res.json({ success: true, message: "deleted" });
+
+  if (deleted) {
+    var status = new Status("Deleted");
+    res.status(200).json(status);
+  } else {
+    var status = new Status("Not Found");
+    res.status(404).json(status);
+  }
 });
 
+/*
+  ------------------
+  (exports)
+  ------------------
+*/
 // always last line
 module.exports = router;

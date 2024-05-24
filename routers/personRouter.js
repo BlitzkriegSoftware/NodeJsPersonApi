@@ -1,12 +1,11 @@
 "use strict";
 
-const Person = require("../models/person");
 const express = require("express");
 const router = express.Router();
-var cors = require("cors");
 
 var Data = require("../data/people");
 var Status = require("../models/status");
+const Person = require("../models/person");
 
 router.use(express.json());
 

@@ -204,6 +204,17 @@
           }
         }
       }
+    },
+    "/about": {
+      "get": {
+        "summary": "About this project",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {

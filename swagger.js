@@ -36,7 +36,7 @@ var comps = {
 };
 
 // Add all routers here
-const endpointsFiles = ["./routers/personRouter.js"];
+const endpointsFiles = ["./routers/personRouter.js", "./routers/infoRouter.js"];
 
 swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
   console.log("Updating " + outputFile);

@@ -1,6 +1,6 @@
 "use strict";
 
-const { Port } = require("./Settings/envvars");
+const { Port } = require("./Settings/envVars.js");
 
 // Express setup
 const express = require("express");

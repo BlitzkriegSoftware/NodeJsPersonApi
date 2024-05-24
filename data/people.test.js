@@ -12,13 +12,13 @@ test("Data is inited", () => {
 });
 
 test("Data can be filled", () => {
-  var person = Person.makeperson();
+  var person = Person.makePerson();
   expect(person.isValid()).toBe(true);
 
   Data.push(person);
   expect(Data.length == 1).toBe(true);
 
-  person = Person.makeperson();
+  person = Person.makePerson();
   Data.push(person);
   expect(Data.length == 2).toBe(true);
 });

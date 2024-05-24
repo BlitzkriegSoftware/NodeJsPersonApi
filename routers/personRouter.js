@@ -158,7 +158,6 @@ router.post("/person/", (req, res) => {
   */
 
   var person = Person.fromObject(req.body);
-
   if (person.isValid()) {
     var status = new Status("Created");
     Data.push(person);
@@ -229,7 +228,7 @@ router.put("/person/", (req, res) => {
     });
 
     // add resplacement
-    data.push(p);
+    Data.push(p);
     var status = new Status("Updated");
     res.status(200).json(status);
   } else {

@@ -40,7 +40,6 @@ router.get("/about", (req, res) => {
     });
 });
 
-
 /*
   ------------------
   Health
@@ -48,9 +47,8 @@ router.get("/about", (req, res) => {
 */
 router.get("/health", (req, res) => {
   // #swagger.summary = 'Health check'
-  res.status(200).json('Healthy');
-}
-
+  res.status(200).json("Healthy");
+});
 
 /*
   ------------------

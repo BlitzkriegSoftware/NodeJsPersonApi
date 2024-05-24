@@ -229,6 +229,7 @@ router.put("/person/", (req, res) => {
 
     // add resplacement
     Data.push(p);
+
     var status = new Status("Updated");
     res.status(200).json(status);
   } else {

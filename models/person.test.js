@@ -6,17 +6,17 @@ const { describe, expect, test } = require("@jest/globals");
 const Person = require("./person");
 
 test("makeperson", () => {
-  var person = Person.makeperson();
+  var person = Person.makePerson();
   expect(person.isValid()).toBe(true);
   expect(person.isBlank(person.company)).toBe(false);
   expect(person.isBlank(person.email)).toBe(false);
 });
 
 test("fromjson", () => {
-  var person = Person.makeperson();
+  var person = Person.makePerson();
   expect(person.isValid()).toBe(true);
   var json = JSON.stringify(person);
-  var p2 = Person.fromjson(json);
+  var p2 = Person.fromJson(json);
   expect(p2.isValid()).toBe(true);
   expect(person.lastname == p2.lastname).toBe(true);
   expect(person.firstname == p2.firstname).toBe(true);

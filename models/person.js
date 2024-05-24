@@ -22,7 +22,7 @@ module.exports = class Person {
     this.company = "";
   }
 
-  static makeperson() {
+  static makePerson() {
     var _id = String(Math.round(Math.random() * 100000));
     var _firstname = faker.person.firstName();
     var _lastname = faker.person.lastName();
@@ -33,18 +33,18 @@ module.exports = class Person {
     return new Person(_id, _firstname, _lastname, _cellphone, _email, _company);
   }
 
-  static tostring(person) {
+  static toString(person) {
     var s = `${person.id};${person.firstname};${person.lastname};${person.cellphone};${person.email};${person.company}`;
     return s;
   }
 
-  tostring() {
-    return Person.tostring(this);
+  toString() {
+    return Person.toString(this);
   }
 
-  static fromjson(json) {
+  static fromJson(json) {
     var o = JSON.parse(json);
-    console.log(Object.getOwnPropertyNames(o));
+    // console.log(Object.getOwnPropertyNames(o));
     var p = new Person(
       o.id,
       o.firstname,

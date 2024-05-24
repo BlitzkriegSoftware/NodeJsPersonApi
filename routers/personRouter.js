@@ -49,7 +49,7 @@ router.get("/person/samples", (req, res) => {
   const sampleCount = 5;
 
   for (let i = 0; i < sampleCount; i++) {
-    var p = Person.makeperson();
+    var p = Person.makePerson();
     Data.push(p);
   }
 
@@ -93,7 +93,7 @@ router.post("/person/", (req, res) => {
     }
   */
 
-  var person = Person.fromjson(req.body);
+  var person = Person.fromJson(req.body);
   Data.push(person);
   res.json({ success: true, message: "added successfully" });
 });
@@ -116,7 +116,7 @@ router.put("/person/", (req, res) => {
   */
 
   const json = req.body;
-  var p = Person.fromjson(json);
+  var p = Person.fromJson(json);
   var id = p.id;
 
   Data = Data.filter((value, index, arr) => {

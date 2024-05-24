@@ -1,6 +1,7 @@
 "use strict";
 
-const fs = require("node:fs");
+const fs = require("fs");
+const fsPromises = require("fs").promises;
 const express = require("express");
 const router = express.Router();
 
@@ -14,34 +15,43 @@ router.use(express.json());
   ------------------
 */
 router.get("/about", (req, res) => {
-  // #swagger.summary = 'About this project'
+  // #swagger.summary = 'About this API'
 
   const filename = "./package.json";
 
-  var id = {
-    version: "n/a",
-    description: "People API",
-    author: "Stuart Williams",
-    license: "n/a",
-    git: "https://github.com/BlitzkriegSoftware/NodeJsPersonApi",
-    copyright: "(c) 2024",
-  };
+  fs.promises
+    .readFile(filename, "utf8")
+    .then(function (json) {
+      var id = JSON.parse(json);
+      var info = {
+        author: id.author || "Stuart Williams",
+        version: id.version || "n/a",
+        description: id.description || "People API",
+        license: id.license || "MIT",
+        git: "https://github.com/BlitzkriegSoftware/NodeJsPersonApi",
+        copyright: "(c) 2024-" + new Date().getFullYear().toString(),
+      };
 
-  fs.readFile(filename, "utf8", (err, data) => {
-    if (err == null) {
-      id = data;
-    }
-  });
-
-  var info = {
-    author: id.author,
-    version: id.version,
-    description: id.description,
-    license: id.license,
-    git: id.git,
-    copyright: id.copyright,
-  };
+      res.status(200).json(info);
+    })
+    .catch(function (error) {
+      var result = new Result("Error", error);
+      res.status(500).json(result);
+    });
 });
+
+
+/*
+  ------------------
+  Health
+  ------------------
+*/
+router.get("/health", (req, res) => {
+  // #swagger.summary = 'Health check'
+  res.status(200).json('Healthy');
+}
+
+
 /*
   ------------------
   (exports)

@@ -207,11 +207,25 @@
     },
     "/about": {
       "get": {
-        "summary": "About this project",
+        "summary": "About this API",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }

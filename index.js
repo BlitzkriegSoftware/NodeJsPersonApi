@@ -69,6 +69,10 @@ app.use(express.json());
 const personRouter = require("./routers/personRouter");
 app.use("/", personRouter);
 
+// Info
+const infoRouter = require("./routers/infoRouter");
+app.use("/", infoRouter);
+
 // Redirect to swagger
 app.get("/", (req, res) => {
   res.redirect("/doc");

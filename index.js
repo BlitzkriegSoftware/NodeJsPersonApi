@@ -10,27 +10,17 @@ const app = express();
 // https://github.com/scottie1984/swagger-ui-express/issues/120
 const swaggerUi = require("swagger-ui-express");
 
-const DisableTryItOutPlugin = function () {
-  return {
-    statePlugins: {
-      spec: {
-        wrapSelectors: {
-          allowTryItOutFor: () => () => false,
-        },
-      },
-    },
-  };
-};
-
+// https://stackoverflow.com/questions/69663117/do-not-render-try-it-out-button-and-enable-execute-button-in-swagger-ui
 const options = {
+  explorer: true,
   swaggerOptions: {
-    plugins: [DisableTryItOutPlugin],
+    tryItOutEnabled: true,
   },
 };
 
 const swaggerFile = require("./swagger.json");
 
-app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use("/doc", swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 
 // https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h
 const cors = require("cors");

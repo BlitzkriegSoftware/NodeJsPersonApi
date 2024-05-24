@@ -57,6 +57,19 @@ module.exports = class Person {
     return p;
   }
 
+  static fromObject(o) {
+    var p = new Person(
+      o.id,
+      o.firstname,
+      o.lastname,
+      o.cellphone,
+      o.email,
+      o.company
+    );
+
+    return p;
+  }
+
   isValid() {
     return (
       !this.isBlank(this.firstname) &&

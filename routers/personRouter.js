@@ -41,7 +41,7 @@ router.get("/person/list", (req, res) => {
   MAKE SAMPLES
   ------------------
 */
-router.get("/person/samples/:count?", (req, res) => {
+router.post("/person/samples/:count", (req, res) => {
   // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
 
   /* 
@@ -57,7 +57,7 @@ router.get("/person/samples/:count?", (req, res) => {
   }   
 */
 
-  const sampleCount = req.params.count || 5;
+  const sampleCount = Number(req.params.count || 5);
 
   for (let i = 0; i < sampleCount; i++) {
     var p = Person.makePerson();
@@ -102,7 +102,7 @@ router.get("/person/:id", (req, res) => {
   */
 
   const results = Data.filter((person) => person.id == req.params.id);
-  if (results == null) {
+  if (results == null || results.length <= 0) {
     var status = new Status("Not found");
     res.status(404).json(status);
   } else {
@@ -158,7 +158,7 @@ router.post("/person/", (req, res) => {
   }   
   */
 
-  var person = Person.fromJson(req.body);
+  var person = Person.fromObject(req.body);
 
   if (person.isValid()) {
     var status = new Status("Created");
@@ -219,7 +219,7 @@ router.put("/person/", (req, res) => {
   */
 
   const json = req.body;
-  var p = Person.fromJson(json);
+  var p = Person.fromObject(json);
 
   if (p.isValid()) {
     // remove old record

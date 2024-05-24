@@ -29,13 +29,13 @@
         }
       }
     },
-    "/person/samples/{count?}": {
-      "get": {
+    "/person/samples/{count}": {
+      "post": {
         "summary": "Makes N sample people and adds them to DATA (default: 5)",
         "description": "",
         "parameters": [
           {
-            "name": "count?",
+            "name": "count",
             "in": "path",
             "required": true,
             "schema": {

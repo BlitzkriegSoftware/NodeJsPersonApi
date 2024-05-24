@@ -10,18 +10,8 @@ const swaggerAutogen = require("swagger-autogen")({ openapi: "3.0.0" });
 
 const outputFile = "./swagger.json";
 
-// Add all routers here
-const endpointsFiles = ["./routers/personRouter.js"];
-
-swaggerAutogen(outputFile, endpointsFiles).then((data) => {
-  console.log("Updating " + outputFile);
-
-  let openapi3 = require(outputFile);
-
-  // Manual overrides
-  openapi3.info.description = "Person API";
-  openapi3.servers[0].url = "http://localhost:" + Port;
-  openapi3.components = {
+var comps = {
+  components: {
     schemas: {
       Person: {
         $id: "unique identity",
@@ -38,7 +28,20 @@ swaggerAutogen(outputFile, endpointsFiles).then((data) => {
         },
       },
     },
-  };
+  },
+};
+
+// Add all routers here
+const endpointsFiles = ["./routers/personRouter.js"];
+
+swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
+  console.log("Updating " + outputFile);
+
+  let openapi3 = require(outputFile);
+
+  // Manual overrides
+  openapi3.info.description = "Person API";
+  openapi3.servers[0].url = "http://localhost:" + Port;
 
   // write updates
   var json = JSON.stringify(openapi3, null, 2);

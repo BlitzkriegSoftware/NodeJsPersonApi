@@ -14,10 +14,17 @@
     "/person/list": {
       "get": {
         "summary": "Gets all people",
-        "description": "Returns a JSON array of PERSON",
+        "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Returns PEOPLE or error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/People"
+                }
+              }
+            }
           }
         }
       }
@@ -28,7 +35,7 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "Returns a JSON array of PERSON",
+            "description": "Returns PERSON or error",
             "content": {
               "application/json": {
                 "schema": {
@@ -131,17 +138,49 @@
   "components": {
     "schemas": {
       "Person": {
-        "$id": "unique identity",
-        "$firstname": "first name",
-        "$lastname": "last name",
-        "cellphone": "cell phone",
-        "company": "company",
-        "email": "email"
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "unique identity"
+          },
+          "firstname": {
+            "type": "string",
+            "example": "first name"
+          },
+          "lastname": {
+            "type": "string",
+            "example": "last name"
+          },
+          "cellphone": {
+            "type": "string",
+            "example": "cell phone"
+          },
+          "company": {
+            "type": "string",
+            "example": "company"
+          },
+          "email": {
+            "type": "string",
+            "example": "email"
+          }
+        },
+        "required": [
+          "id",
+          "firstname",
+          "lastname"
+        ]
       },
       "People": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Person"
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "array"
+          },
+          "items": {
+            "$ref": "#/components/schemas/Person"
+          }
         }
       }
     }

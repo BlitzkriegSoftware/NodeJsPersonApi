@@ -4,8 +4,8 @@ const express = require("express");
 const router = express.Router();
 
 var Data = require("../data/people");
-var Status = require("../models/status");
 const Person = require("../models/person");
+const PersonRepository = require("../data/people");
 
 router.use(express.json());
 
@@ -32,7 +32,7 @@ router.get("/person/list", (req, res) => {
   }   
 */
 
-  res.json(Data);
+  res.status(200).json(Data);
 });
 
 /*
@@ -57,12 +57,7 @@ router.post("/person/samples/:count", (req, res) => {
 */
 
   const sampleCount = Number(req.params.count || 5);
-
-  for (let i = 0; i < sampleCount; i++) {
-    var p = Person.makePerson();
-    Data.push(p);
-  }
-
+  _ = PersonRepository.addSamples(sampleCount);
   res.json(Data);
 });
 
@@ -77,126 +72,32 @@ router.get("/person/:id", (req, res) => {
   /* 
   #swagger.responses[200] = {
     description: "Returns PERSON",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Person"
-        }
-      }           
-    }
   }   
   */
 
   /* 
   #swagger.responses[404] = {
     description: "Not Found",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
   }   
   */
 
-  const results = Data.filter((person) => person.id == req.params.id);
-  if (results == null || results.length <= 0) {
-    var status = new Status("Not found");
-    res.status(404).json(status);
+  var p = PersonRepository.findById(id);
+  if(p == null) {
+    return res.status(404);
   } else {
-    res.status(200).json(results);
+    res.status(200).json(p);
   }
+
 });
 
 /*
   ------------------
-  ADD PERSON
+  ADD/update PERSON
   ------------------
 */
 router.post("/person/", (req, res) => {
-  // #swagger.summary = 'Add a new PERSON'
+  // #swagger.summary = 'Add/Update PERSON'
   // #swagger.description = 'Returns Status message'
-
-  /*  
-    #swagger.requestBody = {
-        required: true,
-        content: {
-          "application/json": {
-            schema: {
-              $ref: "#/components/schemas/Person"
-            }  
-          }
-        }
-    }
-  */
-
-  /* 
-  #swagger.responses[201] = {
-    description: "Created w. Status",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
-  }   
-  */
-
-  /* 
-  #swagger.responses[400] = {
-    description: "Bad Person w. Status",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
-  }   
-  */
-
-  /* 
-  #swagger.responses[409] = {
-    description: "Duplicate Person",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
-  }   
-  */
-
-  var person = Person.fromObject(req.body);
-  if (person.isValid()) {
-    const results = Data.filter((p) => p.id == person.id);
-
-    if (results.length > 0) {
-      var status = new Status("Duplicate");
-      res.status(409).json(status);
-      return;
-    }
-
-    var status = new Status("Created");
-    Data.push(person);
-    res.status(201).json(status);
-  } else {
-    var status = new Status("Invalid Person");
-    res.status(400).json(status);
-  }
-});
-
-/*
-  ------------------
-  UPDATE PERSON
-  ------------------
-*/
-router.put("/person/", (req, res) => {
-  // #swagger.summary = 'Updates an existing PERSON'
-  // #swagger.description = 'Returns status message'
 
   /*  
     #swagger.requestBody = {
@@ -225,6 +126,19 @@ router.put("/person/", (req, res) => {
   */
 
   /* 
+  #swagger.responses[201] = {
+    description: "Created w. Status",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/Status"
+        }
+      }           
+    }
+  }   
+  */
+
+  /* 
   #swagger.responses[400] = {
     description: "Bad Person w. Status",
     content: {
@@ -237,25 +151,9 @@ router.put("/person/", (req, res) => {
   }   
   */
 
-  const json = req.body;
-  var p = Person.fromObject(json);
-
-  if (p.isValid()) {
-    // remove old record
-    Data = Data.filter((value, index, arr) => {
-      if (p.id != value.id) return true;
-      else return false;
-    });
-
-    // add resplacement
-    Data.push(p);
-
-    var status = new Status("Updated");
-    res.status(200).json(status);
-  } else {
-    var status = new Status("Bad Person");
-    res.status(400).json(status);
-  }
+  var o = req.body;
+  var sc = PersonRepository.addUpdate(o);
+  res.status(sc);
 });
 
 /*
@@ -293,22 +191,9 @@ router.delete("/person/:id", (req, res) => {
   }   
   */
 
-  var deleted = false;
   const id = req.params.id;
-  Data = Data.filter((value, index, arr) => {
-    if (id == value.id) {
-      deleted = true;
-      return false;
-    } else return true;
-  });
-
-  if (deleted) {
-    var status = new Status("Deleted");
-    res.status(200).json(status);
-  } else {
-    var status = new Status("Not Found");
-    res.status(404).json(status);
-  }
+  var sc =PersonRepository.delete(id);
+  res.status(sc);
 });
 
 /*

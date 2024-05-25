@@ -5,8 +5,6 @@ const fsPromises = require("fs").promises;
 const express = require("express");
 const router = express.Router();
 
-var Status = require("../models/status");
-
 router.use(express.json());
 
 /*

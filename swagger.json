@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:30083"
+      "url": "http://localhost:30090"
     }
   ],
   "paths": {
@@ -73,24 +73,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns PERSON",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Person"
-                }
-              }
-            }
+            "description": "Returns PERSON"
           },
           "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
+            "description": "Not Found"
           }
         }
       },
@@ -133,57 +119,21 @@
     },
     "/person/": {
       "post": {
-        "summary": "Add a new PERSON",
+        "summary": "Add/Update PERSON",
         "description": "Returns Status message",
-        "responses": {
-          "201": {
-            "description": "Created w. Status",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Person w. Status",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Duplicate Person",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Person"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "Updates an existing PERSON",
-        "description": "Returns status message",
         "responses": {
           "200": {
             "description": "Updated w. Status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created w. Status",
             "content": {
               "application/json": {
                 "schema": {

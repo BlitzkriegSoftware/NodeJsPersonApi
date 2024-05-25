@@ -42,7 +42,7 @@ test('Repository', () => {
   expect(person.isValid()).toBe(true);
 
   var words = person.toString();
-  console.log(words);
+  // console.log(words);
   expect(words != null).toBe(true);
   expect(words.indexOf(';') >= 0).toBe(true);
 

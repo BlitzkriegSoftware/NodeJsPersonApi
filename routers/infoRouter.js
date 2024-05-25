@@ -50,6 +50,19 @@ router.get("/health", (req, res) => {
 
 /*
   ------------------
+  Swagger.json
+  ------------------
+*/
+router.get("/swagger", (req,res)=> {
+    // #swagger.summary = 'OpenApi3 JSON Definition (swagger)'
+  const swaggerFile = require("../swagger.json");
+  res.status(200).json(swaggerFile);
+});
+
+
+
+/*
+  ------------------
   (exports)
   ------------------
 */

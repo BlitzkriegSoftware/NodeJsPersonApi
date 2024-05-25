@@ -154,6 +154,17 @@
           }
         }
       }
+    },
+    "/swagger": {
+      "get": {
+        "summary": "OpenApi3 JSON Definition (swagger)",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

@@ -7,6 +7,7 @@ const { Port } = require("./Settings/envVars.js");
 const express = require("express");
 const app = express();
 
+// https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
 // https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h
 const cors = require("cors");
 let corsOptions = {
@@ -17,9 +18,9 @@ let corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
 app.use(function (req, res, next) {
   // Content security policy
+  // https://report-uri.com/home/generate
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self' data: 'unsafe-inline' w3.org w3.org/2000 w3.org/1999; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self' 'unsafe-inline'; frame-src 'self';"
@@ -40,7 +41,6 @@ app.use(function (req, res, next) {
   res.removeHeader("x-powered-by");
   next();
 });
-
 
 // Swagger
 // https://github.com/scottie1984/swagger-ui-express/issues/120

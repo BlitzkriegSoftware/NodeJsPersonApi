@@ -6,22 +6,36 @@ const Person = require('../models/person');
 module.exports = class PersonRepository {
 
     // Data: array of people
+    /**
+     * Data Array
+     */
     static Data = [];
 
     // Has Data
+    /**
+     * Does the Data array have any items?
+     * @returns {boolean} 
+     */
     static hasData() {
-      return (Data.length > 0);
+      return (PersonRepository.Data.length > 0);
     }
 
-    // Empty data, return 200
+    /**
+     * Empties Array
+     * @returns {200}
+     */
     static reset() {
-        Data = [];
+        PersonRepository.Data = [];
         return 200;
     }
 
-    // find by id, returns Person or null
+    /**
+     * find by id
+     * @param {} id 
+     * @returns {Person | null}
+     */
     static findById(id) {
-        const results = Data.filter((person) => person.id == id);
+        const results = PersonRepository.Data.filter((person) => person.id == id);
         if(results.length > 0) {
             return results[0];
         } else {
@@ -29,7 +43,11 @@ module.exports = class PersonRepository {
         }
     }
 
-    // find by name or fields, returns array of results
+    /**
+     * Search fields for text
+     * @param {String} text 
+     * @returns {Array} can be empty
+     */
     static search(text) 
     {
         if((text ==null) || (text.length <= 0)) {
@@ -38,7 +56,7 @@ module.exports = class PersonRepository {
 
         text = text.toLowerCase().trim();
 
-        var results = Data.filter((value, index, arr) => {
+        var results = PersonRepository.Data.filter((value, index, arr) => {
             return 
                 value.lastname.toLowerCase().trim().includes(text) ||
                 value.firstname.toLowerCase().trim().includes(text) ||
@@ -49,10 +67,14 @@ module.exports = class PersonRepository {
         return results;
     }
 
-    // Delete by id, return 200 or 404
+    /**
+     * Delete by Id
+     * @param {String} id 
+     * @returns {200 | 400}
+     */
     static delete(id) {
         var deleted = false;
-        Data = Data.filter((value, index, arr) => {
+        PersonRepository.Data = PersonRepository.Data.filter((value, index, arr) => {
             if (id == value.id) {
             deleted = true;
             return false;
@@ -66,7 +88,11 @@ module.exports = class PersonRepository {
         }
     }
 
-    // Add/updates given object, returns Http-Status-Code
+    /**
+     * Add/Update Person
+     * @param {object} o 
+     * @returns {Number} http status code
+     */
     static addUpdate(o) {
 
         if((o ==null) || (o.length <= 0)) {
@@ -82,14 +108,14 @@ module.exports = class PersonRepository {
 
         if (person.isValid()) {
             var rc = 201;
-            const results = Data.filter((p) => p.id == person.id);
+            const results = PersonRepository.Data.filter((p) => p.id == person.id);
 
             if (results.length > 0) {
-                _ = Delete(person.id);
+                /* _= */ PersonRepository.delete(person.id);
                 rc = 200;
             } 
             
-            Data.push(person);
+            PersonRepository.Data.push(person);
 
             return rc;
         } else {
@@ -97,13 +123,17 @@ module.exports = class PersonRepository {
         }
     }
 
-    // Populate data with {howMany} samples, return samples
+    /**
+     * Populate How-Many Samples into Data
+     * @param {Number} howMany 
+     * @returns {Array} of People created
+     */
     static addSamples(howMany) {
         var count = Number(howMany || 5);
         var results = [];
         for (let i = 0; i < count; i++) {
             var p = Person.makePerson();
-            Data.push(p);
+            PersonRepository.Data.push(p);
             results.push(p);
         }
         

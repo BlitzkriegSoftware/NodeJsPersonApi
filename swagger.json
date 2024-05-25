@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:30090"
+      "url": "http://localhost:30083"
     }
   ],
   "paths": {
@@ -95,24 +95,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Deleted status",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
+            "description": "Deleted status"
           },
           "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
+            "description": "Not Found"
           }
         }
       }
@@ -123,34 +109,13 @@
         "description": "Returns Status message",
         "responses": {
           "200": {
-            "description": "Updated w. Status",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
+            "description": "Updated w. Status"
           },
           "201": {
-            "description": "Created w. Status",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
+            "description": "Created w. Status"
           },
           "400": {
-            "description": "Bad Person w. Status",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
+            "description": "Bad Person w. Status"
           }
         },
         "requestBody": {
@@ -238,22 +203,6 @@
             "$ref": "#/components/schemas/Person"
           }
         }
-      },
-      "Status": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "status message"
-          },
-          "data": {
-            "type": "string",
-            "example": "any data"
-          }
-        },
-        "required": [
-          "message"
-        ]
       }
     }
   }

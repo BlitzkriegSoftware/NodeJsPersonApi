@@ -3,8 +3,6 @@
 const express = require("express");
 const router = express.Router();
 
-var Data = require("../data/people");
-const Person = require("../models/person");
 const PersonRepository = require("../data/people");
 
 router.use(express.json());
@@ -32,7 +30,7 @@ router.get("/person/list", (req, res) => {
   }   
 */
 
-  res.status(200).json(Data);
+  res.status(200).json(PersonRepository.Data);
 });
 
 /*
@@ -57,8 +55,8 @@ router.post("/person/samples/:count", (req, res) => {
 */
 
   const sampleCount = Number(req.params.count || 5);
-  _ = PersonRepository.addSamples(sampleCount);
-  res.json(Data);
+  /* _= */ PersonRepository.addSamples(sampleCount);
+  res.json(PersonRepository.Data);
 });
 
 /*
@@ -81,6 +79,7 @@ router.get("/person/:id", (req, res) => {
   }   
   */
 
+  var id = req.params.id;
   var p = PersonRepository.findById(id);
   if(p == null) {
     return res.status(404);
@@ -114,46 +113,25 @@ router.post("/person/", (req, res) => {
 
   /* 
   #swagger.responses[200] = {
-    description: "Updated w. Status",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
+    description: "Updated w. Status"
   }   
   */
 
   /* 
   #swagger.responses[201] = {
-    description: "Created w. Status",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
+    description: "Created w. Status"
   }   
   */
 
   /* 
   #swagger.responses[400] = {
-    description: "Bad Person w. Status",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
+    description: "Bad Person w. Status"
   }   
   */
 
   var o = req.body;
   var sc = PersonRepository.addUpdate(o);
-  res.status(sc);
+  res.status(sc).json({"status": sc });
 });
 
 /*
@@ -167,33 +145,21 @@ router.delete("/person/:id", (req, res) => {
 
   /* 
   #swagger.responses[200] = {
-    description: "Deleted status",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
+    description: "Deleted status"
   }   
   */
 
   /* 
   #swagger.responses[404] = {
-    description: "Not Found",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/Status"
-        }
-      }           
-    }
+    description: "Not Found"
   }   
   */
 
   const id = req.params.id;
-  var sc =PersonRepository.delete(id);
-  res.status(sc);
+  var sc = PersonRepository.delete(id);
+  var status = "deleted";
+  if(sc == 404) status = "not deleted";
+  res.status(sc).json({"status": status });
 });
 
 /*

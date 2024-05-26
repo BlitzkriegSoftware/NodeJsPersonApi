@@ -7,7 +7,7 @@
     "start": "node index.js",
     "swagger-autogen": "node swagger.js",
     "test": "jest --coverage",
-    "mkdoc": "jsdoc -c ./jsdoc.json ./package.json -R ./README.md"
+    "docs": "jsdoc -c ./jsdoc.json ./package.json -R ./README.md"
   },
   "keywords": [
     "people",

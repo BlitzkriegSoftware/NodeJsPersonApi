@@ -6,12 +6,16 @@
   "scripts": {
     "start": "node index.js",
     "swagger-autogen": "node swagger.js",
-    "test": "jest"
+    "test": "jest --coverage",
+    "mkdoc": "jsdoc -c ./jsdoc.json ./package.json -R ./README.md"
   },
   "keywords": [
     "people",
     "api",
-    "express"
+    "express",
+    "owasp",
+    "swagger",
+    "openapi3"
   ],
   "author": "Stuart Williams",
   "license": "MIT",

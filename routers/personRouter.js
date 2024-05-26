@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const PersonRepository = require("../data/people");
+const PersonRepository = require('../data/people');
 
 router.use(express.json());
 
@@ -14,7 +14,12 @@ router.use(express.json());
   LIST
   ------------------
 */
-router.get("/person/list", (req, res) => {
+
+/**
+ * GET /person/list
+ * @returns {Number} {Array} of People
+ */
+router.get('/person/list', (req, res) => {
   // #swagger.summary = 'Gets all people'
 
   /* 
@@ -33,12 +38,12 @@ router.get("/person/list", (req, res) => {
   res.status(200).json(PersonRepository.Data);
 });
 
-/*
-  ------------------
-  MAKE SAMPLES
-  ------------------
-*/
-router.post("/person/samples/:count", (req, res) => {
+/**
+ * POST /person/samples/:count
+ * @argument {Number} count of Person to Make and add to Data
+ * @returns {Number} {Array} of created people
+ */
+router.post('/person/samples/:count', (req, res) => {
   // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
 
   /* 
@@ -59,12 +64,12 @@ router.post("/person/samples/:count", (req, res) => {
   res.json(PersonRepository.Data);
 });
 
-/*
-  ------------------
-  GET BY ID
-  ------------------
-*/
-router.get("/person/:id", (req, res) => {
+/**
+ * GET /person/:id
+ * @argument {String} Id of Person
+ * @returns {Number} {Class} of Person or Null
+ */
+router.get('/person/:id', (req, res) => {
   // #swagger.summary = 'Gets person by ID or 404 w. Status'
 
   /* 
@@ -81,20 +86,20 @@ router.get("/person/:id", (req, res) => {
 
   var id = req.params.id;
   var p = PersonRepository.findById(id);
-  if(p == null) {
+  if (p == null) {
     return res.status(404);
   } else {
     res.status(200).json(p);
   }
-
 });
 
-/*
-  ------------------
-  ADD/update PERSON
-  ------------------
-*/
-router.post("/person/", (req, res) => {
+/**
+ * POST /person/ ADD/update PERSON
+ * @argument {Class} Person (as Json)
+ * @returns {Number} {String} Status
+ */
+
+router.post('/person/', (req, res) => {
   // #swagger.summary = 'Add/Update PERSON'
   // #swagger.description = 'Returns Status message'
 
@@ -131,15 +136,15 @@ router.post("/person/", (req, res) => {
 
   var o = req.body;
   var sc = PersonRepository.addUpdate(o);
-  res.status(sc).json({"status": sc });
+  res.status(sc).json({ status: sc });
 });
 
-/*
-  ------------------
-  DELETE
-  ------------------
-*/
-router.delete("/person/:id", (req, res) => {
+/**
+ * DELETE /person/:id
+ * @argument {String} id of person
+ * @returns {Number} {String} status
+ */
+router.delete('/person/:id', (req, res) => {
   // #swagger.summary = 'Deletes an existing PERSON by ID'
   // #swagger.description = 'Returns status message'
 
@@ -157,9 +162,9 @@ router.delete("/person/:id", (req, res) => {
 
   const id = req.params.id;
   var sc = PersonRepository.delete(id);
-  var status = "deleted";
-  if(sc == 404) status = "not deleted";
-  res.status(sc).json({"status": status });
+  var status = 'deleted';
+  if (sc == 404) status = 'not deleted';
+  res.status(sc).json({ status: status });
 });
 
 /*

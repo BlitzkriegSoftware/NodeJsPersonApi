@@ -2,6 +2,7 @@
 
 // https://fakerjs.dev/guide/usage.html
 const { faker } = require('@faker-js/faker');
+var Utility = require('../library/utility').Utility;
 
 /**
  * Class: Person
@@ -110,18 +111,9 @@ module.exports = class Person {
    */
   isValid() {
     return (
-      !this.isBlank(this.firstname) &&
-      !this.isBlank(this.lastname) &&
-      !this.isBlank(this.id)
+      !Utility.isBlank(this.firstname) &&
+      !Utility.isBlank(this.lastname) &&
+      !Utility.isBlank(this.id)
     );
-  }
-
-  /**
-   * True if is falsy or just whitespace
-   * @param {String} str
-   * @returns {Boolean} isNullOrWhitespace
-   */
-  isBlank(str) {
-    return !str || /^\s*$/.test(str);
   }
 };

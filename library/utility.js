@@ -23,6 +23,11 @@ exports.Utility = (function () {
      */
     propIsValid: function (o, prop) {
       var isOk = false;
+
+      if (o == null || prop == null) {
+        return isOk;
+      }
+
       if (Object.hasOwn(o, prop)) {
         var value = String(o[prop]);
         if (value != null && value.length > 0) {

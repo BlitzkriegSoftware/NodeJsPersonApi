@@ -5,14 +5,16 @@ const { describe, expect, test } = require('@jest/globals');
 
 const Person = require('./person');
 
+var Utility = require('../library/utility').Utility;
+
 /**
  * TEST: Make Person generates valid People
  */
 test('makePerson', () => {
   var person = Person.makePerson();
   expect(person.isValid()).toBe(true);
-  expect(person.isBlank(person.company)).toBe(false);
-  expect(person.isBlank(person.email)).toBe(false);
+  expect(Utility.isBlank(person.company)).toBe(false);
+  expect(Utility.isBlank(person.email)).toBe(false);
 });
 
 /**

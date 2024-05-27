@@ -26,18 +26,6 @@ module.exports = class Person {
   }
 
   /**
-   * Static CTOR, makes all fields the zero length string
-   */
-  static {
-    this.id = '';
-    this.firstname = '';
-    this.lastname = '';
-    this.cellphone = '';
-    this.email = '';
-    this.company = '';
-  }
-
-  /**
    * Generates a random Person
    * @returns Person
    */
@@ -73,20 +61,24 @@ module.exports = class Person {
   /**
    * Parse Person from Json
    * @param {String} json
-   * @returns {Class} Person
+   * @returns {Class} Person or {null}
    */
   static fromJson(json) {
-    var o = JSON.parse(json);
-    // console.log(Object.getOwnPropertyNames(o));
-    var p = new Person(
-      o.id,
-      o.firstname,
-      o.lastname,
-      o.cellphone,
-      o.email,
-      o.company
-    );
-
+    var p = null;
+    try {
+      var o = JSON.parse(json);
+      // console.log(Object.getOwnPropertyNames(o));
+      p = new Person(
+        o.id,
+        o.firstname,
+        o.lastname,
+        o.cellphone,
+        o.email,
+        o.company
+      );
+    } catch {
+      p = null;
+    }
     return p;
   }
 
@@ -96,15 +88,19 @@ module.exports = class Person {
    * @returns {Class} Person
    */
   static fromObject(o) {
-    var p = new Person(
-      o.id,
-      o.firstname,
-      o.lastname,
-      o.cellphone,
-      o.email,
-      o.company
-    );
-
+    var p = null;
+    if (o == null) {
+      p = null;
+    } else {
+      p = new Person(
+        o.id,
+        o.firstname,
+        o.lastname,
+        o.cellphone,
+        o.email,
+        o.company
+      );
+    }
     return p;
   }
 

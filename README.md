@@ -1,16 +1,18 @@
 # NodeJs Person Api
 
-NodeJs REST API for Person
+NodeJs REST API for Person intended to be a best practices demo
 
 ## How to set up
 
 ### install dependencies
 
-`npm install`
+```powershell
+npm install
+```
 
 ### Configure Port
 
-> If you change the port from default of `30083`, then update `launch.json` as well and change the `API_PORT`
+> If you change the port from default of `30083`, then update `launch.json` as well and change the `API_PORT` environment variable
 
 Configure port (powershell)
 
@@ -30,15 +32,21 @@ If not, close and re-open the terminal to get a fresh session + vars
 
 ### generate swagger
 
-`npm swagger-autogen`
+```powershell
+npm swagger-autogen
+```
 
 -or-
 
-`node .\swagger.js`
+```powershell
+node .\swagger.js
+```
 
 ## Run site
 
-`npm start`
+```powershell
+npm start
+```
 
 -or-
 
@@ -48,17 +56,17 @@ node .\index.js
 
 ## Unit tests
 
-1. Make sure JEST is installed
+1. Make sure JEST is installed globally
 
-`npm install --save-dev jest` (is part of the packages)
-
-2. Install it globally
-
-`npm install jest --global`
+```powershell
+npm install jest --global
+```
 
 3. Run tests with
 
-`jest --coverage`
+```powershell
+jest --coverage
+```
 
 ## JSDOC
 
@@ -66,25 +74,29 @@ node .\index.js
 
 2. Be in the root folder
 
-3. Install JsDoc (if not already)
+3. Install JsDoc globally
 
-`npm i jsdoc -g`
+```powershell
+npm i jsdoc -g
+```
 
 4. Generate docs
 
-`jsdoc -c ./jsdoc.json ./package.json -R ./README.md --verbose`
+```powershell
+scripts/mkdocs.ps1
+```
 
 5. Output will be in
 
-`out/nodejs_people_api/{version}/`
+`out/`
 
 Where `version` is the version attribute from `package.json`
 
 7. The site can be lauched with
 
 ```powershell
-cd out/nodejs_people_api/{version}/
-start index.html`
+cd out/
+start index.html
 ```
 
 Which will launch documents in the default browser

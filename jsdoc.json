@@ -1,9 +1,9 @@
 {
-  "plugins": ["plugins/markdown", "plugins/summarize"],
+  "plugins": ["plugins/markdown"],
   "recurseDepth": 10,
   "source": {
     "include": ["."],
-    "includePattern": ".js$",
+    "includePattern": ".+\\.js$",
     "exclude": ["out", "coverage", "node_modules"]
   },
   "sourceType": "module",
@@ -12,7 +12,7 @@
     "dictionaries": ["jsdoc", "closure"]
   },
   "templates": {
-    "cleverLinks": false,
+    "cleverLinks": true,
     "monospaceLinks": true
   },
   "opts": {

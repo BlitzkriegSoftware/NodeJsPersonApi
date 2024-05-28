@@ -13,12 +13,38 @@ const { Port } = require('./Settings/envVars.js');
  * requires
  */
 const swaggerUi = require('swagger-ui-express');
+var morgan = require('morgan');
+var fs = require('fs');
+var path = require('path');
+const rfs = require('rotating-file-stream');
 
 /**
  * Express setup
  */
 const express = require('express');
 const app = express();
+
+/**
+ * Logging file (rotating)
+ */
+
+var logFolder = path.join('.', 'logs');
+var logFile = path.join(logFolder, 'personapi.log');
+
+if (!fs.existsSync(logFolder)) {
+  fs.mkdirSync(logFolder);
+}
+
+const accessLogStream = rfs.createStream(logFile, {
+  size: '5M', // rotate every 10 MegaBytes written
+  interval: '1h', // rotate daily
+  compress: 'gzip', // compress rotated files
+});
+
+/**
+ * Logging
+ */
+app.use(morgan('combined', { stream: accessLogStream }));
 
 /**
  * CORS

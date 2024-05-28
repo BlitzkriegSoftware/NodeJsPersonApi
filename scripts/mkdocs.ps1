@@ -14,7 +14,8 @@ if(![string]::IsNullOrWhiteSpace($searchResult)) {
     [int]$index = $searchResult.lastIndexOf(':');
     if($index -ge 0) {
         $searchResult = $searchResult.Substring($index + 1).Trim();
-        $version = $searchResult.Replace('"',"").Replace("'",'').Replace(',',"").Trim();
+        $version = $searchResult.Replace('"',"").Replace("'",'').Replace(',',"");
+        $version = $version.Trim();
     }
 }
 

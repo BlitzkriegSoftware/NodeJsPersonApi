@@ -63,14 +63,6 @@ const options = {
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 
 /**
- * Error handler
- */
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send(JSON.stringify(err));
-});
-
-/**
  * Enables Json to Object translation
  */
 app.use(express.json());
@@ -92,6 +84,14 @@ app.use('/', infoRouter);
  */
 app.get('/', (req, res) => {
   res.redirect('/doc');
+});
+
+/**
+ * Error handler, should go right above listen!
+ */
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send(JSON.stringify(err));
 });
 
 /**

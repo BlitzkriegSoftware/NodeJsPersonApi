@@ -2,8 +2,8 @@
 
 /**
  * All person endpoints
- * @name PersonRouter
- * @module Routers
+ * @public
+ * @module PersonRouter
  */
 
 const express = require('express');
@@ -23,6 +23,10 @@ router.use(express.json());
 
 /**
  * GET /person/list
+ * @member
+ * @public
+ * @memberof PersonRouter
+ * @alias person.list
  * @returns {Number} {Array} of People
  */
 router.get('/person/list', (req, res) => {
@@ -46,6 +50,10 @@ router.get('/person/list', (req, res) => {
 
 /**
  * POST /person/samples/:count
+ * @member
+ * @public
+ * @memberof PersonRouter
+ * @alias person.samples
  * @argument {Number} count of Person to Make and add to Data
  * @returns {Number} {Array} of created people
  */
@@ -72,6 +80,10 @@ router.post('/person/samples/:count', (req, res) => {
 
 /**
  * GET /person/:id
+ * @member
+ * @public
+ * @memberof PersonRouter
+ * @alias person.getbyid
  * @argument {String} Id of Person
  * @returns {Number} {Class} of Person or Null
  */
@@ -101,10 +113,13 @@ router.get('/person/:id', (req, res) => {
 
 /**
  * POST /person/ ADD/update PERSON
+ * @member
+ * @public
+ * @alias person.addupdate
+ * @memberof PersonRouter
  * @argument {Class} Person (as Json)
  * @returns {Number} {String} Status
  */
-
 router.post('/person/', (req, res) => {
   // #swagger.summary = 'Add/Update PERSON'
   // #swagger.description = 'Returns Status message'
@@ -147,6 +162,10 @@ router.post('/person/', (req, res) => {
 
 /**
  * DELETE /person/:id
+ * @member
+ * @public
+ * @alias person.deletebyid
+ * @memberof PersonRouter
  * @argument {String} id of person
  * @returns {Number} {String} status
  */

@@ -14,14 +14,15 @@ module.exports = class Person {
   /**
    * CTOR, these are the fields
    * @memberof Person
-   * @alias Person#CTOR
    * @constructor
+   * @alias Person.constructor
    * @param {String} id - Unique Id
    * @param {String} firstname - First Name
    * @param {String} lastname - Last Name
    * @param {String} cellphone - Cell Phone Number
    * @param {String} email - Email
    * @param {String} company - Company Name
+   * @returns {Person} - person class
    */
   constructor(id, firstname, lastname, cellphone, email, company) {
     this.id = id;

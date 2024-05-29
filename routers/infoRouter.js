@@ -2,8 +2,8 @@
 
 /**
  * Endpoints common to all REST APIs
- * @name InfoRouter
- * @module Routers
+ * @public
+ * @module InfoRouter
  */
 
 const fs = require('fs');
@@ -15,6 +15,8 @@ router.use(express.json());
 
 /**
  * GET /About
+ * @method
+ * @name info.about
  * @returns {String} JSON of Info
  */
 router.get('/about', (req, res) => {
@@ -45,6 +47,8 @@ router.get('/about', (req, res) => {
 
 /**
  * GET /health
+ * @method
+ * @name info.health
  * @returns {Number} {String} HTTP Status Code + Message
  */
 router.get('/health', (req, res) => {
@@ -54,6 +58,8 @@ router.get('/health', (req, res) => {
 
 /**
  * GET /swagger
+ * @method
+ * @name info.swagger
  * @returns <String> Swagger.json in OpenAPI3
  */
 router.get('/swagger', (req, res) => {

@@ -27,6 +27,8 @@ if(![string]::IsNullOrWhiteSpace($searchResult)) {
     }
 }
 
+Write-Output "Version: ${version} $(Get-Date -Format 'yyyyMMdd hh:mm:ss')"
+
 jsdoc -c ./jsdoc.json ./package.json -R ./README.md
 Pop-Location
 

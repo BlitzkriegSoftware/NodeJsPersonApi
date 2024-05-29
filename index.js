@@ -19,6 +19,13 @@ var morgan = require('morgan');
 var fs = require('fs');
 var path = require('path');
 const rfs = require('rotating-file-stream');
+var Utility = require('./library/utility').Utility;
+
+/**
+ * Where is the app root?
+ *@global
+ */
+global.appRoot = path.resolve(__dirname);
 
 /**
  * Express setup
@@ -30,17 +37,11 @@ const app = express();
  * Logging file (rotating)
  */
 
-var logFolder = path.join('.', 'logs');
-var logFile = path.join(logFolder, 'personapi.log');
-
-if (!fs.existsSync(logFolder)) {
-  fs.mkdirSync(logFolder);
-}
-
-const accessLogStream = rfs.createStream(logFile, {
+const accessLogStream = rfs.createStream(Utility.logFilename, {
   size: '5M', // rotate every 10 MegaBytes written
   interval: '1h', // rotate daily
   compress: 'gzip', // compress rotated files
+  maxFiles: 3,
 });
 
 /**
@@ -50,7 +51,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 /**
  * CORS
- * @see { @link https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h | cors }
+ * @see {@link https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h|cors}
  */
 const cors = require('cors');
 let corsOptions = {
@@ -63,7 +64,7 @@ app.use(cors(corsOptions));
 
 /**
  * InfoSec Middleware
- * @see { @link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | OWASP Cheetsheet }
+ * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | OWASP Cheetsheet }
  */
 var infoSec = require('./middleware/infoSecMiddleware.js');
 var infoSecOptions = {
@@ -78,8 +79,8 @@ app.use(infoSec(infoSecOptions));
 
 /**
  * Swagger
- * @see { @link  https://github.com/scottie1984/swagger-ui-express/issues/120 | swagger docs }
- * @see { @link  https://stackoverflow.com/questions/69663117/do-not-render-try-it-out-button-and-enable-execute-button-in-swagger-ui | customize swagger }
+ * @see {@link  https://github.com/scottie1984/swagger-ui-express/issues/120 | swagger docs }
+ * @see {@link  https://stackoverflow.com/questions/69663117/do-not-render-try-it-out-button-and-enable-execute-button-in-swagger-ui | customize swagger }
  */
 const swaggerFile = require('./swagger.json');
 const options = {

@@ -5,7 +5,7 @@ const { faker } = require('@faker-js/faker');
 var Utility = require('../library/utility').Utility;
 
 /**
- * @module Models
+ * @module models/person
  * @name Person
  * @class
  * @classdesc Model of a Person in our System
@@ -13,9 +13,8 @@ var Utility = require('../library/utility').Utility;
 module.exports = class Person {
   /**
    * CTOR, these are the fields
-   * @memberof Person
+   * @alias module:models/person.constructor
    * @constructor
-   * @alias Person.constructor
    * @param {String} id - Unique Id
    * @param {String} firstname - First Name
    * @param {String} lastname - Last Name

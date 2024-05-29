@@ -3,13 +3,9 @@
 /**
  * Helpful static methods for use in any code
  * @name Utility
- * @module Libraries
+ * @module library/utility
  */
 
-/**
- * Library: Utility
- * static helper functions
- */
 exports.Utility = (function () {
   return {
     /**

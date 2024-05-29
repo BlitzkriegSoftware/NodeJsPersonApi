@@ -3,7 +3,7 @@
 /**
  * Endpoints common to all REST APIs
  * @public
- * @module InfoRouter
+ * @module routes/inforouter
  */
 
 const fs = require('fs');
@@ -15,11 +15,10 @@ router.use(express.json());
 
 /**
  * GET /About
- * @method
- * @name info.about
+ * @alias module:routes/inforouter.about
  * @returns {String} JSON of Info
  */
-router.get('/about', (req, res) => {
+var about = router.get('/about', (req, res) => {
   // #swagger.summary = 'About this API'
 
   const filename = './package.json';
@@ -47,22 +46,20 @@ router.get('/about', (req, res) => {
 
 /**
  * GET /health
- * @method
- * @name info.health
+ * @alias module:routes/inforouter.health
  * @returns {Number} {String} HTTP Status Code + Message
  */
-router.get('/health', (req, res) => {
+const health = router.get('/health', (req, res) => {
   // #swagger.summary = 'Health check'
   res.status(200).json('Healthy');
 });
 
 /**
  * GET /swagger
- * @method
- * @name info.swagger
+ * @alias module:routes/inforouter.swagger
  * @returns <String> Swagger.json in OpenAPI3
  */
-router.get('/swagger', (req, res) => {
+const swagger = router.get('/swagger', (req, res) => {
   // #swagger.summary = 'OpenApi3 JSON Definition (swagger)'
   const swaggerFile = require('../swagger.json');
   res.status(200).json(swaggerFile);

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * index.js - Entry Point
+ * index.js - Entry Point for REST People API
  * @name   Index
  * @module ApplicationRoot
  */
@@ -50,7 +50,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 /**
  * CORS
- * https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h
+ * @see { @link https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h | cors }
  */
 const cors = require('cors');
 let corsOptions = {
@@ -63,7 +63,7 @@ app.use(cors(corsOptions));
 
 /**
  * InfoSec Middleware
- * https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+ * @see { @link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | OWASP Cheetsheet }
  */
 var infoSec = require('./middleware/infoSecMiddleware.js');
 var infoSecOptions = {
@@ -78,8 +78,8 @@ app.use(infoSec(infoSecOptions));
 
 /**
  * Swagger
- * https://github.com/scottie1984/swagger-ui-express/issues/120
- * https://stackoverflow.com/questions/69663117/do-not-render-try-it-out-button-and-enable-execute-button-in-swagger-ui
+ * @see { @link  https://github.com/scottie1984/swagger-ui-express/issues/120 | swagger docs }
+ * @see { @link  https://stackoverflow.com/questions/69663117/do-not-render-try-it-out-button-and-enable-execute-button-in-swagger-ui | customize swagger }
  */
 const swaggerFile = require('./swagger.json');
 const options = {

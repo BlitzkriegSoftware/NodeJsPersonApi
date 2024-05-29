@@ -5,7 +5,8 @@ var Utility = require('../library/utility').Utility;
 
 /**
  * Infosec Policy Middleware
- * https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html
+ * {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | Owasp Cheetsheet}
+ * @module middleware/infosec
  * @param {Object} options
  * Fields:
  * - csp: Content security policy
@@ -14,6 +15,10 @@ var Utility = require('../library/utility').Utility;
  * - xfo: X-Frame-Options
  * - frp: Referrer-Policy
  * - noh: {Array} of headers to remove
+ * @example
+ * // infoSec - variable assigned to function from requires
+ * // infoSecOptions - object with properties above
+ * app.use(infoSec(infoSecOptions));
  * @returns Middleware configured
  */
 module.exports = function (options) {
@@ -21,7 +26,7 @@ module.exports = function (options) {
     if (options != null) {
       /**
        * CSP - Content security policy
-       * https://report-uri.com/home/generate
+       * {@link https://report-uri.com/home/generate | CSP Generator}
        */
       if (Utility.propIsValid(options, 'csp')) {
         res.setHeader('Content-Security-Policy', options.csp);

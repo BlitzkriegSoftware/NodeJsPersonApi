@@ -1,21 +1,22 @@
 'use strict';
 
-/**
- * @module Repository
- */
-
 const Person = require('../models/person');
 
-// Repository of Person
+/**
+ * Repository of Person
+ * @module repository/people
+ */
 module.exports = class PersonRepository {
   /**
    * Data Array
+   * alias module:repository/people.Data
    */
   static Data = [];
 
   // Has Data
   /**
    * Does the Data array have any items?
+   * alias module:repository/people.hasData
    * @returns {boolean}
    */
   static hasData() {
@@ -24,6 +25,7 @@ module.exports = class PersonRepository {
 
   /**
    * Empties Array
+   * alias module:repository/people.reset
    * @returns {200}
    */
   static reset() {
@@ -33,7 +35,7 @@ module.exports = class PersonRepository {
 
   /**
    * find by id
-   * @param {} id
+   * @param {String} id - Id of person to find
    * @returns {Person | null}
    */
   static findById(id) {
@@ -47,8 +49,8 @@ module.exports = class PersonRepository {
 
   /**
    * Search fields for text
-   * @param {String} text
-   * @returns {Array} can be empty
+   * @param {String} - text
+   * @returns {Array} - of {People} (can be empty)
    */
   static search(text) {
     if (text == null || text.length <= 0) {
@@ -72,7 +74,7 @@ module.exports = class PersonRepository {
   /**
    * Delete by Id
    * @param {String} id
-   * @returns {200 | 404}
+   * @returns {200 | 404} - HttpStatusCode
    */
   static delete(id) {
     var deleted = false;
@@ -95,7 +97,7 @@ module.exports = class PersonRepository {
   /**
    * Add/Update Person
    * @param {object} o
-   * @returns {Number} http status code
+   * @returns {406|201|200|400} -  http status code
    */
   static addUpdate(o) {
     var sc = 406;

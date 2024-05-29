@@ -3,7 +3,7 @@
 /**
  * All person endpoints
  * @public
- * @module PersonRouter
+ * @module routes/personrouter
  */
 
 const express = require('express');
@@ -23,13 +23,10 @@ router.use(express.json());
 
 /**
  * GET /person/list
- * @member
- * @public
- * @memberof PersonRouter
- * @alias person.list
+ * @alias module:routes/personrouter.list
  * @returns {Number} {Array} of People
  */
-router.get('/person/list', (req, res) => {
+var list = router.get('/person/list', (req, res) => {
   // #swagger.summary = 'Gets all people'
 
   /* 
@@ -50,14 +47,11 @@ router.get('/person/list', (req, res) => {
 
 /**
  * POST /person/samples/:count
- * @member
- * @public
- * @memberof PersonRouter
- * @alias person.samples
+ * @alias module:routes/personrouter.samples
  * @argument {Number} count of Person to Make and add to Data
  * @returns {Number} {Array} of created people
  */
-router.post('/person/samples/:count', (req, res) => {
+var samples = router.post('/person/samples/:count', (req, res) => {
   // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
 
   /* 
@@ -80,14 +74,11 @@ router.post('/person/samples/:count', (req, res) => {
 
 /**
  * GET /person/:id
- * @member
- * @public
- * @memberof PersonRouter
- * @alias person.getbyid
+ * @alias module:routes/personrouter.getbyid
  * @argument {String} Id of Person
  * @returns {Number} {Class} of Person or Null
  */
-router.get('/person/:id', (req, res) => {
+var getbyid = router.get('/person/:id', (req, res) => {
   // #swagger.summary = 'Gets person by ID or 404 w. Status'
 
   /* 
@@ -113,14 +104,11 @@ router.get('/person/:id', (req, res) => {
 
 /**
  * POST /person/ ADD/update PERSON
- * @member
- * @public
- * @alias person.addupdate
- * @memberof PersonRouter
+ * @alias module:routes/personrouter.addupdate
  * @argument {Class} Person (as Json)
  * @returns {Number} {String} Status
  */
-router.post('/person/', (req, res) => {
+var addupdate = router.post('/person/', (req, res) => {
   // #swagger.summary = 'Add/Update PERSON'
   // #swagger.description = 'Returns Status message'
 
@@ -162,14 +150,11 @@ router.post('/person/', (req, res) => {
 
 /**
  * DELETE /person/:id
- * @member
- * @public
- * @alias person.deletebyid
- * @memberof PersonRouter
+ * @alias module:routes/personrouter.deleter
  * @argument {String} id of person
  * @returns {Number} {String} status
  */
-router.delete('/person/:id', (req, res) => {
+var deleter = router.delete('/person/:id', (req, res) => {
   // #swagger.summary = 'Deletes an existing PERSON by ID'
   // #swagger.description = 'Returns status message'
 

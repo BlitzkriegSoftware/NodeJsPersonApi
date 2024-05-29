@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * @module Repository
+ */
+
 const Person = require('../models/person');
 
 // Repository of Person

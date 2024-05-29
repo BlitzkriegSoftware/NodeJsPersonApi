@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * All person endpoints
+ * @name PersonRouter
+ * @module Routers
+ */
+
 const express = require('express');
 const router = express.Router();
 

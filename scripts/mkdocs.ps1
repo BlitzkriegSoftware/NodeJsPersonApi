@@ -1,6 +1,14 @@
 <#
-    Make documents
+    Make JSDOC Pages
 #>
+
+
+function Get-ScriptDirectory {
+    Split-Path -Parent $PSCommandPath
+}
+
+[string]$scriptFolder = Get-ScriptDirectory;
+Set-Location $scriptFolder
 
 [string]$version = "1.0.0";
 

@@ -1,6 +1,12 @@
 'use strict';
 
 /**
+ * Helpful static methods for use in any code
+ * @name Utility
+ * @module Libraries
+ */
+
+/**
  * Library: Utility
  * static helper functions
  */

@@ -2,6 +2,8 @@
 
 /**
  * Script to regenerate swagger from the Routes, etc.
+ * @name   Swagger
+ * @module SwaggerGenerator
  */
 
 const fs = require('node:fs');

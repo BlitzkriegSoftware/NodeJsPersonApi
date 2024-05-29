@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Endpoints common to all REST APIs
+ * @name InfoRouter
+ * @module Routers
+ */
+
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const express = require('express');

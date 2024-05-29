@@ -5,17 +5,23 @@ const { faker } = require('@faker-js/faker');
 var Utility = require('../library/utility').Utility;
 
 /**
- * Class: Person
+ * @module Models
+ * @name Person
+ * @class
+ * @classdesc Model of a Person in our System
  */
 module.exports = class Person {
   /**
    * CTOR, these are the fields
-   * @param {String} id
-   * @param {String} firstname
-   * @param {String} lastname
-   * @param {String} cellphone
-   * @param {String} email
-   * @param {String} company
+   * @memberof Person
+   * @alias Person#CTOR
+   * @constructor
+   * @param {String} id - Unique Id
+   * @param {String} firstname - First Name
+   * @param {String} lastname - Last Name
+   * @param {String} cellphone - Cell Phone Number
+   * @param {String} email - Email
+   * @param {String} company - Company Name
    */
   constructor(id, firstname, lastname, cellphone, email, company) {
     this.id = id;
@@ -28,7 +34,10 @@ module.exports = class Person {
 
   /**
    * Generates a random Person
-   * @returns Person
+   * @static
+   * @alias Person.makePerson
+   * @memberof Person
+   * @returns {Class} Person
    */
   static makePerson() {
     var _id = String(Math.round(Math.random() * 100000));
@@ -43,6 +52,9 @@ module.exports = class Person {
 
   /**
    * Semi-Colon separated list of fields for debugging
+   * @static
+   * @memberof Person
+   * @alias Person.toString - ({Person})
    * @param {Class} person
    * @returns {String}
    */
@@ -52,7 +64,10 @@ module.exports = class Person {
   }
 
   /**
-   * Semi-Colon separated list of fields for debugging
+   * @instance
+   * @memberof Person
+   * @alias Person.toString - Self
+   * For this instance return a Semi-Colon separated list of fields for debugging
    * @returns {String}
    */
   toString() {
@@ -61,6 +76,9 @@ module.exports = class Person {
 
   /**
    * Parse Person from Json
+   * @static
+   * @memberof Person
+   * @alias Person.fromJson - populate a new person from given JSON
    * @param {String} json
    * @returns {Class} Person or {null}
    */
@@ -85,6 +103,9 @@ module.exports = class Person {
 
   /**
    * Parse Person from Object
+   * @static
+   * @memberof Person
+   * @alias Person.fromObject - Populate a new person from given object
    * @param {Object} o
    * @returns {Class} Person
    */
@@ -106,8 +127,11 @@ module.exports = class Person {
   }
 
   /**
-   * Returns true if this person has the minumum fields
+   * @instance
+   * @memberof Person
+   * @alias Person.isValid - True if required fields are present
    * @returns {Boolean}
+   * Returns true if this person has the minumum fields: id, first, last
    */
   isValid() {
     return (

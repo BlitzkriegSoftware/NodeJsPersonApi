@@ -2,6 +2,8 @@
 
 /**
  * index.js - Entry Point
+ * @name   Index
+ * @module ApplicationRoot
  */
 
 /**

@@ -18,6 +18,8 @@ var Utility = require('../library/utility').Utility;
  * @example
  * // infoSec - variable assigned to function from requires
  * // infoSecOptions - object with properties above
+ * var infoSec = require('./middleware/infoSecMiddleware.js');
+ * var infoSecOptions = { }; // See parameters
  * app.use(infoSec(infoSecOptions));
  * @returns Middleware configured
  */

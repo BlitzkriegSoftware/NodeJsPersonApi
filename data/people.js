@@ -5,6 +5,12 @@ const Person = require('../models/person');
 /**
  * Repository of Person
  * @module repository/people
+ * @alias module:repository/people.PersonRepository
+ * @description Not production quality, but repositories are a good pattern
+ * @example
+ * const PersonRepository = require('./data/people');
+ * // id is the key to a person
+ * var p = PersonRepository.findById(id);
  */
 module.exports = class PersonRepository {
   /**

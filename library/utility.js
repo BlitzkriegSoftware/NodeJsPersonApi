@@ -6,11 +6,14 @@ const Utility = require('../library/utility.js');
 
 /**
  * Helpful static methods for use in any code
- * @name Utility
  * @module library/utility
- * @description requires 'global.appRoot'
+ * @alias module:library/utility.Utility
+ * @description General Purpose Utility
+ * @example
+ * requires 'global.appRoot'
+ * @example
+ * var Utility = require('./library/utility').Utility;
  */
-
 exports.Utility = (function () {
   return {
     /**

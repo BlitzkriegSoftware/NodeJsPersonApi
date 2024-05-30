@@ -22,7 +22,7 @@ const rfs = require('rotating-file-stream');
 var Utility = require('./library/utility').Utility;
 
 /**
- * Where is the app root?
+ * Where is the app root folder?
  *@global
  */
 global.appRoot = path.resolve(__dirname);

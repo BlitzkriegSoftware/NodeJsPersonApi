@@ -19,7 +19,7 @@ exports.Utility = (function () {
      */
     ensureFolderExists: function (folder) {
       if (!fs.existsSync(folder)) {
-        fs.mkdirSync(folder);
+        fs.mkdirSync(folder, { recursive: true });
       }
     },
 
@@ -29,16 +29,20 @@ exports.Utility = (function () {
      * @returns {String} - Timestamp from Date
      */
     makeStamp: function (d) {
-      var month = '' + (d.getMonth() + 1);
+      var year = '' + d.getFullYear();
+      var month = '' + d.getMonth();
       var day = '' + d.getDate();
-      var year = d.getFullYear();
-      var hour = d.getHours();
+      var hour = '' + d.getHours();
+      var minute = '' + d.getMinutes();
+      var second = '' + d.getSeconds();
 
       if (month.length < 2) month = '0' + month;
       if (day.length < 2) day = '0' + day;
       if (hour.length < 2) hour = '0' + hour;
+      if (minute.length < 2) minute = '0' + minute;
+      if (second.length < 2) second = '0' + second;
 
-      return [year, month, day, hour].join('-');
+      return [year, month, day, hour, minute, second].join('-');
     },
 
     /**
@@ -49,14 +53,13 @@ exports.Utility = (function () {
      */
     logFilename: function (time, index) {
       var logFolder = path.join(global.appRoot, 'logs');
-      if (!fs.existsSync(logFolder)) {
-        fs.mkdirSync(logFolder);
-      }
-      var logFile = 'personapi.w3c.log';
+      Utility.Utility.ensureFolderExists(logFolder);
+      var ext = '.log';
+      var logFile = 'personapi.w3c';
       logFile = path.join(logFolder, logFile);
-      if (!time) return logFile;
+      if (!time) return logFile + ext;
       var stamp = Utility.Utility.makeStamp(time);
-      logFile = [logFile, index, stamp].join('-');
+      logFile = [logFile, index, stamp, ext].join('-');
       return logFile;
     },
 

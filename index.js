@@ -35,13 +35,14 @@ const app = express();
 
 /**
  * Logging file (rotating)
+ * @example
+ * Writing to a file is good for testing not so good in production
  */
-
 const accessLogStream = rfs.createStream(Utility.logFilename, {
-  size: '5M', // rotate every 10 MegaBytes written
-  interval: '1h', // rotate daily
+  size: '5M', // rotate every n MegaBytes written, adjust for your project
+  interval: '1h', // rotate interval, adjust for your project
   compress: 'gzip', // compress rotated files
-  maxFiles: 3,
+  maxFiles: 3, // max files, adjust for your project
 });
 
 /**

@@ -4,10 +4,18 @@
 const { describe, expect, test } = require('@jest/globals');
 const path = require('path');
 const fs = require('node:fs');
+const crypto = require('node:crypto');
 var Utility = require('../library/utility').Utility;
 
 test('ensureFolderExists', () => {
-  var folder = __dirname;
+  var id = crypto.randomBytes(24).toString('hex');
+  var folder = path.join(
+    process.env.SystemDrive,
+    'temp',
+    'personapi-tests',
+    id
+  );
+
   Utility.ensureFolderExists(folder);
   expect(fs.existsSync(folder)).toBe(true);
 
@@ -17,18 +25,26 @@ test('ensureFolderExists', () => {
 });
 
 test('makeStamp', () => {
-  var stamp = Utility.makeStamp(new Date());
+  var d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
+  var stamp = Utility.makeStamp(d);
   expect(stamp.length > 0).toBe(true);
 });
 
 test('logFilename', () => {
-  var folder = path.join(process.env.SystemDrive, 'temp');
+  var id = crypto.randomBytes(24).toString('hex');
+  var folder = path.join(
+    process.env.SystemDrive,
+    'temp',
+    'personapi-tests',
+    id
+  );
   global.appRoot = folder;
 
   var logFile = Utility.logFilename(null, 1);
   expect(logFile.length > 0).toBe(true);
 
-  logFile = Utility.logFilename(new Date(), 1);
+  var d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
+  logFile = Utility.logFilename(d, 1);
   expect(logFile.length > 0).toBe(true);
 });
 

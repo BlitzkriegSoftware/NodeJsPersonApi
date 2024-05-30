@@ -1,1 +1,16 @@
+# Docker Ignore
+.vscode
+coverage
+docs
+logs
+node_modules
 
+.prettierrc
+.gitignore
+README.md
+swagger.js
+
+npm-debug.log
+
+Dockerfile
+.dockerignore

@@ -2,14 +2,11 @@
     Make JSDOC Pages
 #>
 
-[string]$scriptFolder = $PSScriptRoot
-Set-Location $scriptFolder
-
 [string]$version = "1.0.0";
+[string]$scriptFolder = $PSScriptRoot
+[string]$rootPath = (get-item $scriptFolder ).parent.FullName
 
-# Generate documents
-Push-Location ..
-[string]$rootPath = [System.IO.Directory]::GetCurrentDirectory();
+Set-Location $rootPath
 
 $searchFor = "version";
 [string]$searchResult = Select-String -Path '.\package.json' -SimpleMatch $searchFor
@@ -25,7 +22,6 @@ if(![string]::IsNullOrWhiteSpace($searchResult)) {
 Write-Output "Version: ${version} $(Get-Date -Format 'yyyyMMdd hh:mm:ss')"
 
 jsdoc -c ./jsdoc.json ./package.json -R ./README.md
-Pop-Location
 
 # make a Temp folder
 [string]$tempPath = [System.IO.Path]::GetTempPath();
@@ -35,22 +31,20 @@ if(-not [System.IO.Directory]::Exists($tempPath)) {
 } 
 
 # Clean up docs/ folder
-[string]$docpath = Join-Path -Path $rootPath -ChildPath "docs\nodejs_people_api\${version}";
-if(-not [System.IO.Directory]::Exists($docpath)) {
-    write-error "Can't find documentation: ${docpath}";
+[string]$docPath = Join-Path -Path $rootPath -ChildPath "docs\nodejs_people_api\${version}";
+if(-not [System.IO.Directory]::Exists($docPath)) {
+    write-error "Can't find documentation: ${docPath}";
     return 1;
 }
 
-Push-Location $docpath
-Copy-Item -Path . -Destination $tempPath -Recurse -Force
+Copy-Item -Path $docPath -Destination $tempPath -Recurse -Force
+$outPath = Join-Path -Path $rootPath -ChildPath "docs\";
+Push-Location $outPath
+    Get-ChildItem | Remove-Item -Recurse -Force 2>&1 | out-null
 Pop-Location
 
-$outpath = Join-Path -Path $rootPath -ChildPath "docs\";
-Push-Location $outpath
-Get-ChildItem | Remove-Item -Recurse -Force 2>&1 | out-null
 $tempPath = Join-Path -Path $tempPath -ChildPath $version
-Copy-Item -Path "${tempPath}\*" -Destination $outpath -Recurse -Force;
-Pop-Location
+Copy-Item -Path "${tempPath}\*" -Destination $outPath -Recurse -Force;
 
-Write-Output "Documentation is in: ${outpath}"
+Write-Output "Documentation is in: ${outPath}"
 return;

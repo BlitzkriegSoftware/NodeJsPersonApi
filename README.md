@@ -83,19 +83,19 @@ npm i jsdoc -g
 4. Generate docs
 
 ```powershell
-scripts/mkdocs.ps1
+scripts/Invoke-JsDoc.ps1
 ```
 
 5. Output will be in
 
-`out/`
+`docs/`
 
 Where `version` is the version attribute from `package.json`
 
 7. The site can be lauched with
 
 ```powershell
-cd out/
+cd docs/
 start index.html
 ```
 

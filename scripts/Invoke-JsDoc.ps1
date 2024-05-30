@@ -2,12 +2,7 @@
     Make JSDOC Pages
 #>
 
-
-function Get-ScriptDirectory {
-    Split-Path -Parent $PSCommandPath
-}
-
-[string]$scriptFolder = Get-ScriptDirectory;
+[string]$scriptFolder = $PSScriptRoot
 Set-Location $scriptFolder
 
 [string]$version = "1.0.0";

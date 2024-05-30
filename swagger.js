@@ -49,10 +49,23 @@ const endpointsFiles = ['./routers/personRouter.js', './routers/infoRouter.js'];
 swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
   console.log('Updating ' + outputFile);
 
-  let openapi3 = require(outputFile);
+  const openapi3 = require(outputFile);
+  const pkg = require('./package.json');
 
   // Manual overrides
-  openapi3.info.description = 'Person API';
+  openapi3.info.title = 'People REST API';
+  openapi3.info.description = 'An attempt to make a best practices pattern';
+  openapi3.info.version = pkg.version;
+  openapi3.info.contact = {};
+  openapi3.info.contact.name = pkg.author;
+  openapi3.info.contact.email = 'stuart.williams@outlook.com';
+  openapi3.info.contact.url =
+    'https://github.com/BlitzkriegSoftware/NodeJsPersonApi';
+  openapi3.info.license = {};
+  openapi3.info.license.name = 'MIT';
+  openapi3.info.license.url =
+    'https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE';
+
   openapi3.servers[0].url = 'http://localhost:' + Port;
 
   // write updates

@@ -17,7 +17,7 @@
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}/scripts",
-      "script": "${workspaceFolder}/scripts/mkdocs.ps1",
+      "script": "${workspaceFolder}/scripts/Invoke-JsDoc.ps1",
       "args": []
     }
   ]

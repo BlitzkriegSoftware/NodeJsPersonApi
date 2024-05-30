@@ -39,8 +39,8 @@ if(-not [System.IO.Directory]::Exists($tempPath)) {
     New-Item -Path $tempPath -ItemType Directory -Force
 } 
 
-# Clean up out/ folder
-[string]$docpath = Join-Path -Path $rootPath -ChildPath "out\nodejs_people_api\${version}";
+# Clean up docs/ folder
+[string]$docpath = Join-Path -Path $rootPath -ChildPath "docs\nodejs_people_api\${version}";
 if(-not [System.IO.Directory]::Exists($docpath)) {
     write-error "Can't find documentation: ${docpath}";
     return 1;
@@ -50,7 +50,7 @@ Push-Location $docpath
 Copy-Item -Path . -Destination $tempPath -Recurse -Force
 Pop-Location
 
-$outpath = Join-Path -Path $rootPath -ChildPath "out\";
+$outpath = Join-Path -Path $rootPath -ChildPath "docs\";
 Push-Location $outpath
 Get-ChildItem | Remove-Item -Recurse -Force 2>&1 | out-null
 $tempPath = Join-Path -Path $tempPath -ChildPath $version

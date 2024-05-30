@@ -53,6 +53,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
 /**
  * CORS
  * @see {@link https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h|cors}
+ * @example
+ * These are not good setting for production, in reality, 'origin' and 'methods' should always be restritive as possible
  */
 const cors = require('cors');
 let corsOptions = {

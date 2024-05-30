@@ -120,11 +120,10 @@ app.get('/', (req, res) => {
 
 /**
  * Error handler, should go right above listen!
+ * Must be last Use
  */
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send(JSON.stringify(err));
-});
+var ErrorHandler = require('./middleware/errorHandler.js');
+app.use(ErrorHandler);
 
 /**
  * Start listening (HTTP only)

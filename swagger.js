@@ -23,7 +23,7 @@ var comps = {
   components: {
     schemas: {
       Person: {
-        $id: 'unique identity',
+        $id: 'unique integer identity',
         $firstname: 'first name',
         $lastname: 'last name',
         cellphone: 'cell phone',

@@ -135,9 +135,10 @@ module.exports = class Person {
    */
   isValid() {
     return (
+      !Utility.isBlank(this.id) &&
+      !isNaN(this.id) &&
       !Utility.isBlank(this.firstname) &&
-      !Utility.isBlank(this.lastname) &&
-      !Utility.isBlank(this.id)
+      !Utility.isBlank(this.lastname)
     );
   }
 };

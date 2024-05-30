@@ -5,7 +5,7 @@ var Utility = require('../library/utility').Utility;
 
 /**
  * Infosec Policy Middleware
- * {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | Owasp Cheetsheet}
+ * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | Owasp Cheetsheet}
  * @module middleware/infosec
  * @param {Object} options
  * Fields:

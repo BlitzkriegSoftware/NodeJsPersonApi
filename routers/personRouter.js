@@ -96,7 +96,7 @@ var getbyid = router.get('/person/:id', (req, res) => {
   var id = req.params.id;
   var p = PersonRepository.findById(id);
   if (p == null) {
-    return res.status(404);
+    return res.status(404).json({ status: 'Not Found' });
   } else {
     res.status(200).json(p);
   }

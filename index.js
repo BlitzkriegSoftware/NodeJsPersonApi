@@ -9,7 +9,7 @@
 /**
  * settings from environment variables
  */
-const { Port } = require('./Settings/envVars.js');
+const { Port } = require('./config/ev.js');
 
 /**
  * requires

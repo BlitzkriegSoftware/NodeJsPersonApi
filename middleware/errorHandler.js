@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Custom Error Handler
  * @module middleware/errorhandler

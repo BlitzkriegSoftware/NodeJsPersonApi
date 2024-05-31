@@ -10,7 +10,7 @@
  */
 
 const fs = require('node:fs');
-const { Port } = require('./Settings/envVars.js');
+const { Port } = require('./config/ev.js');
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
 const outputFile = './swagger.json';
 

@@ -3,7 +3,7 @@
 /**
  * Environment Variables
  * @name   EnvironmentVariables
- * @module settings/environmentvars
+ * @module config/environmentvars
  */
 
 /**

@@ -1,3 +1,7 @@
+/**
+ * @ignore
+ */
+
 module.exports = [
   {
     ignores: [

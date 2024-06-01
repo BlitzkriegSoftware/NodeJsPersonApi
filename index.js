@@ -9,19 +9,19 @@
 /**
  * settings from environment variables
  */
- const { 
-  Port, 
-  Log_Rotate_MaxFiles, 
-  Log_Rotate_Size, 
-  Log_Rotate_Interval, 
-  Cors_Origins, 
+const {
+  Port,
+  Log_Rotate_MaxFiles,
+  Log_Rotate_Size,
+  Log_Rotate_Interval,
+  Cors_Origins,
   Cors_Methods,
   Infosec_Csp,
   Infosec_Sts,
   Infosec_Xct,
   Infosec_Xfo,
   Infosec_Rfp,
-  Infosec_Noh, 
+  Infosec_Noh,
 } = require('./config/ev.js');
 
 /**
@@ -70,7 +70,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
  * These are not good setting for production, in reality, 'origin' and 'methods' should always be restritive as possible
  */
 const cors = require('cors');
-let corsOptions = {
+const corsOptions = {
   origin: Cors_Origins,
   methods: Cors_Methods,
   preflightContinue: false,
@@ -100,7 +100,7 @@ app.use(infoSec(infoSecOptions));
  */
 const swaggerFile = require('./swagger.json');
 const options = {
-  explorer: true,
+  explorer: false,
   swaggerOptions: {
     tryItOutEnabled: true,
   },

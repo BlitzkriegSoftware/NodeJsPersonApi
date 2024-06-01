@@ -37,5 +37,5 @@ try {
   #>
 } 
 finally {
- Set-Location $scriptFolder;
+ Set-Location $rootPath;
 }

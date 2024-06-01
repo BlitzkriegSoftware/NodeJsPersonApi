@@ -68,7 +68,9 @@ module.exports = function (options) {
       if (Utility.propIsValid(options, 'noh')) {
         if (Array.isArray(options.noh)) {
           for (var htr of options.noh) {
-            res.removeHeader(htr);
+            if(htr) {
+              res.removeHeader(htr);
+            }
           }
         }
       }

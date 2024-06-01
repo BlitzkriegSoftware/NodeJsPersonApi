@@ -4,16 +4,27 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch People Api",
+      "name": "People Api",
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}",
       "env": {
-        "API_PORT": "30083"
+        "foo": "foo",
       },
       "program": "${workspaceFolder}\\index.js"
     },
     {
-      "name": "PowerShell: Generate docs",
+      "type": "node",
+      "request": "launch",
+      "name": "Swagger",
+      "skipFiles": ["<node_internals>/**"],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "foo": "foo",
+      },
+      "program": "${workspaceFolder}\\swagger.js"
+    },
+    {
+      "name": "JSDOCs",
       "type": "PowerShell",
       "request": "launch",
       "cwd": "${workspaceFolder}/scripts",

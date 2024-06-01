@@ -59,7 +59,7 @@ const health = router.get('/health', (req, res) => {
  * @alias module:routes/inforouter.swagger
  * @returns <String> Swagger.json in OpenAPI3
  */
-const swagger = router.get('/swagger', (req, res) => {
+const swagger = router.get('/openapi3', (req, res) => {
   // #swagger.summary = 'OpenApi3 JSON Definition (swagger)'
   const swaggerFile = require('../swagger.json');
   res.status(200).json(swaggerFile);

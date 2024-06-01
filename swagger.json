@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.5.1",
+    "version": "1.6.1",
     "title": "People REST API",
     "description": "An attempt to make a best practices pattern",
     "contact": {
@@ -164,7 +164,7 @@
         }
       }
     },
-    "/swagger": {
+    "/openapi3": {
       "get": {
         "summary": "OpenApi3 JSON Definition (swagger)",
         "description": "",

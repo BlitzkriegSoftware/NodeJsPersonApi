@@ -10,9 +10,32 @@
  */
 
 const fs = require('node:fs');
-const { Port } = require('./config/ev.js');
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
 const outputFile = './swagger.json';
+
+
+/**
+ * settings from environment variables
+ */
+const { 
+  Port, 
+  Log_Rotate_MaxFiles, 
+  Log_Rotate_Size, 
+  Log_Rotate_Interval, 
+  Cors_Origins, 
+  Cors_Methods,
+  Infosec_Csp,
+  Infosec_Sts,
+  Infosec_Xct,
+  Infosec_Xfo,
+  Infosec_Rfp,
+  Infosec_Noh, 
+} = require('./config/ev.js');
+
+if(!Port || (Port <= 1)) {
+  console.error("bad port #");
+  exit(9);
+}
 
 console.log('Creating Swagger for Routers on Port: ' + Port);
 

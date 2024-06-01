@@ -9,7 +9,20 @@
 /**
  * settings from environment variables
  */
-const { Port } = require('./config/ev.js');
+ const { 
+  Port, 
+  Log_Rotate_MaxFiles, 
+  Log_Rotate_Size, 
+  Log_Rotate_Interval, 
+  Cors_Origins, 
+  Cors_Methods,
+  Infosec_Csp,
+  Infosec_Sts,
+  Infosec_Xct,
+  Infosec_Xfo,
+  Infosec_Rfp,
+  Infosec_Noh, 
+} = require('./config/ev.js');
 
 /**
  * requires
@@ -18,7 +31,6 @@ const swaggerUi = require('swagger-ui-express');
 var morgan = require('morgan');
 var fs = require('fs');
 var path = require('path');
-const rfs = require('rotating-file-stream');
 var Utility = require('./library/utility').Utility;
 
 /**
@@ -38,11 +50,12 @@ const app = express();
  * @example
  * Writing to a file is good for testing not so good in production
  */
+const rfs = require('rotating-file-stream');
 const accessLogStream = rfs.createStream(Utility.logFilename, {
-  size: '5M', // rotate every n MegaBytes written, adjust for your project
-  interval: '1h', // rotate interval, adjust for your project
   compress: 'gzip', // compress rotated files
-  maxFiles: 3, // max files, adjust for your project
+  size: Log_Rotate_Size, // rotate every n MegaBytes written, adjust for your project
+  interval: Log_Rotate_Interval, // rotate interval, adjust for your project
+  maxFiles: Log_Rotate_MaxFiles, // max files, adjust for your project
 });
 
 /**
@@ -58,8 +71,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
  */
 const cors = require('cors');
 let corsOptions = {
-  origin: '*',
-  methods: '*',
+  origin: Cors_Origins,
+  methods: Cors_Methods,
   preflightContinue: false,
   optionsSuccessStatus: 204,
 };
@@ -71,12 +84,12 @@ app.use(cors(corsOptions));
  */
 var infoSec = require('./middleware/infoSecMiddleware.js');
 var infoSecOptions = {
-  csp: "default-src 'self' data: 'unsafe-inline' w3.org w3.org/2000 w3.org/1999; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src data: 'self' 'unsafe-inline'; frame-src 'self';",
-  sts: 'max-age=63072000; includeSubDomains; preload',
-  xct: 'nosniff',
-  xfo: 'DENY',
-  rfp: 'strict-origin-when-cross-origin',
-  noh: ['x-powered-by'],
+  csp: Infosec_Csp,
+  sts: Infosec_Sts,
+  xct: Infosec_Xct,
+  xfo: Infosec_Xfo,
+  rfp: Infosec_Rfp,
+  noh: Infosec_Noh,
 };
 app.use(infoSec(infoSecOptions));
 
@@ -92,7 +105,7 @@ const options = {
     tryItOutEnabled: true,
   },
 };
-app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 
 /**
  * Enables Json to Object translation
@@ -115,7 +128,7 @@ app.use('/', infoRouter);
  * Redirect root (/) to swagger
  */
 app.get('/', (req, res) => {
-  res.redirect('/doc');
+  res.redirect('/swagger');
 });
 
 /**

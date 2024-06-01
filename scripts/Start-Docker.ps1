@@ -1,3 +1,26 @@
+<#
+.SYNOPSIS
+ Runs People API in local instance of Docker
+#>
+
+function Test-DockerIsRunning {
+  $isOk = 0;
+  Try {
+    Get-Process 'com.docker.backend' -ErrorAction Stop;
+    $isOk = 1;
+  }
+  Catch {
+    $isOk = 0;
+  }
+  return $isOk;
+}
+
+$isrunning = Test-DockerIsRunning;
+if(-not $isrunning) {
+  Write-Output "Docker must be running";
+  return;
+}
+
 [string]$scriptFolder = $PSScriptRoot
 [string]$rootPath = (get-item $scriptFolder ).parent.FullName
 Set-Location $rootPath

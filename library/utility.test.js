@@ -13,7 +13,7 @@ test('ensureFolderExists', () => {
     process.env.SystemDrive,
     'temp',
     'personapi-tests',
-    id
+    id,
   );
 
   Utility.ensureFolderExists(folder);
@@ -36,7 +36,7 @@ test('logFilename', () => {
     process.env.SystemDrive,
     'temp',
     'personapi-tests',
-    id
+    id,
   );
   global.appRoot = folder;
 
@@ -44,6 +44,10 @@ test('logFilename', () => {
   expect(logFile.length > 0).toBe(true);
 
   var d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
+  logFile = Utility.logFilename(d, 1);
+  expect(logFile.length > 0).toBe(true);
+
+  var d = new Date(2024, 11, 12, 13, 14, 15, 16, 17);
   logFile = Utility.logFilename(d, 1);
   expect(logFile.length > 0).toBe(true);
 });
@@ -73,4 +77,16 @@ test('propIsValid', () => {
 
   o[f] = '';
   expect(Utility.propIsValid(o, f)).toBe(false);
+});
+
+test('isString', () => {
+  expect(Utility.isString(null)).toBe(false);
+  expect(Utility.isString('moo')).toBe(true);
+});
+
+test('toSafeString', () => {
+  expect(Utility.toSafeString(null) == '').toBe(true);
+  expect(Utility.toSafeString('moo') == 'moo').toBe(true);
+  expect(Utility.toSafeString(99) == '99').toBe(true);
+  expect(Utility.toSafeString('\u0006moo\u0007') == 'moo').toBe(true);
 });

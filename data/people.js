@@ -53,6 +53,14 @@ module.exports = class PersonRepository {
    * @returns {Person | null}
    */
   static findById(id) {
+    if (id == null) {
+      id = '0';
+    }
+
+    if (!id) {
+      id = '0';
+    }
+
     if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
       id = '0';
     }

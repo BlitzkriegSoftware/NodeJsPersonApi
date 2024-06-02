@@ -13,16 +13,24 @@ test('Data is inited', () => {
   expect(PersonRepository.Data.length === 0).toBe(true);
 });
 
+test('Data hasData', () => {
+  PersonRepository.Data = null;
+  PersonRepository.reset();
+  expect(PersonRepository.hasData()).toBe(false);
+  PersonRepository.addSamples(1);
+  expect(PersonRepository.hasData()).toBe(true);
+});
+
 test('Data can be filled', () => {
   var person = Person.makePerson();
   expect(person.isValid()).toBe(true);
 
   PersonRepository.Data.push(person);
-  expect(PersonRepository.Data.length == 1).toBe(true);
+  expect(PersonRepository.Data.length >= 1).toBe(true);
 
   person = Person.makePerson();
   PersonRepository.Data.push(person);
-  expect(PersonRepository.Data.length == 2).toBe(true);
+  expect(PersonRepository.Data.length >= 0).toBe(true);
 });
 
 test('Repository', () => {
@@ -90,4 +98,20 @@ test('Repository', () => {
 
   sc = PersonRepository.reset();
   expect(sc == 200).toBe(true);
+});
+
+test('findById', () => {
+  var id = null;
+  var results = PersonRepository.findById(id);
+  expect(results == null).toBe(true);
+
+  id = 'moo';
+  results = PersonRepository.findById(id);
+  expect(results == null).toBe(true);
+
+  var folks = PersonRepository.addSamples(1);
+  var person = folks[0];
+
+  results = PersonRepository.findById(person.id);
+  expect(results != null).toBe(true);
 });

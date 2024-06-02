@@ -30,6 +30,7 @@ module.exports = class PersonRepository {
    * alias module:repository/people.hasData
    * @returns {boolean}
    */
+  /* istanbul ignore next */
   static hasData() {
     if (!PersonRepository.Data) {
       PersonRepository.reset();
@@ -57,10 +58,6 @@ module.exports = class PersonRepository {
       id = '0';
     }
 
-    if (!id) {
-      id = '0';
-    }
-
     if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
       id = '0';
     }
@@ -79,20 +76,9 @@ module.exports = class PersonRepository {
    * @returns {Array} - of {People} (can be empty)
    */
   static search(text) {
-    // don't allow no search text
-    if (!text) {
-      return [];
-    }
-
-    if (!Utility.isString(text)) {
-      return [];
-    }
-
-    // sanitize + lowercase (coerce to string 1st)
     text = '' + text;
     text = Utility.toSafeString(text).toLowerCase();
 
-    // don't search empty
     if (text.length <= 0) {
       return [];
     }

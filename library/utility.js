@@ -45,6 +45,7 @@ exports.Utility = (function () {
       if (!text) {
         return '';
       }
+      text = '' + text;
       if (!Utility.Utility.isString(text)) {
         text = text.toString();
       }

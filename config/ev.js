@@ -34,6 +34,7 @@ if (!port || port <= 0) {
 
 /**
  * Urls that the API runs on (w/o : port)
+ * @description Environment Variable 'HOST_URLS'
  * @default @see {Default_Urls} - Localhost(s)
  * @returns {String} - Turned into an array of urls
  */
@@ -41,8 +42,8 @@ var urlstring = process.env.HOST_URLS ?? Default_Urls;
 var urls = urlstring.split(',');
 
 /**
- * Environment Variable 'LOG_ROTATE_SIZE'
- * @description Size of file to rotate
+ * Size of file to rotate
+ * @description Environment Variable 'LOG_ROTATE_SIZE'
  * @see {@link https://www.npmjs.com/package/rotating-file-stream|rotating-file-stream}
  * @default 5M
  * @returns {String}

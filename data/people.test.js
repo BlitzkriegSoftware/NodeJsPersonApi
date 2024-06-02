@@ -79,7 +79,7 @@ test('Repository', () => {
   sc = PersonRepository.delete(id);
   expect(sc == 200).toBe(true);
 
-  id = null;
+  id = '';
   sc = PersonRepository.delete(id);
   expect(sc == 404).toBe(true);
 
@@ -89,6 +89,9 @@ test('Repository', () => {
 
   id = 'abcdef';
   sc = PersonRepository.delete(id);
+  expect(sc == 404).toBe(true);
+
+  sc = PersonRepository.delete(null);
   expect(sc == 404).toBe(true);
 
   person = PersonRepository.Data[0];
@@ -105,7 +108,7 @@ test('Repository', () => {
   expect(result.length > 0).toBe(false);
 
   result = PersonRepository.search(99);
-  expect(result.length > 0).toBe(false);
+  expect(result.length <= 0).toBe(true);
 
   sc = PersonRepository.reset();
   expect(sc == 200).toBe(true);

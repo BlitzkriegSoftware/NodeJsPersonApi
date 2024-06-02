@@ -79,10 +79,6 @@ module.exports = class PersonRepository {
     text = '' + text;
     text = Utility.toSafeString(text).toLowerCase();
 
-    if (text.length <= 0) {
-      return [];
-    }
-
     var results = PersonRepository.Data.filter((value, index, arr) => {
       return (
         value.lastname.toLowerCase().trim().includes(text) ||
@@ -101,6 +97,10 @@ module.exports = class PersonRepository {
    * @returns {200 | 404} - HttpStatusCode
    */
   static delete(id) {
+    if (id === null) {
+      id = '0';
+    }
+    id = '' + id;
     if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
       id = '0';
     }

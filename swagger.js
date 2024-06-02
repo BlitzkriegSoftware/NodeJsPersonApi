@@ -37,7 +37,9 @@ if (!Port || Port <= 1) {
   exit(9);
 }
 
-console.log('Creating Swagger for Routers on Port: ' + Port);
+console.log(
+  'Creating Swagger for Routers on Port: ' + Port + ' for ' + Urls.join('; '),
+);
 
 /**
  * Schemas: Person (Class), People (Array)
@@ -72,15 +74,16 @@ const endpointsFiles = ['./routers/personRouter.js', './routers/infoRouter.js'];
  * Generate new swagger file then edit with Port, URL, etc.
  */
 swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
-  console.log('Updating ' + outputFile);
-
   const openapi3 = require(outputFile);
   const pkg = require('./package.json');
+  const version = pkg.version;
+
+  console.log('Updating ' + outputFile + ' for version ' + version);
 
   // Manual overrides
   openapi3.info.title = 'People REST API';
   openapi3.info.description = 'An attempt to make a best practices pattern';
-  openapi3.info.version = pkg.version;
+  openapi3.info.version = version;
   openapi3.info.contact = {};
   openapi3.info.contact.name = pkg.author;
   openapi3.info.contact.email = 'stuart.williams@outlook.com';

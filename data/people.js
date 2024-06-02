@@ -1,12 +1,17 @@
 'use strict';
 
+const Max_Int32 = 2147483647;
+const Default_HowMany = 3;
+var validator = require('validator');
 const Person = require('../models/person');
+var Utility = require('../library/utility').Utility;
 
 /**
  * Repository of Person
  * @module repository/people
  * @alias module:repository/people.PersonRepository
  * @description Not production quality, but repositories are a good pattern
+ * @see {@link https://github.com/validatorjs/validator.js | Validator}
  * @example
  * const PersonRepository = require('./data/people');
  * // id is the key to a person
@@ -26,6 +31,9 @@ module.exports = class PersonRepository {
    * @returns {boolean}
    */
   static hasData() {
+    if (!PersonRepository.Data) {
+      PersonRepository.reset();
+    }
     return PersonRepository.Data.length > 0;
   }
 
@@ -45,6 +53,10 @@ module.exports = class PersonRepository {
    * @returns {Person | null}
    */
   static findById(id) {
+    if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
+      id = '0';
+    }
+
     const results = PersonRepository.Data.filter((person) => person.id == id);
     if (results.length > 0) {
       return results[0];
@@ -59,11 +71,23 @@ module.exports = class PersonRepository {
    * @returns {Array} - of {People} (can be empty)
    */
   static search(text) {
-    if (text == null || text.length <= 0) {
+    // don't allow no search text
+    if (!text) {
       return [];
     }
 
-    text = text.toLowerCase().trim();
+    if (!Utility.isString(text)) {
+      return [];
+    }
+
+    // sanitize + lowercase (coerce to string 1st)
+    text = '' + text;
+    text = Utility.toSafeString(text).toLowerCase();
+
+    // don't search empty
+    if (text.length <= 0) {
+      return [];
+    }
 
     var results = PersonRepository.Data.filter((value, index, arr) => {
       return (
@@ -83,14 +107,20 @@ module.exports = class PersonRepository {
    * @returns {200 | 404} - HttpStatusCode
    */
   static delete(id) {
+    if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
+      id = '0';
+    }
+
     var deleted = false;
     PersonRepository.Data = PersonRepository.Data.filter(
       (value, index, arr) => {
         if (id == value.id) {
           deleted = true;
           return false;
-        } else return true;
-      }
+        } else {
+          return true;
+        }
+      },
     );
 
     if (deleted) {
@@ -135,9 +165,15 @@ module.exports = class PersonRepository {
    * @returns {Array} of People created
    */
   static addSamples(howMany) {
-    var count = Number(howMany || 5);
+    if (!howMany) {
+      howMany = 0;
+    }
+    if (!validator.isInt(howMany.toString(), { min: 1, max: 99 })) {
+      howMany = Default_HowMany;
+    }
+
     var results = [];
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < howMany; i++) {
       var p = Person.makePerson();
       PersonRepository.Data.push(p);
       results.push(p);

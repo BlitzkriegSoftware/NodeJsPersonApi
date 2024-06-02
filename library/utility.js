@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('node:fs');
+var validator = require('validator');
 const Utility = require('../library/utility.js');
 
 /**
@@ -24,6 +25,31 @@ exports.Utility = (function () {
       if (!fs.existsSync(folder)) {
         fs.mkdirSync(folder, { recursive: true });
       }
+    },
+
+    /**
+     * Tests if an object is a string
+     * @param {Object} o
+     * @returns {Boolean} - true if so
+     */
+    isString: function (o) {
+      return Object.prototype.toString.call(o) === '[object String]';
+    },
+
+    /**
+     * Returns a 'safer' string
+     * @param {String} text
+     * @returns {String} - Trimmed, Cleaned up string
+     */
+    toSafeString: function (text) {
+      if (!text) {
+        return '';
+      }
+      if (!Utility.Utility.isString(text)) {
+        text = text.toString();
+      }
+
+      return validator.escape(validator.stripLow(text)).trim();
     },
 
     /**

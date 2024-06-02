@@ -93,7 +93,7 @@ module.exports = class Person {
         o.lastname,
         o.cellphone,
         o.email,
-        o.company
+        o.company,
       );
     } catch {
       p = null;
@@ -120,7 +120,7 @@ module.exports = class Person {
         o.lastname,
         o.cellphone,
         o.email,
-        o.company
+        o.company,
       );
     }
     return p;

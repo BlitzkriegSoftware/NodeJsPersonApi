@@ -13,27 +13,27 @@ const fs = require('node:fs');
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
 const outputFile = './swagger.json';
 
-
 /**
  * settings from environment variables
  */
-const { 
-  Port, 
-  Log_Rotate_MaxFiles, 
-  Log_Rotate_Size, 
-  Log_Rotate_Interval, 
-  Cors_Origins, 
+const {
+  Port,
+  Log_Rotate_MaxFiles,
+  Log_Rotate_Size,
+  Log_Rotate_Interval,
+  Cors_Origins,
   Cors_Methods,
   Infosec_Csp,
   Infosec_Sts,
   Infosec_Xct,
   Infosec_Xfo,
   Infosec_Rfp,
-  Infosec_Noh, 
+  Infosec_Noh,
+  Urls,
 } = require('./config/ev.js');
 
-if(!Port || (Port <= 1)) {
-  console.error("bad port #");
+if (!Port || Port <= 1) {
+  console.error('bad port #');
   exit(9);
 }
 
@@ -91,8 +91,18 @@ swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
   openapi3.info.license.url =
     'https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE';
 
-  // Change this for production
-  openapi3.servers[0].url = 'http://localhost:' + Port;
+  var uct = 0;
+  for (const url of Urls) {
+    if (url) {
+      var fqdn = url + ':' + Port;
+      if (uct == 0) {
+        openapi3.servers[0].url = fqdn;
+      } else {
+        openapi3.servers.push({ url: fqdn });
+      }
+    }
+    uct = uct + 1;
+  }
 
   // write updates
   var json = JSON.stringify(openapi3, null, 2);

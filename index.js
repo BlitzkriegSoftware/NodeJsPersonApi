@@ -22,6 +22,7 @@ const {
   Infosec_Xfo,
   Infosec_Rfp,
   Infosec_Noh,
+  Urls,
 } = require('./config/ev.js');
 
 /**

@@ -17,6 +17,9 @@
   "servers": [
     {
       "url": "http://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
     }
   ],
   "paths": {

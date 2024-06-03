@@ -8,7 +8,7 @@
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}",
       "env": {
-        "foo": "foo",
+        "foo": "foo"
       },
       "program": "${workspaceFolder}\\index.js"
     },
@@ -19,7 +19,7 @@
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}",
       "env": {
-        "foo": "foo",
+        "foo": "foo"
       },
       "program": "${workspaceFolder}\\swagger.js"
     },
@@ -29,6 +29,14 @@
       "request": "launch",
       "cwd": "${workspaceFolder}/scripts",
       "script": "${workspaceFolder}/scripts/Invoke-JsDoc.ps1",
+      "args": []
+    },
+    {
+      "name": "Docker",
+      "type": "PowerShell",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/scripts",
+      "script": "${workspaceFolder}/scripts/Start-Docker.ps1",
       "args": []
     }
   ]

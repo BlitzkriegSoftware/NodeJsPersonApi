@@ -28,7 +28,7 @@ Set-Location $rootPath
 [int32]$port = 30083;
 [string]$name = 'node_people_api';
 [string]$imageName = "blitzkriegsoftware/${name}";
-[string]$workDir = '/api'; # must match Dockerfile
+[string]$workDir = '/usr/src/app'; # must match Dockerfile
 
 try {
   Write-Output "`nCleanup Docker...`n"

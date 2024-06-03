@@ -92,7 +92,7 @@ scripts/Invoke-JsDoc.ps1
 
 Where `version` is the version attribute from `package.json`
 
-7. The site can be lauched with
+7. The site can be lauched locally with
 
 ```powershell
 cd docs/
@@ -100,6 +100,16 @@ start index.html
 ```
 
 Which will launch documents in the default browser
+
+## Docker
+
+Files:
+
+- .dockerignore
+- Dockerfile
+- scripts\Start-Docker.ps1
+
+Run the PowerShell script to build and run docker container. Container will run as the user `Node`
 
 ## Recommendations for VS Code Extensions
 

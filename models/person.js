@@ -45,7 +45,16 @@ module.exports = class Person {
     var _lastname = faker.person.lastName();
     var _cellphone = faker.phone.number();
     var _company = faker.company.name();
-    var _email = _firstname + '.' + _lastname + '@' + _company + '.com';
+    var _email =
+      _firstname +
+      '.' +
+      _lastname +
+      '@' +
+      _company
+        .replace(/[,.'&^<>?/]+/g, '')
+        .replace(/\s+/g, '')
+        .trim() +
+      '.com';
 
     return new Person(_id, _firstname, _lastname, _cellphone, _email, _company);
   }

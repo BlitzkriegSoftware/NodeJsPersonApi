@@ -19,8 +19,8 @@ const Default_InfoSec_Sts = 'max-age=63072000; includeSubDomains; preload';
 const Default_InfoSec_Xct = 'nosniff';
 const Default_InfoSec_Xfo = 'DENY';
 const Default_InfoSec_RFP = 'strict-origin-when-cross-origin';
-const Default_InfoSec_Noh = 'x-powered-by,';
-const Default_Request_Size_Limit = '1kb';
+const Default_InfoSec_Noh = 'x-powered-by,Server,';
+const Default_Request_Size_Limit = '2kb';
 
 /**
  * Port to listen on

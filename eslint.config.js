@@ -10,6 +10,7 @@ module.exports = [
       '*.config.js',
       'coverage/**',
       'docs/**',
+      'logs/**',
       'node_modules/**',
       'scripts/**',
     ],

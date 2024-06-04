@@ -23,6 +23,7 @@ const {
   Infosec_Rfp,
   Infosec_Noh,
   Urls,
+  Size_Limit,
 } = require('./config/ev.js');
 
 /**
@@ -95,6 +96,25 @@ var infoSecOptions = {
 app.use(infoSec(infoSecOptions));
 
 /**
+ * HTTP Parameter Polution Prevention
+ * @see {@link https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/07-Input_Validation_Testing/04-Testing_for_HTTP_Parameter_Pollution.html | HPP}
+ */
+const hpp = require('hpp');
+app.use(hpp());
+
+/**
+ * ExpectCT is deprecated!
+ *  @see {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT | Expect-CT}
+ */
+
+/**
+ * Enforce no-cache
+ * @see {@link https://www.npmjs.com/package/nocache | nocache}
+ */
+const nocache = require('nocache');
+app.use(nocache());
+
+/**
  * Swagger
  * @see {@link  https://github.com/scottie1984/swagger-ui-express/issues/120 | swagger docs }
  * @see {@link  https://stackoverflow.com/questions/69663117/do-not-render-try-it-out-button-and-enable-execute-button-in-swagger-ui | customize swagger }
@@ -111,7 +131,7 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 /**
  * Enables Json to Object translation
  */
-app.use(express.json());
+app.use(express.json({ limit: Size_Limit }));
 
 /**
  * Person Routes

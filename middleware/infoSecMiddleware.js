@@ -1,6 +1,7 @@
 'use strict';
 
 const { tr } = require('@faker-js/faker');
+const { isPassportNumber } = require('validator');
 var Utility = require('../library/utility').Utility;
 
 /**
@@ -63,12 +64,26 @@ module.exports = function (options) {
       }
 
       /**
+       * X-Download-Options
+       * @see { @info X-Download-Options: noopen | 'X-Download-Options}
+       */
+      res.setHeader('X-Download-Options', 'noopen');
+
+      /**
+       * Cross-Site Request Forgery Prevention
+       * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html | XCSRF }
+       * @see {@link https://www.npmjs.com/package/csrf-csrf | csrf }
+       */
+      const { doubleCsrf } = require('csrf-csrf');
+      // TODO
+
+      /**
        *  Remove banned headers
        */
       if (Utility.propIsValid(options, 'noh')) {
         if (Array.isArray(options.noh)) {
           for (var htr of options.noh) {
-            if(htr) {
+            if (htr) {
               res.removeHeader(htr);
             }
           }

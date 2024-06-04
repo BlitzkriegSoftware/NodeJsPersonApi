@@ -20,6 +20,7 @@ const Default_InfoSec_Xct = 'nosniff';
 const Default_InfoSec_Xfo = 'DENY';
 const Default_InfoSec_RFP = 'strict-origin-when-cross-origin';
 const Default_InfoSec_Noh = 'x-powered-by,';
+const Default_Request_Size_Limit = '1kb';
 
 /**
  * Port to listen on
@@ -150,6 +151,15 @@ if (infosec_nohstr) {
   infosec_noh = infosec_nohstr.split(',');
 }
 
+/**
+ * Maximum JSON Request Size Limit
+ * @description Environment Variable 'REQ_SIZE_LIMIT'
+ * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | OWASP Cheetsheet }
+ * @default - As recomended by OWASP
+ * @returns {String} - See above
+ */
+var size_limit = process.env.REQ_SIZE_LIMIT ?? Default_Request_Size_Limit;
+
 module.exports = {
   Port: port,
   Log_Rotate_Size: log_rotate_size,
@@ -164,4 +174,5 @@ module.exports = {
   Infosec_Rfp: infosec_rfp,
   Infosec_Noh: infosec_noh,
   Urls: urls,
+  Size_Limit: size_limit,
 };

@@ -116,3 +116,16 @@ Run the PowerShell script to build and run docker container. Container will run 
 1. https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 2. https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner
 3. https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+
+## OWASP Considerations
+
+### Let the infrastructure handle it
+
+1. DDOS
+2. IAM
+3. `InfoRouter` routes are assumed to be blocked if needed
+
+### Handle it in code
+
+1. See InfoSec Middleware
+2. `config\ev.js`

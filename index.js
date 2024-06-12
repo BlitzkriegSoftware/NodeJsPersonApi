@@ -157,6 +157,7 @@ app.get('/', (req, res) => {
  * Must be last Use
  */
 var ErrorHandler = require('./middleware/errorHandler.js');
+const { stringify } = require('querystring');
 app.use(ErrorHandler);
 
 /**
@@ -165,3 +166,38 @@ app.use(ErrorHandler);
 app.listen(Port, () => {
   console.log(`Person API listening on port ${Port}`);
 });
+
+/**
+ * handle SIGINT signals gracefully
+ */
+process.on('SIGINT', () => {
+  const msg = 'Received SIGINT, performing graceful shutdown.';
+  console.log(JSON.stringify(msg));
+  shutdown();
+});
+
+/**
+ * handle SIGTERM signals gracefully
+ */
+process.on('SIGTERM', () => {
+  const msg = 'Received SIGTERM, performing graceful shutdown.';
+  console.log(JSON.stringify(msg));
+  shutdown();
+});
+
+/**
+ * handle SIGQUIT signals gracefully
+ */
+process.on('SIGQUIT', () => {
+  const msg = 'Received SIGQUIT, performing graceful shutdown.';
+  console.log(JSON.stringify(msg));
+  shutdown();
+});
+
+/**
+ * Orderly shutdown
+ */
+function shutdown() {
+  // Do other shut down tasks
+  process.exit();
+}

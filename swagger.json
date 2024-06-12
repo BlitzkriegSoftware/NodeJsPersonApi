@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.7.0",
+    "version": "1.7.1",
     "title": "People REST API",
     "description": "An attempt to make a best practices pattern",
     "contact": {

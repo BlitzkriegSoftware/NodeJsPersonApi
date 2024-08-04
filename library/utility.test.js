@@ -5,7 +5,7 @@ const { describe, expect, test } = require('@jest/globals');
 const path = require('path');
 const fs = require('node:fs');
 const crypto = require('node:crypto');
-var Utility = require('../library/utility').Utility;
+var Utility = require('../library/utility');
 
 test('ensureFolderExists', () => {
   var id = crypto.randomBytes(24).toString('hex');

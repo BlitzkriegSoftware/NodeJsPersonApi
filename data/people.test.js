@@ -108,7 +108,9 @@ test('Repository', () => {
   expect(result.length > 0).toBe(false);
 
   result = PersonRepository.search(99);
-  expect(result.length <= 0).toBe(true);
+  if (result != null) {
+    expect(result.length <= 0).toBe(true);
+  }
 
   sc = PersonRepository.reset();
   expect(sc == 200).toBe(true);

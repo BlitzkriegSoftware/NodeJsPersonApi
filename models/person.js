@@ -2,7 +2,7 @@
 
 // https://fakerjs.dev/guide/usage.html
 const { faker } = require('@faker-js/faker');
-var Utility = require('../library/utility').Utility;
+var Utility = require('../library/utility');
 
 /**
  * @module models/person

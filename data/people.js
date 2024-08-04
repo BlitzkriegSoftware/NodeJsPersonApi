@@ -4,7 +4,7 @@ const Max_Int32 = 2147483647;
 const Default_HowMany = 3;
 var validator = require('validator');
 const Person = require('../models/person');
-var Utility = require('../library/utility').Utility;
+var Utility = require('../library/utility');
 
 /**
  * Repository of Person

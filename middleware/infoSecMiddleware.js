@@ -2,7 +2,7 @@
 
 const { tr } = require('@faker-js/faker');
 const { isPassportNumber } = require('validator');
-var Utility = require('../library/utility').Utility;
+var Utility = require('../library/utility');
 
 /**
  * Infosec Policy Middleware

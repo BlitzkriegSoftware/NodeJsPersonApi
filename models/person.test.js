@@ -5,7 +5,7 @@ const { describe, expect, test } = require('@jest/globals');
 
 const Person = require('./person');
 
-var Utility = require('../library/utility').Utility;
+var Utility = require('../library/utility');
 
 /**
  * TEST: Make Person generates valid People

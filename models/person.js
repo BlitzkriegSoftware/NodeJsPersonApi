@@ -2,7 +2,7 @@
 
 // https://fakerjs.dev/guide/usage.html
 const { faker } = require('@faker-js/faker');
-var Utility = require('../library/utility');
+const Utility = require('../library/utility');
 
 /**
  * @module models/person
@@ -40,21 +40,21 @@ module.exports = class Person {
    * @returns {Class} Person
    */
   static makePerson() {
-    var _id = String(Math.round(Math.random() * 100000));
-    var _firstname = faker.person.firstName();
-    var _lastname = faker.person.lastName();
-    var _cellphone = faker.phone.number();
-    var _company = faker.company.name();
-    var _email =
-      _firstname +
-      '.' +
-      _lastname +
-      '@' +
+    const _id = String(Math.round(Math.random() * 100000));
+    const _firstname = faker.person.firstName();
+    const _lastname = faker.person.lastName();
+    const _cellphone = faker.phone.number();
+    const _company = faker.company.name();
+    const _email =
+      `${_firstname 
+      }.${ 
+      _lastname 
+      }@${ 
       _company
         .replace(/[,.'&^<>?/]+/g, '')
         .replace(/\s+/g, '')
-        .trim() +
-      '.com';
+        .trim() 
+      }.com`;
 
     return new Person(_id, _firstname, _lastname, _cellphone, _email, _company);
   }
@@ -68,7 +68,7 @@ module.exports = class Person {
    * @returns {String}
    */
   static toString(person) {
-    var s = `${person.id};${person.firstname};${person.lastname};${person.cellphone};${person.email};${person.company}`;
+    const s = `${person.id};${person.firstname};${person.lastname};${person.cellphone};${person.email};${person.company}`;
     return s;
   }
 
@@ -92,9 +92,9 @@ module.exports = class Person {
    * @returns {Class} Person or {null}
    */
   static fromJson(json) {
-    var p = null;
+    let p = null;
     try {
-      var o = JSON.parse(json);
+      const o = JSON.parse(json);
       // console.log(Object.getOwnPropertyNames(o));
       p = new Person(
         o.id,
@@ -119,7 +119,7 @@ module.exports = class Person {
    * @returns {Class} Person
    */
   static fromObject(o) {
-    var p = null;
+    let p = null;
     if (o == null) {
       p = null;
     } else {

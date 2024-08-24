@@ -5,13 +5,13 @@ const { describe, expect, test } = require('@jest/globals');
 
 const Person = require('./person');
 
-var Utility = require('../library/utility');
+const Utility = require('../library/utility');
 
 /**
  * TEST: Make Person generates valid People
  */
 test('makePerson', () => {
-  var person = Person.makePerson();
+  const person = Person.makePerson();
   expect(person.isValid()).toBe(true);
   expect(Utility.isBlank(person.company)).toBe(false);
   expect(Utility.isBlank(person.email)).toBe(false);
@@ -21,8 +21,8 @@ test('makePerson', () => {
  * TEST: format PERSON
  */
 test('Person string', () => {
-  var person = Person.makePerson();
-  var text = person.toString();
+  const person = Person.makePerson();
+  const text = person.toString();
   expect(text.includes(';')).toBe(true);
 });
 
@@ -30,10 +30,10 @@ test('Person string', () => {
  * TEST: From JSON
  */
 test('fromJson', () => {
-  var person = Person.makePerson();
+  let person = Person.makePerson();
   expect(person.isValid()).toBe(true);
-  var json = JSON.stringify(person);
-  var p2 = Person.fromJson(json);
+  let json = JSON.stringify(person);
+  let p2 = Person.fromJson(json);
   expect(p2.isValid()).toBe(true);
   expect(person.lastname == p2.lastname).toBe(true);
   expect(person.firstname == p2.firstname).toBe(true);
@@ -53,9 +53,9 @@ test('fromJson', () => {
  * TEST: From Object
  */
 test('fromObject', () => {
-  var person = Person.makePerson();
+  let person = Person.makePerson();
   expect(person.isValid()).toBe(true);
-  var p2 = Person.fromObject(person);
+  let p2 = Person.fromObject(person);
   expect(p2.isValid()).toBe(true);
   expect(person.lastname == p2.lastname).toBe(true);
   expect(person.firstname == p2.firstname).toBe(true);

@@ -76,7 +76,7 @@ module.exports = class PersonRepository {
    * @returns {Array} - of {People} (can be empty)
    */
   static search(text) {
-    text = '' + text;
+    text = `${  text}`;
     text = Utility.toSafeString(text).toLowerCase();
 
     const results = PersonRepository.Data.filter((value, index, arr) => {
@@ -100,7 +100,7 @@ module.exports = class PersonRepository {
     if (id === null) {
       id = '0';
     }
-    id = '' + id;
+    id = `${  id}`;
     if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
       id = '0';
     }
@@ -136,7 +136,7 @@ module.exports = class PersonRepository {
       return sc;
     }
 
-    let person = Person.fromObject(o);
+    const person = Person.fromObject(o);
     if (person.isValid()) {
       sc = 201;
       const results = PersonRepository.Data.filter((p) => p.id == person.id);

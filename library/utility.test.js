@@ -5,11 +5,11 @@ const { describe, expect, test } = require('@jest/globals');
 const path = require('path');
 const fs = require('node:fs');
 const crypto = require('node:crypto');
-var Utility = require('../library/utility');
+const Utility = require('../library/utility');
 
 test('ensureFolderExists', () => {
-  var id = crypto.randomBytes(24).toString('hex');
-  var folder = path.join(
+  const id = crypto.randomBytes(24).toString('hex');
+  let folder = path.join(
     process.env.SystemDrive,
     'temp',
     'personapi-tests',
@@ -25,14 +25,14 @@ test('ensureFolderExists', () => {
 });
 
 test('makeStamp', () => {
-  var d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
-  var stamp = Utility.makeStamp(d);
+  const d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
+  const stamp = Utility.makeStamp(d);
   expect(stamp.length > 0).toBe(true);
 });
 
 test('logFilename', () => {
-  var id = crypto.randomBytes(24).toString('hex');
-  var folder = path.join(
+  const id = crypto.randomBytes(24).toString('hex');
+  const folder = path.join(
     process.env.SystemDrive,
     'temp',
     'personapi-tests',
@@ -40,7 +40,7 @@ test('logFilename', () => {
   );
   global.appRoot = folder;
 
-  var logFile = Utility.logFilename(null, 1);
+  let logFile = Utility.logFilename(null, 1);
   expect(logFile.length > 0).toBe(true);
 
   var d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
@@ -53,7 +53,7 @@ test('logFilename', () => {
 });
 
 test('isBlank', () => {
-  var data = null;
+  let data = null;
   expect(data == null).toBe(true);
   expect(Utility.isBlank(data)).toBe(true);
 
@@ -63,9 +63,9 @@ test('isBlank', () => {
 });
 
 test('propIsValid', () => {
-  var f = 'foo';
-  var v = 'boo';
-  var o = null;
+  const f = 'foo';
+  const v = 'boo';
+  let o = null;
   expect(o == null).toBe(true);
   expect(Utility.propIsValid(o, f)).toBe(false);
 

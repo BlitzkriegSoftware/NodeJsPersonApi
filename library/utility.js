@@ -2,7 +2,7 @@
 
 const path = require('path');
 const fs = require('node:fs');
-var validator = require('validator');
+const validator = require('validator');
 
 /**
  * Helpful static methods for use in any code
@@ -56,18 +56,18 @@ module.exports = class Utility {
    * @returns {String} - Timestamp from Date
    */
   static makeStamp(d) {
-    var year = '' + d.getFullYear();
-    var month = '' + d.getMonth();
-    var day = '' + d.getDate();
-    var hour = '' + d.getHours();
-    var minute = '' + d.getMinutes();
-    var second = '' + d.getSeconds();
+    const year = `${  d.getFullYear()}`;
+    let month = `${  d.getMonth()}`;
+    let day = `${  d.getDate()}`;
+    let hour = `${  d.getHours()}`;
+    let minute = `${  d.getMinutes()}`;
+    let second = `${  d.getSeconds()}`;
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    if (hour.length < 2) hour = '0' + hour;
-    if (minute.length < 2) minute = '0' + minute;
-    if (second.length < 2) second = '0' + second;
+    if (month.length < 2) month = `0${  month}`;
+    if (day.length < 2) day = `0${  day}`;
+    if (hour.length < 2) hour = `0${  hour}`;
+    if (minute.length < 2) minute = `0${  minute}`;
+    if (second.length < 2) second = `0${  second}`;
 
     return [year, month, day, hour, minute, second].join('-');
   }
@@ -79,13 +79,13 @@ module.exports = class Utility {
    * @param {*} index
    */
   static logFilename(time, index) {
-    var logFolder = path.join(global.appRoot, 'logs');
+    const logFolder = path.join(global.appRoot, 'logs');
     Utility.Utility.ensureFolderExists(logFolder);
-    var ext = '.log';
-    var logFile = 'personapi.w3c';
+    const ext = '.log';
+    let logFile = 'personapi.w3c';
     logFile = path.join(logFolder, logFile);
     if (!time) return logFile + ext;
-    var stamp = Utility.Utility.makeStamp(time);
+    const stamp = Utility.Utility.makeStamp(time);
     logFile = [logFile, index, stamp, ext].join('-');
     return logFile;
   }
@@ -106,14 +106,14 @@ module.exports = class Utility {
    * @returns {Boolean}
    */
   static propIsValid(o, prop) {
-    var isOk = false;
+    let isOk = false;
 
     if (o == null || prop == null) {
       return isOk;
     }
 
     if (Object.hasOwn(o, prop)) {
-      var value = String(o[prop]);
+      const value = String(o[prop]);
       if (value != null && value.length > 0) {
         isOk = true;
       }

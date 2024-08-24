@@ -26,7 +26,7 @@ router.use(express.json());
  * @alias module:routes/personrouter.list
  * @returns {Number} {Array} of People
  */
-var list = router.get('/person/list', (req, res) => {
+const list = router.get('/person/list', (req, res) => {
   // #swagger.summary = 'Gets all people'
 
   /* 
@@ -51,7 +51,7 @@ var list = router.get('/person/list', (req, res) => {
  * @argument {Number} count of Person to Make and add to Data
  * @returns {Number} {Array} of created people
  */
-var samples = router.post('/person/samples/:count', (req, res) => {
+const samples = router.post('/person/samples/:count', (req, res) => {
   // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
 
   /* 
@@ -78,7 +78,7 @@ var samples = router.post('/person/samples/:count', (req, res) => {
  * @argument {String} Id of Person
  * @returns {Number} {Class} of Person or Null
  */
-var getbyid = router.get('/person/:id', (req, res) => {
+const getbyid = router.get('/person/:id', (req, res) => {
   // #swagger.summary = 'Gets person by ID or 404 w. Status'
 
   /* 
@@ -93,8 +93,8 @@ var getbyid = router.get('/person/:id', (req, res) => {
   }   
   */
 
-  var id = req.params.id;
-  var p = PersonRepository.findById(id);
+  const id = req.params.id;
+  const p = PersonRepository.findById(id);
   if (p == null) {
     return res.status(404).json({ status: 'Not Found' });
   } else {
@@ -108,7 +108,7 @@ var getbyid = router.get('/person/:id', (req, res) => {
  * @argument {Class} Person (as Json)
  * @returns {Number} {String} Status
  */
-var addupdate = router.post('/person/', (req, res) => {
+const addupdate = router.post('/person/', (req, res) => {
   // #swagger.summary = 'Add/Update PERSON'
   // #swagger.description = 'Returns Status message'
 
@@ -143,8 +143,8 @@ var addupdate = router.post('/person/', (req, res) => {
   }   
   */
 
-  var o = req.body;
-  var sc = PersonRepository.addUpdate(o);
+  const o = req.body;
+  const sc = PersonRepository.addUpdate(o);
   res.status(sc).json({ status: sc });
 });
 
@@ -154,7 +154,7 @@ var addupdate = router.post('/person/', (req, res) => {
  * @argument {String} id of person
  * @returns {Number} {String} status
  */
-var deleter = router.delete('/person/:id', (req, res) => {
+const deleter = router.delete('/person/:id', (req, res) => {
   // #swagger.summary = 'Deletes an existing PERSON by ID'
   // #swagger.description = 'Returns status message'
 
@@ -171,8 +171,8 @@ var deleter = router.delete('/person/:id', (req, res) => {
   */
 
   const id = req.params.id;
-  var sc = PersonRepository.delete(id);
-  var status = 'deleted';
+  const sc = PersonRepository.delete(id);
+  let status = 'deleted';
   if (sc == 404) status = 'not deleted';
   res.status(sc).json({ status: status });
 });

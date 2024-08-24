@@ -27,16 +27,16 @@ module.exports = class OpenApi3Generation {
     }
 
     console.log(
-      'Creating Swagger for Routers on Port: ' +
-        Port +
-        ' for ' +
-        urls.join('; '),
+      `Creating Swagger for Routers on Port: ${ 
+        Port 
+        } for ${ 
+        urls.join('; ')}`,
     );
 
     /**
      * Schemas: Person (Class), People (Array)
      */
-    var comps = {
+    const comps = {
       components: {
         schemas: {
           Person: {
@@ -73,7 +73,7 @@ module.exports = class OpenApi3Generation {
       const pkg = require('../package.json');
       const version = pkg.version;
 
-      console.log('Updating ' + outputFile + ' for version ' + version);
+      console.log(`Updating ${  outputFile  } for version ${  version}`);
 
       // Manual overrides
       openapi3.info.title = pkg.name;
@@ -89,10 +89,10 @@ module.exports = class OpenApi3Generation {
       openapi3.info.license.url =
         'https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE';
 
-      var uct = 0;
+      let uct = 0;
       for (const url of Urls) {
         if (url) {
-          var fqdn = url + ':' + Port;
+          const fqdn = `${url  }:${  Port}`;
           if (uct == 0) {
             openapi3.servers[0].url = fqdn;
           } else {
@@ -103,7 +103,7 @@ module.exports = class OpenApi3Generation {
       }
 
       // write updates
-      var json = JSON.stringify(openapi3, null, 2);
+      const json = JSON.stringify(openapi3, null, 2);
       fs.writeFile(outputFile, json, (err) => {
         if (err) console.log(JSON.stringify(err));
       });

@@ -2,7 +2,7 @@
 
 const { tr } = require('@faker-js/faker');
 const { isPassportNumber } = require('validator');
-var Utility = require('../library/utility');
+const Utility = require('../library/utility');
 
 /**
  * Infosec Policy Middleware
@@ -82,7 +82,7 @@ module.exports = function (options) {
        */
       if (Utility.propIsValid(options, 'noh')) {
         if (Array.isArray(options.noh)) {
-          for (var htr of options.noh) {
+          for (const htr of options.noh) {
             if (htr) {
               res.removeHeader(htr);
             }

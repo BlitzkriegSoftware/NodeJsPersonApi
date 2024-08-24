@@ -33,12 +33,12 @@ global.appRoot = path.resolve(__dirname);
 /**
  * Fetch Configuration
  */
-var config = new EnvironmentConfiguration();
+const config = new EnvironmentConfiguration();
 
 /**
  * Generate Swagger (OpenApi3)
  */
-var filename = generator.generate(config.Urls, config.Port);
+const filename = generator.generate(config.Urls, config.Port);
 if (filename.length <= 0) {
   exit(9);
 }
@@ -86,7 +86,7 @@ app.use(cors(corsOptions));
  * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | OWASP Cheetsheet }
  */
 
-var infoSecOptions = {
+const infoSecOptions = {
   csp: config.Infosec_Csp(),
   sts: config.Infosec_Sts(),
   xct: config.Infosec_Xct(),
@@ -155,7 +155,7 @@ app.get('/', (req, res) => {
  * Error handler, should go right above listen!
  * Must be last Use
  */
-var ErrorHandler = require('./middleware/errorHandler.js');
+const ErrorHandler = require('./middleware/errorHandler.js');
 const { stringify } = require('querystring');
 app.use(ErrorHandler);
 

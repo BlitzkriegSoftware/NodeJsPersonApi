@@ -44,7 +44,7 @@ module.exports = class EnvironmentConfiguration {
      * @default @see {Default_Urls} - Localhost(s)
      * @returns {String} - Turned into an array of urls
      */
-    var urlstring = process.env.HOST_URLS ?? Default_Urls;
+    const urlstring = process.env.HOST_URLS ?? Default_Urls;
     this.urls = urlstring.split(',');
 
     /**
@@ -150,7 +150,7 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {Array} - See above
      */
-    var infosec_nohstr = process.env.INFOSEC_NOH ?? Default_InfoSec_Noh;
+    const infosec_nohstr = process.env.INFOSEC_NOH ?? Default_InfoSec_Noh;
     this.infosec_noh = [];
     if (infosec_nohstr) {
       this.infosec_noh = infosec_nohstr.split(',');

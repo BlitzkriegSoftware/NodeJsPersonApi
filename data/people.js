@@ -2,9 +2,9 @@
 
 const Max_Int32 = 2147483647;
 const Default_HowMany = 3;
-var validator = require('validator');
+const validator = require('validator');
 const Person = require('../models/person');
-var Utility = require('../library/utility');
+const Utility = require('../library/utility');
 
 /**
  * Repository of Person
@@ -15,7 +15,7 @@ var Utility = require('../library/utility');
  * @example
  * const PersonRepository = require('./data/people');
  * // id is the key to a person
- * var p = PersonRepository.findById(id);
+ * let p = PersonRepository.findById(id);
  */
 module.exports = class PersonRepository {
   /**
@@ -79,7 +79,7 @@ module.exports = class PersonRepository {
     text = '' + text;
     text = Utility.toSafeString(text).toLowerCase();
 
-    var results = PersonRepository.Data.filter((value, index, arr) => {
+    const results = PersonRepository.Data.filter((value, index, arr) => {
       return (
         value.lastname.toLowerCase().trim().includes(text) ||
         value.firstname.toLowerCase().trim().includes(text) ||
@@ -105,7 +105,7 @@ module.exports = class PersonRepository {
       id = '0';
     }
 
-    var deleted = false;
+    let deleted = false;
     PersonRepository.Data = PersonRepository.Data.filter(
       (value, index, arr) => {
         if (id == value.id) {
@@ -130,13 +130,13 @@ module.exports = class PersonRepository {
    * @returns {406|201|200|400} -  http status code
    */
   static addUpdate(o) {
-    var sc = 406;
+    let sc = 406;
 
     if (o == null || o.length <= 0) {
       return sc;
     }
 
-    var person = Person.fromObject(o);
+    let person = Person.fromObject(o);
     if (person.isValid()) {
       sc = 201;
       const results = PersonRepository.Data.filter((p) => p.id == person.id);
@@ -166,9 +166,9 @@ module.exports = class PersonRepository {
       howMany = Default_HowMany;
     }
 
-    var results = [];
+    const results = [];
     for (let i = 0; i < howMany; i++) {
-      var p = Person.makePerson();
+      const p = Person.makePerson();
       PersonRepository.Data.push(p);
       results.push(p);
     }

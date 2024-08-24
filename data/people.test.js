@@ -22,7 +22,7 @@ test('Data hasData', () => {
 });
 
 test('Data can be filled', () => {
-  var person = Person.makePerson();
+  const person = Person.makePerson();
   expect(person.isValid()).toBe(true);
 
   PersonRepository.Data.push(person);
@@ -37,29 +37,29 @@ test('Repository', () => {
   PersonRepository.reset();
   expect(PersonRepository.hasData()).toBe(false);
 
-  var result = PersonRepository.addSamples(null);
+  let result = PersonRepository.addSamples(null);
   expect(result != null).toBe(true);
   expect(PersonRepository.hasData()).toBe(true);
 
-  var result = PersonRepository.addSamples(1);
+  result = PersonRepository.addSamples(1);
   expect(result != null).toBe(true);
   expect(PersonRepository.hasData()).toBe(true);
 
-  var person = PersonRepository.Data[0];
+  let person = PersonRepository.Data[0];
   expect(person != null).toBe(true);
   expect(person.isValid()).toBe(true);
 
-  var words = person.toString();
+  const words = person.toString();
   // console.log(words);
   expect(words != null).toBe(true);
   expect(words.indexOf(';') >= 0).toBe(true);
 
-  var id = person.id;
-  var sc = PersonRepository.addUpdate(person);
+  let id = person.id;
+  let sc = PersonRepository.addUpdate(person);
   expect(sc == 200).toBe(true);
 
   id = '1234';
-  var p2 = PersonRepository.findById(id);
+  const p2 = PersonRepository.findById(id);
   expect(p2 == null).toBe(true);
 
   person.id = id;
@@ -69,7 +69,7 @@ test('Repository', () => {
   sc = PersonRepository.addUpdate(null);
   expect(sc == 406).toBe(true);
 
-  var o = {
+  const o = {
     x: 'blah',
   };
   sc = PersonRepository.addUpdate(o);
@@ -96,11 +96,11 @@ test('Repository', () => {
 
   person = PersonRepository.Data[0];
   id = person.id;
-  var result = PersonRepository.findById(id);
+  result = PersonRepository.findById(id);
   expect(result != null).toBe(true);
   expect(result.isValid()).toBe(true);
 
-  var text = person.lastname.substring(0, 2);
+  const text = person.lastname.substring(0, 2);
   result = PersonRepository.search(text);
   expect(result.length > 0).toBe(true);
 
@@ -117,16 +117,16 @@ test('Repository', () => {
 });
 
 test('findById', () => {
-  var id = null;
-  var results = PersonRepository.findById(id);
+  const id = null;
+  const results = PersonRepository.findById(id);
   expect(results == null).toBe(true);
 
   id = 'moo';
   results = PersonRepository.findById(id);
   expect(results == null).toBe(true);
 
-  var folks = PersonRepository.addSamples(1);
-  var person = folks[0];
+  const folks = PersonRepository.addSamples(1);
+  const person = folks[0];
 
   results = PersonRepository.findById(person.id);
   expect(results != null).toBe(true);

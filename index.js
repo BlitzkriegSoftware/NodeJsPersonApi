@@ -13,17 +13,16 @@ const EnvironmentConfiguration = require('./config/ev.js');
  */
 const swaggerUi = require('swagger-ui-express');
 const morgan = require('morgan');
-const fs = require('fs');
 const path = require('path');
-const utility = require('./library/utility');
-const generator = require('./library/swagger.js');
 const rfs = require('rotating-file-stream');
 const express = require('express');
-const app = express();
 const hpp = require('hpp');
-const infoSec = require('./middleware/infoSecMiddleware.js');
 const nocache = require('nocache');
 const cors = require('cors');
+
+const utility = require('./library/utility');
+const generator = require('./library/swagger.js');
+const infoSec = require('./middleware/infoSecMiddleware.js');
 
 /**
  * Where is the app root folder?
@@ -57,6 +56,11 @@ const accessLogStream = rfs.createStream(utility.logFilename, {
 });
 
 /**
+ * Set up Express (app)
+ */
+const app = express();
+
+/**
  * Logging
  */
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -65,7 +69,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
  * CORS
  * @see {@link https://dev.to/speaklouder/how-to-configure-cors-in-nodejs-with-express-11h|cors}
  * @example
- * These are not good setting for production, in reality, 'origin' and 'methods' should always be restritive as possible
+ * These are not good setting for production, in reality,
+ * 'origin' and 'methods' should always be restritive as possible
  */
 
 const corsOptions = {
@@ -95,7 +100,6 @@ app.use(infoSec(infoSecOptions));
  * HTTP Parameter Polution Prevention
  * @see {@link https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/07-Input_Validation_Testing/04-Testing_for_HTTP_Parameter_Pollution.html | HPP}
  */
-
 app.use(hpp());
 
 /**
@@ -107,7 +111,6 @@ app.use(hpp());
  * Enforce no-cache
  * @see {@link https://www.npmjs.com/package/nocache | nocache}
  */
-
 app.use(nocache());
 
 /**

@@ -1,4 +1,4 @@
-'use strict';
+// // 'use strict';
 
 /**
  * Script to regenerate swagger from the Routes, etc.
@@ -10,15 +10,16 @@
  */
 
 const fs = require('node:fs');
+const path = require('path');
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
-const outputFile = './swagger.json';
+const outputFile = path.join(global.appRoot, 'swagger.json');
 
 module.exports = class OpenApi3Generation {
   /**
    * Generate Swagger in OpenAPI3 JSON
    * @param {array} urls
    * @param {string} port
-   * @returns {striing} openapi3filename
+   * @returns {string} openapi3filename
    */
   static generate(urls, port) {
     if (!port || port <= 1) {
@@ -67,7 +68,7 @@ module.exports = class OpenApi3Generation {
      */
     swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
       const openapi3 = require(outputFile);
-      const pkg = require('../package.json');
+      const pkg = require(path.join(global.appRoot, 'package.json'));
       const version = pkg.version;
 
       console.log(`Updating ${outputFile} for version ${version}`);

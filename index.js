@@ -1,4 +1,4 @@
-'use strict';
+// // 'use strict';
 
 /**
  * index.js - Entry Point for REST People API
@@ -6,14 +6,22 @@
  * @module ApplicationRoot
  */
 
-const EnvironmentConfiguration = require('./config/ev.js');
+/**
+ * Where is the app root folder?
+ *@global
+ */
+const path = require('path');
+global.appRoot = path.resolve(__dirname);
 
 /**
  * requires
  */
-const swaggerUi = require('swagger-ui-express');
+let swaggerUi = null;
+try {
+  swaggerUi = require('swagger-ui-express');
+} catch (e) {}
+
 const morgan = require('morgan');
-const path = require('path');
 const rfs = require('rotating-file-stream');
 const express = require('express');
 const hpp = require('hpp');
@@ -25,14 +33,9 @@ const generator = require('./library/swagger.js');
 const infoSec = require('./middleware/infoSecMiddleware.js');
 
 /**
- * Where is the app root folder?
- *@global
- */
-global.appRoot = path.resolve(__dirname);
-
-/**
  * Fetch Configuration
  */
+const EnvironmentConfiguration = require('./config/ev.js');
 const config = new EnvironmentConfiguration();
 
 /**
@@ -50,9 +53,9 @@ if (filename.length <= 0) {
  */
 const accessLogStream = rfs.createStream(utility.logFilename, {
   compress: 'gzip', // compress rotated files
-  size: config.Log_Rotate_Size(), // rotate every n MegaBytes written, adjust for your project
-  interval: config.Log_Rotate_Interval(), // rotate interval, adjust for your project
-  maxFiles: config.Log_Rotate_MaxFiles(), // max files, adjust for your project
+  size: config.Log_Rotate_Size, // rotate every n MegaBytes written, adjust for your project
+  interval: config.Log_Rotate_Interval, // rotate interval, adjust for your project
+  maxFiles: config.Log_Rotate_MaxFiles // max files, adjust for your project
 });
 
 /**
@@ -74,10 +77,10 @@ app.use(morgan('combined', { stream: accessLogStream }));
  */
 
 const corsOptions = {
-  origin: config.Cors_Origins(),
-  methods: config.Cors_Methods(),
+  origin: config.Cors_Origins,
+  methods: config.Cors_Methods,
   preflightContinue: false,
-  optionsSuccessStatus: 204,
+  optionsSuccessStatus: 204
 };
 app.use(cors(corsOptions));
 
@@ -87,12 +90,12 @@ app.use(cors(corsOptions));
  */
 
 const infoSecOptions = {
-  csp: config.Infosec_Csp(),
-  sts: config.Infosec_Sts(),
-  xct: config.Infosec_Xct(),
-  xfo: config.Infosec_Xfo(),
-  rfp: config.Infosec_Rfp(),
-  noh: config.Infosec_Noh(),
+  csp: config.Infosec_Csp,
+  sts: config.Infosec_Sts,
+  xct: config.Infosec_Xct,
+  xfo: config.Infosec_Xfo,
+  rfp: config.Infosec_Rfp,
+  noh: config.Infosec_Noh
 };
 app.use(infoSec(infoSecOptions));
 
@@ -122,15 +125,15 @@ const swaggerFile = require('./swagger.json');
 const options = {
   explorer: false,
   swaggerOptions: {
-    tryItOutEnabled: true,
-  },
+    tryItOutEnabled: true
+  }
 };
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile, options));
 
 /**
  * Enables Json to Object translation
  */
-app.use(express.json({ limit: config.Size_Limit() }));
+app.use(express.json({ limit: config.Size_Limit }));
 
 /**
  * Person Routes
@@ -163,7 +166,7 @@ app.use(ErrorHandler);
  * Start listening (HTTP only)
  */
 app.listen(config.Port, () => {
-  console.log(`Person API listening on port ${config.Port()}`);
+  console.log(`Person API listening on port ${config.Port}`);
 });
 
 /**

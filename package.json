@@ -33,7 +33,7 @@
     "nocache": "^4.0.0",
     "rotating-file-stream": "^3.2.1",
     "swagger-autogen": "^2.23.7",
-    "swagger-ui-express": "^5.0.0",
+    "swagger-ui-express": "^5.0.1",
     "validator": "^13.12.0"
   },
   "devDependencies": {

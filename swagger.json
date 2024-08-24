@@ -1,9 +1,6 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.7.1",
-    "title": "People REST API",
-    "description": "An attempt to make a best practices pattern",
     "contact": {
       "name": "Stuart Williams",
       "email": "stuart.williams@outlook.com",
@@ -12,11 +9,26 @@
     "license": {
       "name": "MIT",
       "url": "https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE"
-    }
+    },
+    "title": "nodejs_people_api",
+    "description": "A simple people api",
+    "version": "1.7.1"
   },
   "servers": [
     {
       "url": "http://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
     },
     {
       "url": "https://localhost:30083"

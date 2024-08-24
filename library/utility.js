@@ -43,7 +43,7 @@ module.exports = class Utility {
       return '';
     }
 
-    if (!Utility.Utility.isString(text)) {
+    if (!Utility.isString(text)) {
       text = text.toString();
     }
 
@@ -56,18 +56,18 @@ module.exports = class Utility {
    * @returns {String} - Timestamp from Date
    */
   static makeStamp(d) {
-    const year = `${  d.getFullYear()}`;
-    let month = `${  d.getMonth()}`;
-    let day = `${  d.getDate()}`;
-    let hour = `${  d.getHours()}`;
-    let minute = `${  d.getMinutes()}`;
-    let second = `${  d.getSeconds()}`;
+    const year = `${d.getFullYear()}`;
+    let month = `${d.getMonth()}`;
+    let day = `${d.getDate()}`;
+    let hour = `${d.getHours()}`;
+    let minute = `${d.getMinutes()}`;
+    let second = `${d.getSeconds()}`;
 
-    if (month.length < 2) month = `0${  month}`;
-    if (day.length < 2) day = `0${  day}`;
-    if (hour.length < 2) hour = `0${  hour}`;
-    if (minute.length < 2) minute = `0${  minute}`;
-    if (second.length < 2) second = `0${  second}`;
+    if (month.length < 2) month = `0${month}`;
+    if (day.length < 2) day = `0${day}`;
+    if (hour.length < 2) hour = `0${hour}`;
+    if (minute.length < 2) minute = `0${minute}`;
+    if (second.length < 2) second = `0${second}`;
 
     return [year, month, day, hour, minute, second].join('-');
   }
@@ -80,12 +80,12 @@ module.exports = class Utility {
    */
   static logFilename(time, index) {
     const logFolder = path.join(global.appRoot, 'logs');
-    Utility.Utility.ensureFolderExists(logFolder);
+    Utility.ensureFolderExists(logFolder);
     const ext = '.log';
     let logFile = 'personapi.w3c';
     logFile = path.join(logFolder, logFile);
     if (!time) return logFile + ext;
-    const stamp = Utility.Utility.makeStamp(time);
+    const stamp = Utility.makeStamp(time);
     logFile = [logFile, index, stamp, ext].join('-');
     return logFile;
   }

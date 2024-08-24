@@ -10,6 +10,7 @@ const express = require('express');
 const router = express.Router();
 
 const PersonRepository = require('../data/people');
+const Utility = require('../library/utility');
 
 router.use(express.json());
 
@@ -43,6 +44,48 @@ const list = router.get('/person/list', (req, res) => {
 */
 
   res.status(200).json(PersonRepository.Data);
+});
+
+/**
+ * GET /person/search
+ * @alias module:routes/personrouter.search
+ * @returns {Number} {Array} of People
+ */
+const search = router.get('/person/search:text', (req, res) => {
+  // #swagger.summary = 'Search for people by keyword'
+  /* 
+  #swagger.responses[200] = {
+    description: "Returns People",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/People"
+        }
+      }           
+    }
+  }   
+
+  #swagger.responses[404] = {
+    description: "Not Found",
+  }   
+
+  #swagger.responses[400] = {
+    description: "Text is required",
+  } 
+
+  */
+
+  const text = req.params.text;
+  if (Utility.isBlank(text)) {
+    res.status(400);
+  } else {
+    const p = PersonRepository.search(text);
+    if (p == null) {
+      return res.status(404).json({ status: 'Not Found' });
+    } else {
+      res.status(200).json(p);
+    }
+  }
 });
 
 /**

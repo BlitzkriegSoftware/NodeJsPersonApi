@@ -21,7 +21,7 @@ module.exports = class OpenApi3Generation {
    * @param {string} port
    * @returns {string} openapi3filename
    */
-  static generate(urls, port) {
+  async generate(urls, port) {
     if (!port || port <= 1) {
       console.error('bad port #');
       return '';
@@ -66,7 +66,7 @@ module.exports = class OpenApi3Generation {
     /**
      * Generate new swagger file then edit with Port, URL, etc.
      */
-    swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
+    await swaggerAutogen(outputFile, endpointsFiles, comps).then((data) => {
       const openapi3 = require(outputFile);
       const pkg = require(path.join(global.appRoot, 'package.json'));
       const version = pkg.version;

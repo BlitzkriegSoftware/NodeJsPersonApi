@@ -1,9 +1,6 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.8.0",
-    "title": "nodejs_people_api",
-    "description": "A simple people api",
     "contact": {
       "name": "Stuart Williams",
       "email": "stuart.williams@outlook.com",
@@ -12,11 +9,38 @@
     "license": {
       "name": "MIT",
       "url": "https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE"
-    }
+    },
+    "title": "nodejs_people_api",
+    "description": "A simple people api",
+    "version": "1.8.0"
   },
   "servers": [
     {
       "url": "http://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
+    },
+    {
+      "url": "https://localhost:30083"
     },
     {
       "url": "https://localhost:30083"
@@ -37,40 +61,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/person/{searchtext}": {
-      "get": {
-        "summary": "Search for people by keyword",
-        "description": "",
-        "parameters": [
-          {
-            "name": "searchtext",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns People",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/People"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Text is required"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }

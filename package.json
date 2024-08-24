@@ -1,12 +1,13 @@
 {
   "name": "nodejs_people_api",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "A simple people api",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "swagger-autogen": "node swagger.js",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "npx eslint"
   },
   "keywords": [
     "people",

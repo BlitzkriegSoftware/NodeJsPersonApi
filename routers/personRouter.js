@@ -47,11 +47,38 @@ const list = router.get('/person/list', (req, res) => {
 });
 
 /**
+ * POST /person/samples/:count
+ * @alias module:routes/personrouter.samples
+ * @argument {Number} count of Person to Make and add to Data
+ * @returns {Number} {Array} of created people
+ */
+const samples = router.post('/person/samples/:count', (req, res) => {
+  // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
+
+  /* 
+  #swagger.responses[200] = {
+    description: "Creates {count} people",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/People"
+        }
+      }           
+    }
+  }   
+*/
+
+  const sampleCount = Number(req.params.count || 5);
+  /* _= */ PersonRepository.addSamples(sampleCount);
+  res.json(PersonRepository.Data);
+});
+
+/**
  * GET /person/search
  * @alias module:routes/personrouter.search
  * @returns {Number} {Array} of People
  */
-const search = router.get('/person/search:text', (req, res) => {
+const search = router.get('/person/search/:text', (req, res) => {
   // #swagger.summary = 'Search for people by keyword'
   /* 
   #swagger.responses[200] = {
@@ -86,33 +113,6 @@ const search = router.get('/person/search:text', (req, res) => {
       res.status(200).json(p);
     }
   }
-});
-
-/**
- * POST /person/samples/:count
- * @alias module:routes/personrouter.samples
- * @argument {Number} count of Person to Make and add to Data
- * @returns {Number} {Array} of created people
- */
-const samples = router.post('/person/samples/:count', (req, res) => {
-  // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
-
-  /* 
-  #swagger.responses[200] = {
-    description: "Creates {count} people",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/People"
-        }
-      }           
-    }
-  }   
-*/
-
-  const sampleCount = Number(req.params.count || 5);
-  /* _= */ PersonRepository.addSamples(sampleCount);
-  res.json(PersonRepository.Data);
 });
 
 /**

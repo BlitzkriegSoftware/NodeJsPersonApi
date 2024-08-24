@@ -41,40 +41,6 @@
         }
       }
     },
-    "/person/{searchtext}": {
-      "get": {
-        "summary": "Search for people by keyword",
-        "description": "",
-        "parameters": [
-          {
-            "name": "searchtext",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns People",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/People"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Text is required"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
     "/person/samples/{count}": {
       "post": {
         "summary": "Makes N sample people and adds them to DATA (default: 5)",
@@ -99,6 +65,40 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/person/search/{text}": {
+      "get": {
+        "summary": "Search for people by keyword",
+        "description": "",
+        "parameters": [
+          {
+            "name": "text",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns People",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/People"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Text is required"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }

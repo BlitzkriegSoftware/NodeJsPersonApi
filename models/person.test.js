@@ -45,7 +45,9 @@ test('fromJson', () => {
   try {
     json = JSON.stringify(person);
     p2 = Person.fromJson(json);
-  } catch {}
+  } catch (e) {
+    console.log(e);
+  }
   expect(p2 == null).toBe(true);
 });
 
@@ -65,15 +67,15 @@ test('fromObject', () => {
 
   person = null;
   try {
-    var o = {};
+    const o = {};
     p2 = Person.fromObject(o);
-  } catch {}
+  } catch (e) {}
   expect(p2.isValid()).toBe(false);
 
   person = null;
   try {
-    var o = null;
+    const o = null;
     p2 = Person.fromObject(o);
-  } catch {}
+  } catch (e) {}
   expect(p2 != null).toBe(false);
 });

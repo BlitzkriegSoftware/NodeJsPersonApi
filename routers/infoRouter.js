@@ -6,11 +6,11 @@
  * @module routes/inforouter
  */
 
+const Result = require('../models/result');
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const express = require('express');
 const router = express.Router();
-
 router.use(express.json());
 
 /**
@@ -33,14 +33,14 @@ const about = router.get('/about', (req, res) => {
         description: id.description || 'People API',
         license: id.license || 'MIT',
         git: 'https://github.com/BlitzkriegSoftware/NodeJsPersonApi',
-        copyright: `(c) 2024-${  new Date().getFullYear().toString()}`,
+        copyright: `(c) 2024-${new Date().getFullYear().toString()}`
       };
 
       res.status(200).json(info);
     })
     .catch(function (error) {
-      const result = new Result('Error', error);
-      res.status(500).json(result);
+      const response = new Result('Error', error);
+      res.status(500).json(response);
     });
 });
 

@@ -20,6 +20,7 @@
   "author": "Stuart Williams",
   "license": "MIT",
   "dependencies": {
+    "@babel/eslint-parser": "^7.25.1",
     "@faker-js/faker": "^8.4.1",
     "and": "^0.0.3",
     "cookie-parser": "^1.4.6",

@@ -27,7 +27,7 @@ module.exports = class PersonRepository {
   // Has Data
   /**
    * Does the Data array have any items?
-   * alias module:repository/people.hasData
+   * @alias module:repository/people.hasData
    * @returns {boolean}
    */
   /* istanbul ignore next */
@@ -76,7 +76,7 @@ module.exports = class PersonRepository {
    * @returns {Array} - of {People} (can be empty)
    */
   static search(text) {
-    text = `${  text}`;
+    text = `${text}`;
     text = Utility.toSafeString(text).toLowerCase();
 
     const results = PersonRepository.Data.filter((value, index, arr) => {
@@ -100,7 +100,7 @@ module.exports = class PersonRepository {
     if (id === null) {
       id = '0';
     }
-    id = `${  id}`;
+    id = `${id}`;
     if (!validator.isInt(id, { min: 1, max: Max_Int32 })) {
       id = '0';
     }
@@ -114,7 +114,7 @@ module.exports = class PersonRepository {
         } else {
           return true;
         }
-      },
+      }
     );
 
     if (deleted) {

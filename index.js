@@ -40,7 +40,7 @@ const config = new EnvironmentConfiguration();
  */
 const filename = generator.generate(config.Urls, config.Port);
 if (filename.length <= 0) {
-  exit(9);
+  process.exit(9);
 }
 
 /**
@@ -162,7 +162,7 @@ app.use(ErrorHandler);
 /**
  * Start listening (HTTP only)
  */
-app.listen(Port, () => {
+app.listen(config.Port, () => {
   console.log(`Person API listening on port ${config.Port()}`);
 });
 
@@ -198,5 +198,5 @@ process.on('SIGQUIT', () => {
  */
 function shutdown() {
   // Do other shut down tasks
-  process.exit();
+  process.exit(0);
 }

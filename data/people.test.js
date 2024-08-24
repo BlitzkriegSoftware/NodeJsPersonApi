@@ -70,7 +70,7 @@ test('Repository', () => {
   expect(sc == 406).toBe(true);
 
   const o = {
-    x: 'blah',
+    x: 'blah'
   };
   sc = PersonRepository.addUpdate(o);
   expect(sc == 400).toBe(true);

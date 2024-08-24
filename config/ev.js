@@ -33,7 +33,7 @@ module.exports = class EnvironmentConfiguration {
      * @default 30083
      * @returns {Number}
      */
-    this.port = parseInt(process.env.API_PORT, 10) ?? Default_Port;
+    this.port = parseInt(process.env.API_PORT, 10) || Default_Port;
     if (!this.port || this.port <= 0) {
       this.port = Default_Port;
     }
@@ -44,7 +44,7 @@ module.exports = class EnvironmentConfiguration {
      * @default @see {Default_Urls} - Localhost(s)
      * @returns {String} - Turned into an array of urls
      */
-    const urlstring = process.env.HOST_URLS ?? Default_Urls;
+    const urlstring = process.env.HOST_URLS || Default_Urls;
     this.urls = urlstring.split(',');
 
     /**
@@ -55,7 +55,7 @@ module.exports = class EnvironmentConfiguration {
      * @returns {String}
      */
     this.log_rotate_size =
-      process.env.LOG_ROTATE_SIZE ?? Default_Rotate_File_Size;
+      process.env.LOG_ROTATE_SIZE || Default_Rotate_File_Size;
 
     /**
      * Rotate every N interval
@@ -65,7 +65,7 @@ module.exports = class EnvironmentConfiguration {
      * @returns {String}
      */
     this.log_rotate_interval =
-      process.env.LOG_ROTATE_INTERVAL ?? Default_Log_Rotate_Interval;
+      process.env.LOG_ROTATE_INTERVAL || Default_Log_Rotate_Interval;
 
     /**
      * Max rotated files to keep
@@ -75,7 +75,7 @@ module.exports = class EnvironmentConfiguration {
      * @returns {Number}
      */
     this.log_rotate_maxfiles =
-      parseInt(process.env.LOG_ROTATE_MAXFILES, 10) ?? Default_Keep;
+      parseInt(process.env.LOG_ROTATE_MAXFILES, 10) || Default_Keep;
     if (!this.log_rotate_maxfiles || this.log_rotate_maxfiles <= 1) {
       this.log_rotate_maxfiles = Default_Keep;
     }
@@ -87,7 +87,7 @@ module.exports = class EnvironmentConfiguration {
      * @default *
      * @returns {String} - See above
      */
-    this.cors_origins = process.env.CORS_ORIGINS ?? Default_Cors_Origins;
+    this.cors_origins = process.env.CORS_ORIGINS || Default_Cors_Origins;
 
     /**
      * List of CORS Methods comma separated
@@ -96,7 +96,7 @@ module.exports = class EnvironmentConfiguration {
      * @default *
      * @returns {String} - See above
      */
-    this.cors_methods = process.env.CORE_METHODS ?? Default_Cors_Methods;
+    this.cors_methods = process.env.CORE_METHODS || Default_Cors_Methods;
 
     /**
      * Content Security Policy
@@ -105,7 +105,7 @@ module.exports = class EnvironmentConfiguration {
      * @default {String} - (restrictive)
      * @returns {String} - See above
      */
-    this.infosec_csp = process.env.INFOSEC_CSP ?? Default_InfoSec_Csp;
+    this.infosec_csp = process.env.INFOSEC_CSP || Default_InfoSec_Csp;
 
     /**
      * Strict transport security
@@ -114,7 +114,7 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {String} - See above
      */
-    this.infosec_sts = process.env.INFOSEC_STS ?? Default_InfoSec_Sts;
+    this.infosec_sts = process.env.INFOSEC_STS || Default_InfoSec_Sts;
 
     /**
      * X-Content-Type-Options
@@ -123,7 +123,7 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {String} - See above
      */
-    this.infosec_xct = process.env.INFOSEC_XCT ?? Default_InfoSec_Xct;
+    this.infosec_xct = process.env.INFOSEC_XCT || Default_InfoSec_Xct;
 
     /**
      * X-Frame-Options
@@ -132,7 +132,7 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {String} - See above
      */
-    this.infosec_xfo = process.env.INFOSEC_XFO ?? Default_InfoSec_Xfo;
+    this.infosec_xfo = process.env.INFOSEC_XFO || Default_InfoSec_Xfo;
 
     /**
      * Referrer-Policy
@@ -141,7 +141,7 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {String} - See above
      */
-    this.infosec_rfp = process.env.INFOSEC_RFP ?? Default_InfoSec_RFP;
+    this.infosec_rfp = process.env.INFOSEC_RFP || Default_InfoSec_RFP;
 
     /**
      * List of headers to remove comma separated
@@ -150,7 +150,7 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {Array} - See above
      */
-    const infosec_nohstr = process.env.INFOSEC_NOH ?? Default_InfoSec_Noh;
+    const infosec_nohstr = process.env.INFOSEC_NOH || Default_InfoSec_Noh;
     this.infosec_noh = [];
     if (infosec_nohstr) {
       this.infosec_noh = infosec_nohstr.split(',');
@@ -163,104 +163,104 @@ module.exports = class EnvironmentConfiguration {
      * @default - As recomended by OWASP
      * @returns {String} - See above
      */
-    this.size_limit = process.env.REQ_SIZE_LIMIT ?? Default_Request_Size_Limit;
+    this.size_limit = process.env.REQ_SIZE_LIMIT || Default_Request_Size_Limit;
   }
 
   /**
    * get: Port
    */
   get Port() {
-    return port;
+    return this.port;
   }
 
   /**
    * get Log_Rotate_Size
    */
   get Log_Rotate_Size() {
-    return log_rotate_size;
+    return this.log_rotate_size;
   }
 
   /**
    * get Log_Rotate_Interval
    */
   get Log_Rotate_Interval() {
-    return log_rotate_interval;
+    return this.log_rotate_interval;
   }
 
   /**
    * get Log_Rotate_MaxFiles
    */
   get Log_Rotate_MaxFiles() {
-    return log_rotate_maxfiles;
+    return this.log_rotate_maxfiles;
   }
 
   /**
    * get Cors_Origins
    */
   get Cors_Origins() {
-    return cors_origins;
+    return this.cors_origins;
   }
 
   /**
    * get Cors_Methods
    */
   get Cors_Methods() {
-    return cors_methods;
+    return this.cors_methods;
   }
 
   /**
    * get Infosec_Csp
    */
   get Infosec_Csp() {
-    return infosec_csp;
+    return this.infosec_csp;
   }
 
   /**
    * get Infosec_Sts
    */
   get Infosec_Sts() {
-    return infosec_sts;
+    return this.infosec_sts;
   }
 
   /**
    * get Infosec_Xct
    */
   get Infosec_Xct() {
-    return infosec_xct;
+    return this.infosec_xct;
   }
 
   /**
    * get Infosec_Xfo
    */
   get Infosec_Xfo() {
-    return infosec_xfo;
+    return this.infosec_xfo;
   }
 
   /**
    * get Infosec_Rfp
    */
   get Infosec_Rfp() {
-    return infosec_rfp;
+    return this.infosec_rfp;
   }
 
   /**
    * get Infosec_Noh
    */
   get Infosec_Noh() {
-    return infosec_noh;
+    return this.infosec_noh;
   }
 
   /**
    * get Urls
    */
   get Urls() {
-    return urls;
+    return this.urls;
   }
 
   /**
    * get Size_Limit
    */
   get Size_Limit() {
-    return size_limit;
+    return this.size_limit;
   }
 };

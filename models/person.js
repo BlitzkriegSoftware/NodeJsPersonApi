@@ -45,16 +45,10 @@ module.exports = class Person {
     const _lastname = faker.person.lastName();
     const _cellphone = faker.phone.number();
     const _company = faker.company.name();
-    const _email =
-      `${_firstname 
-      }.${ 
-      _lastname 
-      }@${ 
-      _company
-        .replace(/[,.'&^<>?/]+/g, '')
-        .replace(/\s+/g, '')
-        .trim() 
-      }.com`;
+    const _email = `${_firstname}.${_lastname}@${_company
+      .replace(/[,.'&^<>?/]+/g, '')
+      .replace(/\s+/g, '')
+      .trim()}.com`;
 
     return new Person(_id, _firstname, _lastname, _cellphone, _email, _company);
   }
@@ -73,10 +67,10 @@ module.exports = class Person {
   }
 
   /**
+   * For this instance return a Semi-Colon separated list of fields for debugging
    * @instance
    * @memberof Person
    * @alias Person.toString - Self
-   * For this instance return a Semi-Colon separated list of fields for debugging
    * @returns {String}
    */
   toString() {
@@ -102,9 +96,9 @@ module.exports = class Person {
         o.lastname,
         o.cellphone,
         o.email,
-        o.company,
+        o.company
       );
-    } catch {
+    } catch (e) {
       p = null;
     }
     return p;
@@ -129,18 +123,18 @@ module.exports = class Person {
         o.lastname,
         o.cellphone,
         o.email,
-        o.company,
+        o.company
       );
     }
     return p;
   }
 
   /**
+   * Returns true if this person has the minumum fields: id, first, last
    * @instance
    * @memberof Person
    * @alias Person.isValid - True if required fields are present
    * @returns {Boolean}
-   * Returns true if this person has the minumum fields: id, first, last
    */
   isValid() {
     return (

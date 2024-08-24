@@ -27,10 +27,7 @@ module.exports = class OpenApi3Generation {
     }
 
     console.log(
-      `Creating Swagger for Routers on Port: ${ 
-        Port 
-        } for ${ 
-        urls.join('; ')}`,
+      `Creating Swagger for Routers on Port: ${port} for ${urls.join('; ')}`
     );
 
     /**
@@ -45,16 +42,16 @@ module.exports = class OpenApi3Generation {
             $lastname: 'last name',
             cellphone: 'cell phone',
             company: 'company',
-            email: 'email',
+            email: 'email'
           },
           People: {
             type: 'array',
             items: {
-              $ref: '#/components/schemas/Person',
-            },
-          },
-        },
-      },
+              $ref: '#/components/schemas/Person'
+            }
+          }
+        }
+      }
     };
 
     /**
@@ -62,7 +59,7 @@ module.exports = class OpenApi3Generation {
      */
     const endpointsFiles = [
       './routers/personRouter.js',
-      './routers/infoRouter.js',
+      './routers/infoRouter.js'
     ];
 
     /**
@@ -73,7 +70,7 @@ module.exports = class OpenApi3Generation {
       const pkg = require('../package.json');
       const version = pkg.version;
 
-      console.log(`Updating ${  outputFile  } for version ${  version}`);
+      console.log(`Updating ${outputFile} for version ${version}`);
 
       // Manual overrides
       openapi3.info.title = pkg.name;
@@ -90,9 +87,9 @@ module.exports = class OpenApi3Generation {
         'https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE';
 
       let uct = 0;
-      for (const url of Urls) {
+      for (const url of urls) {
         if (url) {
-          const fqdn = `${url  }:${  Port}`;
+          const fqdn = `${url}:${port}`;
           if (uct == 0) {
             openapi3.servers[0].url = fqdn;
           } else {

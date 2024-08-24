@@ -43,7 +43,7 @@ test('logFilename', () => {
   let logFile = Utility.logFilename(null, 1);
   expect(logFile.length > 0).toBe(true);
 
-  const d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
+  let d = new Date(2024, 1, 2, 3, 4, 5, 6, 7);
   logFile = Utility.logFilename(d, 1);
   expect(logFile.length > 0).toBe(true);
 

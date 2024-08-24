@@ -22,7 +22,7 @@ test('Data hasData', () => {
 });
 
 test('Data can be filled', () => {
-  const person = Person.makePerson();
+  let person = Person.makePerson();
   expect(person.isValid()).toBe(true);
 
   PersonRepository.Data.push(person);
@@ -107,7 +107,7 @@ test('Repository', () => {
   result = PersonRepository.search(null);
   expect(result.length > 0).toBe(false);
 
-  result = PersonRepository.search(99);
+  result = PersonRepository.search(-99);
   if (result != null) {
     expect(result.length <= 0).toBe(true);
   }
@@ -117,8 +117,8 @@ test('Repository', () => {
 });
 
 test('findById', () => {
-  const id = null;
-  const results = PersonRepository.findById(id);
+  let id = null;
+  let results = PersonRepository.findById(id);
   expect(results == null).toBe(true);
 
   id = 'moo';

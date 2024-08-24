@@ -30,18 +30,6 @@ refreshenv
 
 If not, close and re-open the terminal to get a fresh session + vars
 
-### generate swagger
-
-```powershell
-npm swagger-autogen
-```
-
--or-
-
-```powershell
-node .\swagger.js
-```
-
 ## Run site
 
 ```powershell

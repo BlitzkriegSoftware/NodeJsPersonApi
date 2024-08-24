@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.8.0",
+    "version": "1.8.1",
     "title": "nodejs_people_api",
     "description": "A simple people api",
     "contact": {
@@ -243,11 +243,7 @@
             "example": "email"
           }
         },
-        "required": [
-          "id",
-          "firstname",
-          "lastname"
-        ]
+        "required": ["id", "firstname", "lastname"]
       },
       "People": {
         "type": "object",

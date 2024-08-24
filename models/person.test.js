@@ -2,10 +2,9 @@
 
 // https://jestjs.io/docs/getting-started
 const { describe, expect, test } = require('@jest/globals');
+const Utility = require('../library/utility');
 
 const Person = require('./person');
-
-const Utility = require('../library/utility');
 
 /**
  * TEST: Make Person generates valid People

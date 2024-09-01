@@ -101,7 +101,7 @@ const search = router.get('/person/search/:text', (req, res) => {
     res.status(400);
   } else {
     const p = PersonRepository.search(text);
-    if (p == null) {
+    if (p.length <= 0) {
       return res.status(404).json({ status: 'Not Found' });
     } else {
       res.status(200).json(p);

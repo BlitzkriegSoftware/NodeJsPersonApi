@@ -28,11 +28,23 @@ describe('Person API', () => {
     expect(result != null).toBe(true);
   });
   test('/person/search/:text', async () => {
-    const url = `/person/search/${data[0].firstname}`;
+    const text = data[0].firstname;
+    const url = `/person/search/${text}`;
     const res = await request(app).get(url);
     expect(res.statusCode).toEqual(200);
     const result = res.body;
     expect(result != null).toBe(true);
+  });
+  test('/person/search/:text (empty)', async () => {
+    const text = '';
+    const url = `/person/search/${text}`;
+    const res = await request(app).get(url);
+    expect(res.statusCode).toEqual(404);
+  }, 50000);
+  test('/person/search/:text (not found)', async () => {
+    const url = `/person/search/xxxxxxxxxx`;
+    const res = await request(app).get(url);
+    expect(res.statusCode).toEqual(404);
   });
   test('/person/:id', async () => {
     const url = `/person/${data[0].id}`;

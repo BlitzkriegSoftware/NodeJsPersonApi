@@ -84,13 +84,11 @@ module.exports = class OpenApi3Generation {
       openapi3.info.version = version;
       openapi3.info.contact = {};
       openapi3.info.contact.name = pkg.author;
-      openapi3.info.contact.email = 'stuart.williams@outlook.com';
-      openapi3.info.contact.url =
-        'https://github.com/BlitzkriegSoftware/NodeJsPersonApi';
+      openapi3.info.contact.email = pkg.config.email;
+      openapi3.info.contact.url = pkg.config.giturl;
       openapi3.info.license = {};
-      openapi3.info.license.name = 'MIT';
-      openapi3.info.license.url =
-        'https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE';
+      openapi3.info.license.name = pkg.license;
+      openapi3.info.license.url = pkg.config.licenseurl;
 
       let uct = 0;
       for (const url of urls) {

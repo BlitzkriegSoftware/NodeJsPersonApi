@@ -23,24 +23,6 @@
     }
   ],
   "paths": {
-    "/person/list": {
-      "get": {
-        "summary": "Gets all people",
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Returns People",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/People"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/person/samples/{count}": {
       "post": {
         "summary": "Makes N sample people and adds them to DATA (default: 5)",
@@ -58,6 +40,24 @@
         "responses": {
           "200": {
             "description": "Creates {count} people",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/People"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/person/list": {
+      "get": {
+        "summary": "Gets all people",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Returns People",
             "content": {
               "application/json": {
                 "schema": {
@@ -94,11 +94,8 @@
               }
             }
           },
-          "400": {
-            "description": "Text is required"
-          },
           "404": {
-            "description": "Not Found"
+            "description": "Not Found or no text supplied"
           }
         }
       }

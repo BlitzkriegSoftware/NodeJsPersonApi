@@ -87,25 +87,17 @@ const search = router.get('/person/search/:text', (req, res) => {
   }   
 
   #swagger.responses[404] = {
-    description: "Not Found",
+    description: "Not Found or no text supplied",
   }   
-
-  #swagger.responses[400] = {
-    description: "Text is required",
-  } 
 
   */
 
   const text = req.params.text;
-  if (Utility.isBlank(text)) {
-    res.status(400);
+  const p = PersonRepository.search(text);
+  if (p.length <= 0) {
+    return res.status(404).json({ status: 'Not Found' });
   } else {
-    const p = PersonRepository.search(text);
-    if (p.length <= 0) {
-      return res.status(404).json({ status: 'Not Found' });
-    } else {
-      res.status(200).json(p);
-    }
+    res.status(200).json(p);
   }
 });
 

@@ -20,6 +20,11 @@
   ],
   "author": "Stuart Williams",
   "license": "MIT",
+  "config": {
+    "email": "stuart.williams@outlook.com",
+    "giturl": "https://github.com/BlitzkriegSoftware/NodeJsPersonApi",
+    "licenseurl": "https://github.com/BlitzkriegSoftware/NodeJsPersonApi/blob/main/LICENSE"
+  },
   "dependencies": {
     "@babel/eslint-parser": "^7.25.1",
     "@faker-js/faker": "^8.4.1",

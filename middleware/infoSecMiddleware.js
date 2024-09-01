@@ -59,7 +59,7 @@ module.exports = function (options) {
        * Referrer-Policy
        */
       if (Utility.propIsValid(options, 'rfp')) {
-        res.setHeader('Referrer-Policy', options.frp);
+        res.setHeader('Referrer-Policy', options.rfp);
       }
 
       /**

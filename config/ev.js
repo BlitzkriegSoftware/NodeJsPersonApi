@@ -73,9 +73,6 @@ module.exports = class EnvironmentConfiguration {
      */
     this.log_rotate_maxfiles =
       parseInt(process.env.LOG_ROTATE_MAXFILES, 10) || Default_Keep;
-    if (!this.log_rotate_maxfiles || this.log_rotate_maxfiles <= 1) {
-      this.log_rotate_maxfiles = Default_Keep;
-    }
 
     /**
      * List of CORS Origins comma separated

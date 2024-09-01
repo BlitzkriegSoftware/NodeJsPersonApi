@@ -67,5 +67,5 @@ test('InfoSec Handler', () => {
   res.setHeader('Server', '2');
   hf(mockRequest, res, nxt);
   const headers = res.headers();
-  expect(headers.size == 5).toBe(true);
+  expect(headers.size == 6).toBe(true);
 });

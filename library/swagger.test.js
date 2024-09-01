@@ -13,7 +13,8 @@ const Default_Urls = 'http://localhost,https://localhost,';
 const urls = Default_Urls.split(',');
 
 test('confirmGeneration', async () => {
-  global.appRoot = path.resolve('..');
+  global.appRoot = path.join(__dirname, '..');
+  process.chdir(global.appRoot);
   const generator = new OpenApi3Generation();
   const filename = await Utility.tempFile('swagger.json');
   console.log(`Filename: ${filename}`);

@@ -13,7 +13,7 @@ const Utility = require('../library/utility');
  * - sts: Strict transport security
  * - xct: X-Content-Type-Options
  * - xfo: X-Frame-Options
- * - frp: Referrer-Policy
+ * - rfp: Referrer-Policy
  * - noh: {Array} of headers to remove
  * @example
  * // infoSec - variable assigned to function from requires
@@ -58,7 +58,7 @@ module.exports = function (options) {
       /**
        * Referrer-Policy
        */
-      if (Utility.propIsValid(options, 'frp')) {
+      if (Utility.propIsValid(options, 'rfp')) {
         res.setHeader('Referrer-Policy', options.frp);
       }
 

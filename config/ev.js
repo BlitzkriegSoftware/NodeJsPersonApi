@@ -34,9 +34,6 @@ module.exports = class EnvironmentConfiguration {
      * @returns {Number}
      */
     this.port = parseInt(process.env.API_PORT, 10) || Default_Port;
-    if (!this.port || this.port <= 0) {
-      this.port = Default_Port;
-    }
 
     /**
      * Urls that the API runs on (w/o : port)

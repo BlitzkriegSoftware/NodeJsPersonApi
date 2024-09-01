@@ -1,7 +1,6 @@
 'use strict';
 
 const { tr } = require('@faker-js/faker');
-const { isPassportNumber } = require('validator');
 const Utility = require('../library/utility');
 
 /**

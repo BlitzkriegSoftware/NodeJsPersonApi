@@ -11,6 +11,14 @@ const { NextFunction, Request, Response } = require('express');
 
 const handler = require('./errorHandler');
 
+// Mock Error
+const mockedError = () => {
+  const err = new Error('Oh No');
+  err.statusCode = 500;
+  err.message = 'Server Error';
+  return err;
+};
+
 // Request
 const mockRequest = () => {
   const req = {};
@@ -23,16 +31,18 @@ const mockResponse = () => {
   const res = {};
   res.statusCode = 500;
   res.message = 'Server Error';
-  res.status = jest.fn((code) => {});
-  res.json = jest.fn((payload) => {});
-  return res;
-};
 
-const mockedError = () => {
-  const err = new Error('Oh No');
-  err.statusCode = 500;
-  err.message = 'Server Error';
-  return err;
+  return {
+    status: function (code) {
+      res.statusCode = code;
+      return this;
+    },
+    json: function (payload) {
+      res.message = payload;
+      return this;
+    },
+    res
+  };
 };
 
 test('Error Handler', () => {
@@ -40,5 +50,7 @@ test('Error Handler', () => {
   const req = mockRequest();
   const res = mockResponse();
   const nxt = jest.fn();
-  const result = handler(err, req, res, nxt);
+  handler(err, req, res, nxt);
+  expect(res.res.statusCode == 500).toBe(true);
+  expect(Utility.isBlank(res.res.message)).toBe(false);
 });

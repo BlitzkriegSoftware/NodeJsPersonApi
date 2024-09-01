@@ -11,20 +11,25 @@
 
 const fs = require('node:fs');
 const path = require('path');
+const Utility = require('./utility');
 const swaggerAutogen = require('swagger-autogen')({ openapi: '3.0.0' });
-const outputFile = path.join(global.appRoot, 'swagger.json');
 
 module.exports = class OpenApi3Generation {
   /**
    * Generate Swagger in OpenAPI3 JSON
-   * @param {array} urls
-   * @param {string} port
+   * @param {string} outputFile - Path to the swagger.json
+   * @param {array} urls - list to configure
+   * @param {string} port - to use
    * @returns {string} openapi3filename
    */
-  async generate(urls, port) {
+  async generate(outputFile, urls, port) {
     if (!port || port <= 1) {
       console.error('bad port #');
       return '';
+    }
+
+    if (Utility.isBlank(outputFile)) {
+      outputFile = path.join(global.appRoot, 'swagger.json');
     }
 
     console.log(

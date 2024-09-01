@@ -90,3 +90,9 @@ test('toSafeString', () => {
   expect(Utility.toSafeString(99) == '99').toBe(true);
   expect(Utility.toSafeString('\u0006moo\u0007') == 'moo').toBe(true);
 });
+
+test('tempFile', async () => {
+  const filename = await Utility.tempFile('test', '');
+  console.log(`Filename: ${filename}`);
+  expect(fs.existsSync(filename)).toBe(true);
+});

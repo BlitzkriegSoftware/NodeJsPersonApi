@@ -243,7 +243,11 @@
             "example": "email"
           }
         },
-        "required": ["id", "firstname", "lastname"]
+        "required": [
+          "id",
+          "firstname",
+          "lastname"
+        ]
       },
       "People": {
         "type": "object",

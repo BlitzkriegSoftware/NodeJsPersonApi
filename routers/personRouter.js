@@ -16,36 +16,6 @@ router.use(express.json());
 
 // #swagger.description = 'People API'
 
-/*
-  ------------------
-  LIST
-  ------------------
-*/
-
-/**
- * GET /person/list
- * @alias module:routes/personrouter.list
- * @returns {Number} {Array} of People
- */
-const list = router.get('/person/list', (req, res) => {
-  // #swagger.summary = 'Gets all people'
-
-  /* 
-  #swagger.responses[200] = {
-    description: "Returns People",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/People"
-        }
-      }           
-    }
-  }   
-*/
-
-  res.status(200).json(PersonRepository.Data);
-});
-
 /**
  * POST /person/samples/:count
  * @alias module:routes/personrouter.samples
@@ -71,6 +41,30 @@ const samples = router.post('/person/samples/:count', (req, res) => {
   const sampleCount = Number(req.params.count || 5);
   /* _= */ PersonRepository.addSamples(sampleCount);
   res.json(PersonRepository.Data);
+});
+
+/**
+ * GET /person/list
+ * @alias module:routes/personrouter.list
+ * @returns {Number} {Array} of People
+ */
+const list = router.get('/person/list', (req, res) => {
+  // #swagger.summary = 'Gets all people'
+
+  /* 
+  #swagger.responses[200] = {
+    description: "Returns People",
+    content: {
+      "application/json": {
+        schema:{
+          $ref: "#/components/schemas/People"
+        }
+      }           
+    }
+  }   
+*/
+
+  res.status(200).json(PersonRepository.Data);
 });
 
 /**

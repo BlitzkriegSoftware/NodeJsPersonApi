@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('node:fs');
+const os = require('os');
 const validator = require('validator');
 
 /**
@@ -119,5 +120,28 @@ module.exports = class Utility {
       }
     }
     return isOk;
+  }
+
+  /**
+   * Generates a temp filename
+   * @param {*} name - Filename w/o path but with extension
+   * @param {*} data - data to put in file
+   * @param {*} encoding - defaults to utf8
+   * @returns filename with path
+   */
+  static tempFile(name = 'filename', data = '', encoding = 'utf8') {
+    return new Promise((resolve, reject) => {
+      const tempPath = path.join(os.tmpdir(), 'tmp-');
+      fs.mkdtemp(tempPath, (err, folder) => {
+        if (err) return reject(err);
+
+        const file_name = path.join(folder, name);
+
+        fs.writeFile(file_name, data, encoding, (error_file) => {
+          if (error_file) return reject(error_file);
+          resolve(file_name);
+        });
+      });
+    });
   }
 };

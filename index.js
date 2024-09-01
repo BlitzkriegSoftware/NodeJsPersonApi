@@ -16,6 +16,7 @@ global.appRoot = path.resolve(__dirname);
 /**
  * requires
  */
+
 const swaggerUi = require('swagger-ui-express');
 
 const morgan = require('morgan');
@@ -48,7 +49,7 @@ const main = async () => {
    * Generate Swagger (OpenApi3)
    */
   const generator = new OpenApi3Generation();
-  const filename = await generator.generate(config.Urls, config.Port);
+  const filename = await generator.generate('', config.Urls, config.Port);
 
   /**
    * Logging file (rotating)

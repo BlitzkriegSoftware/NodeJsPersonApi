@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "swagger-autogen": "node swagger.js",
     "test": "jest --coverage",
     "lint": "npx eslint"
   },

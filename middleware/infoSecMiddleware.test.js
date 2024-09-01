@@ -63,9 +63,13 @@ const nxt = jest.fn();
 test('InfoSec Handler', () => {
   const hf = handler(infoSecOptions);
   const res = mockResponse();
-  res.setHeader('x-powered-by', '1');
-  res.setHeader('Server', '2');
+  const keys = ['x-powered-by', 'Server'];
+  res.setHeader(keys[0], '1');
+  res.setHeader(keys[1], '2');
   hf(mockRequest, res, nxt);
   const headers = res.headers();
   expect(headers.size == 6).toBe(true);
+  keys.forEach((value) => {
+    expect(headers.has(value)).toBe(false);
+  });
 });

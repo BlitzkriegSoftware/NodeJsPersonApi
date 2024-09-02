@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.8.2",
+    "version": "1.8.3",
     "title": "nodejs_people_api",
     "description": "A simple people api",
     "contact": {
@@ -182,7 +182,7 @@
             "description": "OK"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Missing critical file"
           }
         }
       }
@@ -193,7 +193,10 @@
         "description": "",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Healthy"
+          },
+          "500": {
+            "description": "Missing package or swagger file"
           }
         }
       }
@@ -205,6 +208,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Missing swagger file"
           }
         }
       }

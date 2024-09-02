@@ -6,18 +6,19 @@ const os = require('os');
 const validator = require('validator');
 
 /**
- * Helpful static methods for use in any code
- * @module library/utility
- * @alias module:library/utility.Utility
- * @description General Purpose Utility
  * @class
- * @example
+ * @name Utility
+ * @classdesc General Purpose Utility
+ * @summary
  * requires 'global.appRoot'
  */
 module.exports = class Utility {
   /**
    * Creates a folder if it does not exist
+   * @name Utility#ensureFolderExists
+   * @function
    * @param {String} folder - Path to folder we want
+   * @returns {null} - none
    */
   static ensureFolderExists(folder) {
     if (!fs.existsSync(folder)) {
@@ -27,6 +28,8 @@ module.exports = class Utility {
 
   /**
    * Tests if an object is a string
+   * @name Utility#isString
+   * @function
    * @param {Object} o
    * @returns {Boolean} - true if so
    */
@@ -36,6 +39,8 @@ module.exports = class Utility {
 
   /**
    * Returns a 'safer' string
+   * @name Utility#toSafeString
+   * @function
    * @param {String} text
    * @returns {String} - Trimmed, Cleaned up string
    */
@@ -53,6 +58,8 @@ module.exports = class Utility {
 
   /**
    * Makes a string timestamp from a date
+   * @name Utility#makeStamp
+   * @function
    * @param {Date} d - Date
    * @returns {String} - Timestamp from Date
    */
@@ -75,9 +82,12 @@ module.exports = class Utility {
 
   /**
    * Makes a rotating filename when called into '$/logs/', makes folder if not exists
-   * @see {@link https://stackoverflow.com/questions/61650047/how-to-specify-rotated-file-location-by-using-rotating-file-stream|Log file path}
+   * @name Utility#logFilename
+   * @function
    * @param {*} time
    * @param {*} index
+   * @returns {string} - log filename
+   * @see {@link https://stackoverflow.com/questions/61650047/how-to-specify-rotated-file-location-by-using-rotating-file-stream|Log file path}
    */
   static logFilename(time, index) {
     const logFolder = path.join(global.appRoot, 'logs');
@@ -93,6 +103,8 @@ module.exports = class Utility {
 
   /**
    * True if is falsy or just whitespace
+   * @name Utility#isBlank
+   * @function
    * @param {String} str
    * @returns {Boolean} isNullOrWhitespace
    */
@@ -102,6 +114,8 @@ module.exports = class Utility {
 
   /**
    * True if prop exists and has a value
+   * @name Utility#propIsValid
+   * @function
    * @param {Object} o
    * @param {String} prop
    * @returns {Boolean}
@@ -124,6 +138,8 @@ module.exports = class Utility {
 
   /**
    * Generates a temp filename
+   * @name Utility#tempFile
+   * @function
    * @param {*} name - Filename w/o path but with extension
    * @param {*} data - data to put in file
    * @param {*} encoding - defaults to utf8

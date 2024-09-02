@@ -23,9 +23,9 @@ router.use(express.json());
  * @returns {Number} {Array} of created people
  */
 const samples = router.post('/person/samples/:count', (req, res) => {
-  // #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
-
-  /* 
+  /*
+  #swagger.summary = 'Makes N sample people and adds them to DATA (default: 5)'
+   
   #swagger.responses[200] = {
     description: "Creates {count} people",
     content: {
@@ -36,8 +36,7 @@ const samples = router.post('/person/samples/:count', (req, res) => {
       }           
     }
   }   
-*/
-
+ */
   const sampleCount = Number(req.params.count || 5);
   /* _= */ PersonRepository.addSamples(sampleCount);
   res.json(PersonRepository.Data);
@@ -49,21 +48,20 @@ const samples = router.post('/person/samples/:count', (req, res) => {
  * @returns {Number} {Array} of People
  */
 const list = router.get('/person/list', (req, res) => {
-  // #swagger.summary = 'Gets all people'
-
   /* 
-  #swagger.responses[200] = {
-    description: "Returns People",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/People"
-        }
-      }           
-    }
-  }   
-*/
+    #swagger.summary = 'Gets all people'
 
+    #swagger.responses[200] = {
+      description: "Returns People",
+      content: {
+        "application/json": {
+          schema:{
+            $ref: "#/components/schemas/People"
+          }
+        }           
+      }
+    }   
+  */
   res.status(200).json(PersonRepository.Data);
 });
 
@@ -73,25 +71,24 @@ const list = router.get('/person/list', (req, res) => {
  * @returns {Number} {Array} of People
  */
 const search = router.get('/person/search/:text', (req, res) => {
-  // #swagger.summary = 'Search for people by keyword'
   /* 
-  #swagger.responses[200] = {
-    description: "Returns People",
-    content: {
-      "application/json": {
-        schema:{
-          $ref: "#/components/schemas/People"
-        }
-      }           
-    }
-  }   
+    #swagger.summary = 'Search for people by keyword'
 
-  #swagger.responses[404] = {
-    description: "Not Found or no text supplied",
-  }   
+    #swagger.responses[200] = {
+      description: "Returns People",
+      content: {
+        "application/json": {
+          schema:{
+            $ref: "#/components/schemas/People"
+          }
+        }           
+      }
+    }   
 
+    #swagger.responses[404] = {
+      description: "Not Found or no text supplied",
+    }   
   */
-
   const text = req.params.text;
   const p = PersonRepository.search(text);
   if (p.length <= 0) {
@@ -108,20 +105,17 @@ const search = router.get('/person/search/:text', (req, res) => {
  * @returns {Number} {Class} of Person or Null
  */
 const getbyid = router.get('/person/:id', (req, res) => {
-  // #swagger.summary = 'Gets person by ID or 404 w. Status'
-
   /* 
-  #swagger.responses[200] = {
-    description: "Returns PERSON",
-  }   
-  */
+    #swagger.summary = 'Gets person by ID or 404 w. Status'
 
-  /* 
-  #swagger.responses[404] = {
-    description: "Not Found",
-  }   
-  */
+    #swagger.responses[200] = {
+      description: "Returns PERSON",
+    }   
 
+    #swagger.responses[404] = {
+      description: "Not Found",
+    }   
+  */
   const id = req.params.id;
   const p = PersonRepository.findById(id);
   if (p == null) {
@@ -138,10 +132,9 @@ const getbyid = router.get('/person/:id', (req, res) => {
  * @returns {Number} {String} Status
  */
 const addupdate = router.post('/person/', (req, res) => {
-  // #swagger.summary = 'Add/Update PERSON'
-  // #swagger.description = 'Returns Status message'
-
   /*  
+    #swagger.summary = 'Add/Update PERSON'
+    #swagger.description = 'Returns Status message'
     #swagger.requestBody = {
         required: true,
         content: {
@@ -160,9 +153,7 @@ const addupdate = router.post('/person/', (req, res) => {
   #swagger.responses[201] = {
     description: "Created w. Status"
   }   
-  */
-
-  /* 
+  
   #swagger.responses[400] = {
     description: "Bad Person w. Status"
   }   
@@ -180,19 +171,17 @@ const addupdate = router.post('/person/', (req, res) => {
  * @returns {Number} {String} status
  */
 const deleter = router.delete('/person/:id', (req, res) => {
-  // #swagger.summary = 'Deletes an existing PERSON by ID'
-  // #swagger.description = 'Returns status message'
-
   /* 
-  #swagger.responses[200] = {
-    description: "Deleted status"
-  }   
-  */
+    #swagger.summary = 'Deletes an existing PERSON by ID'
+    #swagger.description = 'Returns status message'
 
-  /* 
-  #swagger.responses[404] = {
-    description: "Not Found"
-  }   
+    #swagger.responses[200] = {
+      description: "Deleted status"
+    }   
+
+    #swagger.responses[404] = {
+      description: "Not Found"
+    }   
   */
 
   const id = req.params.id;

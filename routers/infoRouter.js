@@ -21,13 +21,13 @@ router.use(express.json());
  */
 const about = router.get('/about', (req, res) => {
   /*
-  #swagger.summary = 'About this API'
-  #swagger.responses[200] = {
-    description: "OK"
-  } 
-  #swagger.responses[500] = {
-    description: "Missing critical file"
-  } 
+    #swagger.summary = 'About this API'
+    #swagger.responses[200] = {
+      description: "OK"
+    } 
+    #swagger.responses[500] = {
+      description: "Missing critical file"
+    } 
   */
   const filename = path.join(global.appRoot, 'package.json');
 
@@ -59,13 +59,13 @@ const about = router.get('/about', (req, res) => {
  */
 const health = router.get('/health', (req, res) => {
   /* 
-  #swagger.summary = 'Health check'
-  #swagger.responses[200] = {
-    description: "Healthy"
-  } 
-  #swagger.responses[500] = {
-    description: "Missing package or swagger file"
-  } 
+    #swagger.summary = 'Health check'
+    #swagger.responses[200] = {
+      description: "Healthy"
+    } 
+    #swagger.responses[500] = {
+      description: "Missing package or swagger file"
+    } 
   */
   let sc = 200;
   let message = 'Healthy';
@@ -93,13 +93,13 @@ const health = router.get('/health', (req, res) => {
  */
 const swagger = router.get('/openapi3', (req, res) => {
   /*
-  #swagger.summary = 'OpenApi3 JSON Definition (swagger)'
-  #swagger.responses[200] = {
-    description: "OK"
-  } 
-  #swagger.responses[500] = {
-    description: "Missing swagger file"
-  } 
+    #swagger.summary = 'OpenApi3 JSON Definition (swagger)'
+    #swagger.responses[200] = {
+      description: "OK"
+    } 
+    #swagger.responses[500] = {
+      description: "Missing swagger file"
+    } 
   */
   const swaggerPath = path.join(global.appRoot, 'swagger.json');
   if (fs.existsSync(swaggerPath)) {

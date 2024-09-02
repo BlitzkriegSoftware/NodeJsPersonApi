@@ -11,10 +11,10 @@ const Utility = require('../library/utility');
 module.exports = class Result {
   /**
    * CTOR, these are the fields
-   * @alias module:models/person.constructor
-   * @constructor
-   * @param {String} message
-   * @param {Any} error
+   * @alias Result#constructor
+   * @function
+   * @param {String} - message
+   * @param {Any} - error
    * @returns {Result} - result class
    */
   constructor(message, error) {

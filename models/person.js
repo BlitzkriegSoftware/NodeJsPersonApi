@@ -5,7 +5,6 @@ const { faker } = require('@faker-js/faker');
 const Utility = require('../library/utility');
 
 /**
- * @module models/person
  * @name Person
  * @class
  * @classdesc Model of a Person in our System
@@ -13,8 +12,8 @@ const Utility = require('../library/utility');
 module.exports = class Person {
   /**
    * CTOR, these are the fields
-   * @alias module:models/person.constructor
-   * @constructor
+   * @name Person#constructor
+   * @function
    * @param {String} id - Unique Id
    * @param {String} firstname - First Name
    * @param {String} lastname - Last Name
@@ -22,6 +21,7 @@ module.exports = class Person {
    * @param {String} email - Email
    * @param {String} company - Company Name
    * @returns {Person} - person class
+   * @function
    */
   constructor(id, firstname, lastname, cellphone, email, company) {
     this.id = id;
@@ -37,6 +37,7 @@ module.exports = class Person {
    * @static
    * @alias Person.makePerson
    * @memberof Person
+   * @function
    * @returns {Class} Person
    */
   static makePerson() {
@@ -59,6 +60,7 @@ module.exports = class Person {
    * @memberof Person
    * @alias Person.toString - ({Person})
    * @param {Class} person
+   * @function
    * @returns {String}
    */
   static toString(person) {
@@ -71,6 +73,7 @@ module.exports = class Person {
    * @instance
    * @memberof Person
    * @alias Person.toString - Self
+   * @function
    * @returns {String}
    */
   toString() {
@@ -82,6 +85,7 @@ module.exports = class Person {
    * @static
    * @memberof Person
    * @alias Person.fromJson - populate a new person from given JSON
+   * @function
    * @param {String} json
    * @returns {Class} Person or {null}
    */
@@ -109,6 +113,7 @@ module.exports = class Person {
    * @static
    * @memberof Person
    * @alias Person.fromObject - Populate a new person from given object
+   * @function
    * @param {Object} o
    * @returns {Class} Person
    */
@@ -134,6 +139,7 @@ module.exports = class Person {
    * @instance
    * @memberof Person
    * @alias Person.isValid - True if required fields are present
+   * @function
    * @returns {Boolean}
    */
   isValid() {

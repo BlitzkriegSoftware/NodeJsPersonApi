@@ -131,12 +131,10 @@ module.exports = class Utility {
    */
   static tempFile(name = 'filename', data = '', encoding = 'utf8') {
     return new Promise((resolve, reject) => {
-      const tempPath = path.join(os.tmpdir(), 'tmp-');
+      const tempPath = os.tmpdir();
       fs.mkdtemp(tempPath, (err, folder) => {
         if (err) return reject(err);
-
         const file_name = path.join(folder, name);
-
         fs.writeFile(file_name, data, encoding, (error_file) => {
           if (error_file) return reject(error_file);
           resolve(file_name);

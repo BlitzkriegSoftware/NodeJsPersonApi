@@ -21,3 +21,12 @@ test('confirmGeneration', async () => {
   const result = await generator.generate(filename, urls, Default_Port);
   expect(fs.existsSync(result)).toBe(true);
 });
+
+test('rejectGeneration', async () => {
+  global.appRoot = path.join(__dirname, '..');
+  process.chdir(global.appRoot);
+  const generator = new OpenApi3Generation();
+  const filename = await Utility.tempFile('swagger.json');
+  const result = await generator.generate(filename, urls, 0);
+  expect(result.length <= 0).toBe(true);
+});

@@ -55,21 +55,40 @@ function mockResponse() {
     headers: function () {
       return res.headers;
     },
+    getStatusCode: function () {
+      return res.statusCode;
+    },
+    getMessage: function () {
+      return res.message;
+    },
     res
   };
 }
 const nxt = jest.fn();
 
 test('InfoSec Handler', () => {
-  const hf = handler(infoSecOptions);
   const res = mockResponse();
-  const keys = ['x-powered-by', 'Server'];
-  res.setHeader(keys[0], '1');
-  res.setHeader(keys[1], '2');
+  const bannedHeaders = ['x-powered-by', 'Server'];
+  res.setHeader(bannedHeaders[0], '1');
+  res.setHeader(bannedHeaders[1], '2');
+  const requiredHeaders = [
+    'Content-Security-Policy',
+    'Strict-Transport-Security',
+    'X-Content-Type-Options',
+    'X-Frame-Options',
+    'Referrer-Policy',
+    'X-Download-Options'
+  ];
+
+  const hf = handler(infoSecOptions);
   hf(mockRequest, res, nxt);
+
   const headers = res.headers();
-  expect(headers.size == 6).toBe(true);
-  keys.forEach((value) => {
+  expect(headers.size == requiredHeaders.length).toBe(true);
+  requiredHeaders.forEach((value) => {
+    expect(headers.has(value)).toBe(true);
+  });
+  bannedHeaders.forEach((value) => {
     expect(headers.has(value)).toBe(false);
   });
 });

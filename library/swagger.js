@@ -24,7 +24,6 @@ module.exports = class OpenApi3Generation {
    */
   async generate(outputFile, urls, port) {
     if (!port || port <= 1) {
-      console.error('bad port #');
       return '';
     }
 

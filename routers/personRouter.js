@@ -152,15 +152,11 @@ const addupdate = router.post('/person/', (req, res) => {
           }
         }
     }
-  */
-
-  /* 
+  
   #swagger.responses[200] = {
     description: "Updated w. Status"
   }   
-  */
-
-  /* 
+ 
   #swagger.responses[201] = {
     description: "Created w. Status"
   }   

@@ -10,14 +10,17 @@ const Utility = require('../library/utility');
  * @name Infosec
  * @function
  * @param {Object} options
+ * @returns Middleware configured
+ *
  * @example
- * Fields:
+ * options fields:
  * - csp: Content security policy
  * - sts: Strict transport security
  * - xct: X-Content-Type-Options
  * - xfo: X-Frame-Options
  * - rfp: Referrer-Policy
  * - noh: {Array} of headers to remove
+ *
  * @example
  * Use:
  * // infoSec - variable assigned to function from requires
@@ -25,7 +28,6 @@ const Utility = require('../library/utility');
  * var infoSec = require('./middleware/infoSecMiddleware.js');
  * var infoSecOptions = { }; // See parameters
  * app.use(infoSec(infoSecOptions));
- * @returns Middleware configured
  */
 module.exports = function (options) {
   return function (req, res, next) {

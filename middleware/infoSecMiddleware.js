@@ -6,8 +6,11 @@ const Utility = require('../library/utility');
 /**
  * Infosec Policy Middleware
  * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | Owasp Cheetsheet}
- * @module middleware/infosec
+ * @module middleware/Infosec
+ * @name Infosec
+ * @function
  * @param {Object} options
+ * @example
  * Fields:
  * - csp: Content security policy
  * - sts: Strict transport security
@@ -16,6 +19,7 @@ const Utility = require('../library/utility');
  * - rfp: Referrer-Policy
  * - noh: {Array} of headers to remove
  * @example
+ * Use:
  * // infoSec - variable assigned to function from requires
  * // infoSecOptions - object with properties above
  * var infoSec = require('./middleware/infoSecMiddleware.js');

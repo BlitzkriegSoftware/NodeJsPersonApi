@@ -84,9 +84,9 @@ module.exports = class Utility {
    * Makes a rotating filename when called into '$/logs/', makes folder if not exists
    * @name Utility#logFilename
    * @function
-   * @param {*} time
-   * @param {*} index
-   * @returns {string} - log filename
+   * @param {Date} time
+   * @param {Number} index
+   * @returns {String} - log filename
    * @see {@link https://stackoverflow.com/questions/61650047/how-to-specify-rotated-file-location-by-using-rotating-file-stream|Log file path}
    */
   static logFilename(time, index) {
@@ -140,9 +140,9 @@ module.exports = class Utility {
    * Generates a temp filename
    * @name Utility#tempFile
    * @function
-   * @param {*} name - Filename w/o path but with extension
+   * @param {String} name - Filename w/o path but with extension
    * @param {*} data - data to put in file
-   * @param {*} encoding - defaults to utf8
+   * @param {String} encoding - defaults to utf8
    * @returns filename with path
    */
   static tempFile(name = 'filename', data = '', encoding = 'utf8') {

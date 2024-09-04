@@ -5,9 +5,7 @@ const Utility = require('../library/utility');
 
 /**
  * Infosec Policy Middleware
- * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | Owasp Cheetsheet}
  * @module middleware/Infosec
- * @name Infosec
  * @function
  * @param {Object} options
  * @returns Middleware configured
@@ -28,6 +26,7 @@ const Utility = require('../library/utility');
  * var infoSec = require('./middleware/infoSecMiddleware.js');
  * var infoSecOptions = { }; // See parameters
  * app.use(infoSec(infoSecOptions));
+ * @see {@link https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html | Owasp Cheetsheet}
  */
 module.exports = function (options) {
   return function (req, res, next) {

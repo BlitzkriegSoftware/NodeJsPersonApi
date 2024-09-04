@@ -16,8 +16,12 @@ router.use(express.json());
 
 /**
  * GET /About
- * @alias module:routes/inforouter.about
+ * @name About
+ * @function
  * @returns {String} JSON of Info
+ * @example
+ * 200 - Info
+ * 500 - Missing Critical File
  */
 const about = router.get('/about', (req, res) => {
   /*
@@ -54,8 +58,12 @@ const about = router.get('/about', (req, res) => {
 
 /**
  * GET /health
- * @alias module:routes/inforouter.health
+ * @Name Health
+ * @function
  * @returns {Number} {String} HTTP Status Code + Message
+ * @example
+ * 200 - OK
+ * 500 - Missing Critical Files, see message
  */
 const health = router.get('/health', (req, res) => {
   /* 
@@ -88,8 +96,12 @@ const health = router.get('/health', (req, res) => {
 
 /**
  * GET /swagger
- * @alias module:routes/inforouter.swagger
- * @returns <String> Swagger.json in OpenAPI3
+ * @Name Swagger
+ * @function
+ * @returns {JSON} Swagger.json in OpenAPI3
+ * @example
+ * 200 - OpenApi3 JSON
+ * 500 - Missing Swagger File
  */
 const swagger = router.get('/openapi3', (req, res) => {
   /*

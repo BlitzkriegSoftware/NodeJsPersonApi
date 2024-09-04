@@ -18,9 +18,14 @@ router.use(express.json());
 
 /**
  * POST /person/samples/:count
+ * @description Create {count} sample people
  * @alias module:routes/personrouter.samples
+ * @function
  * @argument {Number} count of Person to Make and add to Data
- * @returns {Number} {Array} of created people
+ * @returns {Array} of created people
+ * @example
+ * 200 - OK
+ * 404 - No {count} passed
  */
 const samples = router.post('/person/samples/:count', (req, res) => {
   /*
@@ -36,6 +41,9 @@ const samples = router.post('/person/samples/:count', (req, res) => {
       }           
     }
   }   
+  #swagger.responses[404] = {
+    description: "No count passed"
+  } 
  */
   const sampleCount = Number(req.params.count || 5);
   /* _= */ PersonRepository.addSamples(sampleCount);
@@ -44,8 +52,12 @@ const samples = router.post('/person/samples/:count', (req, res) => {
 
 /**
  * GET /person/list
+ * @description Get the list of all people
  * @alias module:routes/personrouter.list
- * @returns {Number} {Array} of People
+ * @function
+ * @returns {Array} of People
+ * @example
+ * 200 - OK
  */
 const list = router.get('/person/list', (req, res) => {
   /* 
@@ -67,8 +79,13 @@ const list = router.get('/person/list', (req, res) => {
 
 /**
  * GET /person/search
+ * @description Get People with Search Text
  * @alias module:routes/personrouter.search
- * @returns {Number} {Array} of People
+ * @function
+ * @returns {Array} of People
+ * @example
+ * 200 - List
+ * 404 - Not found
  */
 const search = router.get('/person/search/:text', (req, res) => {
   /* 
@@ -100,9 +117,14 @@ const search = router.get('/person/search/:text', (req, res) => {
 
 /**
  * GET /person/:id
+ * @description Get a Person by Id
  * @alias module:routes/personrouter.getbyid
+ * @function
  * @argument {String} Id of Person
- * @returns {Number} {Class} of Person or Null
+ * @returns {Class} of Person or Null
+ * @example
+ * 200 - Person
+ * 404 - Not Found
  */
 const getbyid = router.get('/person/:id', (req, res) => {
   /* 
@@ -126,10 +148,16 @@ const getbyid = router.get('/person/:id', (req, res) => {
 });
 
 /**
- * POST /person/ ADD/update PERSON
+ * POST /person/
+ * @description ADD/update PERSON
  * @alias module:routes/personrouter.addupdate
+ * @function
  * @argument {Class} Person (as Json)
- * @returns {Number} {String} Status
+ * @returns {Class} Modified Person
+ * @example
+ * 200 - OK
+ * 201 - Created
+ * 400 - Bad Payload, see message
  */
 const addupdate = router.post('/person/', (req, res) => {
   /*  
@@ -145,20 +173,16 @@ const addupdate = router.post('/person/', (req, res) => {
           }
         }
     }
-  
   #swagger.responses[200] = {
     description: "Updated w. Status"
   }   
- 
   #swagger.responses[201] = {
     description: "Created w. Status"
   }   
-  
   #swagger.responses[400] = {
     description: "Bad Person w. Status"
   }   
   */
-
   const o = req.body;
   const sc = PersonRepository.addUpdate(o);
   res.status(sc).json({ status: sc });
@@ -166,9 +190,14 @@ const addupdate = router.post('/person/', (req, res) => {
 
 /**
  * DELETE /person/:id
+ * @description Delete a person by Id
  * @alias module:routes/personrouter.deleter
+ * @function
  * @argument {String} id of person
- * @returns {Number} {String} status
+ * @returns {String} status
+ * @example
+ * 200 - OK
+ * 404 - Not Found
  */
 const deleter = router.delete('/person/:id', (req, res) => {
   /* 

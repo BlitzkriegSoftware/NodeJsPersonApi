@@ -11,7 +11,12 @@ const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require('path');
 const express = require('express');
+const RateLimit = require('express-rate-limit'); // Import express-rate-limit
 const router = express.Router();
+const openapi3Limiter = RateLimit({ // Define rate limiter for `/openapi3`
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+});
 router.use(express.json());
 
 /**
@@ -103,7 +108,7 @@ const health = router.get('/health', (req, res) => {
  * 200 - OpenApi3 JSON
  * 500 - Missing Swagger File
  */
-const swagger = router.get('/openapi3', (req, res) => {
+const swagger = router.get('/openapi3', openapi3Limiter, (req, res) => {
   /*
     #swagger.summary = 'OpenApi3 JSON Definition (swagger)'
     #swagger.responses[200] = {

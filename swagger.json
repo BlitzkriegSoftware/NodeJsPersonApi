@@ -47,6 +47,9 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "No count passed"
           }
         }
       }

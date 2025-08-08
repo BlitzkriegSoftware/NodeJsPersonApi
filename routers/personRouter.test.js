@@ -5,12 +5,14 @@
 const { describe, expect, test } = require('@jest/globals');
 const path = require('path');
 const fs = require('node:fs');
-const Utility = require('../library/utility');
 const request = require('supertest');
 const express = require('express');
+const Utility = require('../library/utility');
+
 const app = express();
 const personRouter = require('./personRouter');
 const Person = require('../models/person');
+
 const TESTTIMEOUT = 0;
 
 app.use('/', personRouter);

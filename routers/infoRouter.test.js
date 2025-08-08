@@ -10,19 +10,37 @@ const request = require('supertest');
 const express = require('express');
 const app = express();
 const infoRouter = require('./infoRouter');
+const TESTTIMEOUT = 0;
+
 app.use('/', infoRouter);
 
+beforeAll(() => {
+  global.appRoot = process.cwd();
+});
+
 describe('Info Router', () => {
-  test('version', async () => {
-    const res = await request(app).get('/about');
-    expect(res.statusCode).toEqual(200);
-  });
-  test('health', async () => {
-    const res = await request(app).get('/health');
-    expect(res.statusCode).toEqual(200);
-  });
-  test('openapi3', async () => {
-    const res = await request(app).get('/openapi3');
-    expect(res.statusCode).toEqual(200);
-  });
+  test(
+    'version',
+    async () => {
+      const res = await request(app).get('/version');
+      expect(res.statusCode).toEqual(200);
+    },
+    TESTTIMEOUT
+  );
+  test(
+    'health',
+    async () => {
+      const res = await request(app).get('/health');
+      expect(res.statusCode).toEqual(200);
+    },
+    TESTTIMEOUT
+  );
+  test(
+    'swagger',
+    async () => {
+      const res = await request(app).get('/swagger');
+      expect(res.statusCode).toEqual(200);
+    },
+    TESTTIMEOUT
+  );
 });

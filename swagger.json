@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.8.3",
+    "version": "2.0.0",
     "title": "nodejs_people_api",
     "description": "A simple people api",
     "contact": {
@@ -204,7 +204,21 @@
         }
       }
     },
-    "/openapi3": {
+    "/version": {
+      "get": {
+        "summary": "Version",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Current Version"
+          },
+          "500": {
+            "description": "Missing swagger file"
+          }
+        }
+      }
+    },
+    "/swagger": {
       "get": {
         "summary": "OpenApi3 JSON Definition (swagger)",
         "description": "",

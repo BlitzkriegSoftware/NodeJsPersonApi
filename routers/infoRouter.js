@@ -29,7 +29,7 @@ router.use(express.json());
  * 200 - Info
  * 500 - Missing Critical File
  */
-const about = router.get('/about', (req, res) => {
+const about = router.get('/about', openapi3Limiter, (req, res) => {
   /*
     #swagger.summary = 'About this API'
     #swagger.responses[200] = {

@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.25.1",
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^10.5.0",
     "and": "^0.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
